@@ -10,6 +10,8 @@ class Person < ApplicationRecord
   has_one :trainer_profile
   has_many :trainees
   has_many :trainers
+  has_many :payments
+  belongs_to :membership_type
 
   validates :first_name, :middle_name, :last_name, :gender, :date_of_birth, :profession_id,
             :email, :phone_number, :country, :address, presence: true

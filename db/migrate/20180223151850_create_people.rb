@@ -1,7 +1,6 @@
 class CreatePeople < ActiveRecord::Migration[5.1]
   def change
     create_table :people do |t|
-      t.references :membership_type, null: false, foreign_key: true
       t.string :title
       t.string :first_name
       t.string :middle_name
@@ -19,6 +18,7 @@ class CreatePeople < ActiveRecord::Migration[5.1]
       t.string :job_title
       t.references :profession_category,  foreign_key: true
       t.references :profession,  foreign_key: true
+      t.references :membership_type, foreign_key: true
 
       t.timestamps
     end

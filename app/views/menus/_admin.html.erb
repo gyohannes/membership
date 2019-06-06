@@ -66,11 +66,19 @@
       <li><%= link_to 'Trainings', trainings_path %></li>
     </ul>
   </li>
-  <li>
-    <%= link_to people_path do %>
+    <li>
+    <a href="javascript:void(0);" class="menu-toggle">
       <i class="material-icons">group</i>
-      <span class="nav-label">Members</span>
-    <% end %>
+      <span class="nav-label">Membership</span>
+    </a>
+    <ul>
+      <li><%= link_to 'Members', people_path %></li>
+      <li><%= link_to 'Membership Types', membership_types_path %></li>
+      <li><%= link_to 'Payment Years', mp_years_path %></li>
+      <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
+      <li><%= link_to 'Membership Fees', payments_path %></li>
+      
+    </ul>
   </li>
 
   <li>

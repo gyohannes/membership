@@ -145,18 +145,17 @@ ActiveRecord::Schema.define(version: 20190606121716) do
   end
 
   create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "people_id"
+    t.bigint "person_id"
     t.bigint "mp_year_id"
     t.text "remark"
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mp_year_id"], name: "index_payments_on_mp_year_id"
-    t.index ["people_id"], name: "index_payments_on_people_id"
+    t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "membership_type_id", null: false
     t.string "title"
     t.string "first_name"
     t.string "middle_name"
@@ -174,6 +173,7 @@ ActiveRecord::Schema.define(version: 20190606121716) do
     t.string "job_title"
     t.bigint "profession_category_id"
     t.bigint "profession_id"
+    t.bigint "membership_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_file_name"
@@ -388,7 +388,7 @@ ActiveRecord::Schema.define(version: 20190606121716) do
   add_foreign_key "mp_amount_settings", "mp_years"
   add_foreign_key "organization_units", "organization_types"
   add_foreign_key "payments", "mp_years"
-  add_foreign_key "payments", "people", column: "people_id"
+  add_foreign_key "payments", "people"
   add_foreign_key "people", "facilities"
   add_foreign_key "people", "institutions"
   add_foreign_key "people", "membership_types"
