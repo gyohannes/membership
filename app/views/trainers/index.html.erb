@@ -1,0 +1,33 @@
+<div class="header">
+  <h2>
+    Trainers List: <b><%= @training %></b>
+  </h2>
+</div>
+<div class="body table-responsive">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Training Topic</th>
+      <th>Trainer Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trainers.each do |trainer| %>
+      <tr>
+        <td><%= trainer.training %></td>
+        <td><%= trainer.person %></td>
+        <td>
+          <%= link_to 'Edit', edit_trainer_path(trainer) %>
+          <%= link_to 'Delete', trainer, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add Trainer', new_trainer_path(training: @training.id) %>
+</div>

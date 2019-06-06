@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  training: one
+  organization_unit: one
+  number_of_trainees: 
+
+two:
+  training: two
+  organization_unit: two
+  number_of_trainees: 

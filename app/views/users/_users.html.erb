@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td>
+          <%= link_to edit_user_path(user) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+  <% unless (@type == 'institution' or @organization_unit.blank?)  %>
+    <%= link_to new_user_path(type: 'org unit', organization_unit: @organization_unit.try(:id)) do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Organization Unit User</button>
+  <% end %>
+<% end %>

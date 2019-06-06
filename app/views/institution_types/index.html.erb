@@ -1,0 +1,27 @@
+    <div class="panel-heading">
+      Institution Types
+    </div>
+    <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @institution_types.each do |institution_type| %>
+      <tr>
+        <td><%= institution_type.name %></td>
+        <td><%= institution_type.description %></td>
+        <td><%= link_to 'Edit', edit_institution_type_path(institution_type) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to 'New Institution Type', new_institution_type_path, class: 'btn btn-primary' %>
+</div>

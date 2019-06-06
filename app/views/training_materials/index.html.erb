@@ -1,0 +1,31 @@
+<div class="panel-heading">
+  Training Materials
+</div>
+<div class="panel-body">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Training title</th>
+      <th>Name</th>
+      <th>Attachment</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @training_materials.each do |training_material| %>
+      <tr>
+        <td><%= training_material.training_title %></td>
+        <td><%= training_material.name %></td>
+        <td><%= link_to 'Download', training_material.attachment.url %></td>
+        <td>
+          <%= link_to 'Edit', edit_training_material_path(training_material) %>
+          <%= link_to 'Delete', training_material, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr/>
+<%= link_to 'New Training Material', new_training_material_path %>
+</div>

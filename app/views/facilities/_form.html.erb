@@ -1,0 +1,19 @@
+<%= simple_form_for(@facility) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :organization_unit_id, collection: [@facility.organization_unit], class: "form-control show-tick" %>
+  <%= f.input :name %>
+  <%= f.input :code %>
+  <%= f.association :facility_type %>
+  <%= f.input :ownership, collection: ['Public', 'Private', 'NGO'], class: "form-control show-tick" %>
+  <%= f.input :contact_person, class: "form-control show-tick" %>
+  <%= f.input :contact_phone, class: "form-control show-tick" %>
+  <%= f.input :contact_email, class: "form-control show-tick" %>
+  <%= f.input :url, class: "form-control show-tick" %>
+  <%= f.input :latitude, class: "form-control show-tick" %>
+  <%= f.input :longitude, class: "form-control show-tick" %>
+  <%= f.input :description %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

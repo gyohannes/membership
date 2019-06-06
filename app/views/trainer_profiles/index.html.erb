@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trainer Profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Trainer type</th>
+      <th>Primary job</th>
+      <th>Secondary job</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trainer_profiles.each do |trainer_profile| %>
+      <tr>
+        <td><%= trainer_profile.person %></td>
+        <td><%= trainer_profile.trainer_type %></td>
+        <td><%= trainer_profile.primary_job %></td>
+        <td><%= trainer_profile.secondary_job %></td>
+        <td><%= link_to 'Show', trainer_profile %></td>
+        <td><%= link_to 'Edit', edit_trainer_profile_path(trainer_profile) %></td>
+        <td><%= link_to 'Destroy', trainer_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trainer Profile', new_trainer_profile_path %>

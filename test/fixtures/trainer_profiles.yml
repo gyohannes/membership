@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person: one
+  trainer_type: MyString
+  primary_job: MyString
+  secondary_job: MyString
+
+two:
+  person: two
+  trainer_type: MyString
+  primary_job: MyString
+  secondary_job: MyString

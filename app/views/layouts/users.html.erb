@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from sensitive.adminbsb-themes.com/pages/examples/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Jun 2018 08:44:45 GMT -->
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Membership</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" />
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body class="sign-in-page">
+<div class="signin-form-area">
+ <h1>Membership</h1>
+  <div class="row padding-15">
+    <div class="col-sm-2 col-md-2 col-lg-4"></div>
+    <div class="col-sm-8 col-md-8 col-lg-4">
+      <%= yield %>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-4"></div>
+  </div>
+</div>
+<div class="signin-right-image">
+  <div class="background-layer">
+    
+  </div>
+  <div class="copyright-info">
+    <p><b>&copy; Membership</b>. All rights reserved.</p>
+  </div>
+</div>
+<div class="signin-bottom-info">
+  <%= link_to new_user_session_path do %>
+    <i class="fa fa-user-circle-o m-r-5"></i>Sign in
+  <% end %>
+  <span class="pull-right">
+    <%= link_to new_user_password_path do %>Forgot Password
+        <i class="fa fa-unlock m-l-5 font-14"></i>
+    <% end %>
+  </span>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,2 @@
+module TrainingTitlesHelper
+end

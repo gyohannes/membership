@@ -1,0 +1,18 @@
+<legend>Training Topics in which you are competent as a trainer</legend>
+    <%= f.simple_fields_for :trainer_training_titles, :wrapper => false do |tf| %>
+        <div class="fields row">
+          <div class='col-sm-10'>
+            <%= tf.input :training_title_id, label: 'Training Topic', collection: TrainingTitle.all, class: "form-control show-tick" %>
+          </div>
+
+          <div class='col-sm-2'>
+            <%= tf.link_to_remove do %>
+              <button type="button" class="btn btn-rounded btn-outline btn-default"><i class="fa fa-close"></i> Remove</button>
+            <% end %>
+          </div>
+        </div>
+        <%= javascript_include_tag 'AdminBSBMaterialDesign/form_index' %>
+    <% end %>
+      <%= f.link_to_add :trainer_training_titles do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Training Topic</button>
+      <% end %>

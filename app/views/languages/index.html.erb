@@ -1,0 +1,29 @@
+<div class="panel-heading">
+  Languages
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @languages.each do |language| %>
+      <tr>
+        <td><%= language.name %></td>
+        <td>
+          <%= link_to 'Edit', edit_language_path(language) %>
+          <%= link_to 'Delete', language, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Language', new_language_path %>
+</div>

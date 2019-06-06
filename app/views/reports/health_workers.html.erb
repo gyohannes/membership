@@ -1,0 +1,41 @@
+<div class="panel-heading">
+  Health Workers Report
+</div>
+
+<div class="panel-body">
+  <%= form_tag reports_health_workers_path, :remote => true do %>
+
+      <div class="row">
+        <div class="col-sm-4">Facility </div>
+        <div class="col-sm-8">
+          <%= select_tag "facility", options_from_collection_for_select(Facility.all, "id", "name"),{include_blank: true, class: 'form-control'} %>
+        </div>
+      </div><br/>
+
+      <div class="row">
+        <div class="col-sm-4">Training Type</div>
+        <div class="col-sm-8">
+          <%= select(nil, "training_type", ["Pre-Service", "In-Service"].collect{|x| x},{include_blank: true}, class: 'form-control') %>
+        </div>
+      </div><br/>
+
+      <div class="row">
+        <div class="col-sm-4">Training Title </div>
+        <div class="col-sm-8">
+          <%= select_tag "training_title", options_from_collection_for_select(TrainingTitle.all, "id", "title"),{include_blank: true, class: 'form-control'} %>
+        </div>
+      </div><br/>
+      <div class="row">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= submit_tag 'Search' %>
+        </div>
+      </div>
+
+  <% end %>
+
+
+  <div id="health_workers_report">
+    <%= render partial: 'health_workers' %>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  facility_type: one
+  organization_unit: one
+  contact_person: MyString
+  contact_phone: MyString
+  contact_email: MyString
+
+two:
+  name: MyString
+  facility_type: two
+  organization_unit: two
+  contact_person: MyString
+  contact_phone: MyString
+  contact_email: MyString

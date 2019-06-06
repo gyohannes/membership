@@ -1,0 +1,2 @@
+module TraineeDistributionsHelper
+end

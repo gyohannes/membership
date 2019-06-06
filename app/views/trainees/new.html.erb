@@ -1,0 +1,18 @@
+<div class="panel-heading">
+  Add Trainees for <b><%= @training %></b>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+  <div class="col-sm-4">
+    <%= hidden_field_tag 'training', @training.id %>
+    <div id="trainee_tree"></div>
+  </div>
+
+  <div class="col-sm-8">
+    <div id="trainees">
+      <%= render partial: 'trainees' %>
+    </div>
+  </div>
+  </div>
+</div>

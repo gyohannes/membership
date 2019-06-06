@@ -1,0 +1,56 @@
+<div class="panel-heading">
+    Facility Details
+</div>
+<div class='panel-body'>
+  <div class='row'>
+    <div class='col-sm-4' style='border-right: 1px solid silver;'>
+      <ul>
+        <li><label>Name</label> <%= @facility.name %></li>
+        <li><label>Facility Type</label> <%= @facility.facility_type %></li>
+        <li><label>Organization unit</label> <%= @facility.organization_unit %></li>
+        <li><label>Contact Person</label> <%= @facility.contact_person %></li>
+        <li><label>Contact Phone</label> <%= @facility.contact_phone %></li>
+        <li><label>URL</label> <%= @facility.url %></li>
+      </ul>
+      <hr/>
+      <%= link_to edit_facility_path(@facility) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+        <% end %>
+    </div>
+    <div class='col-sm-7'>
+      <div class="body table-responsive">
+        <legend>Health Workers</legend>
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profession</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @facility.people.each do |person| %>
+              <tr>
+                <td><%= person.full_name %></td>
+                <td><%= person.profession %></td>
+                <td>
+                  <%= link_to person_path(person) do %>
+                    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Details</button>
+                    <% end %>
+                  <%= link_to  edit_person_path(person) do %>
+                  <% end %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <br>
+        <%= link_to new_person_path(facility: @facility.id) do %>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Health Worker</button>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

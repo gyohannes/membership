@@ -1,0 +1,15 @@
+<%= simple_form_for(@budget_year) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :from, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :to, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :status, label: 'Currently Active', label_html: {class: 'transparent_label'}, input_html:{class: "filled-in chk-col-pink"} %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

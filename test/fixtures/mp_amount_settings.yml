@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  mp_year: one
+  membership_type: one
+  amount: 1.5
+  description: MyText
+
+two:
+  name: MyString
+  mp_year: two
+  membership_type: two
+  amount: 1.5
+  description: MyText

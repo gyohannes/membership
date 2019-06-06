@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trainer_profile: one
+  training_title: one
+
+two:
+  trainer_profile: two
+  training_title: two

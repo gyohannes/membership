@@ -1,0 +1,18 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :user_type, as: :hidden, value: @user.user_type %>
+  <%= f.input :email %>
+  <% if @user.user_type == 'org unit' %>
+    <%= f.input :organization_unit_id, collection: @organization_units, class: "form-control show-tick" %>
+  <% end %>
+  <% if @user.user_type == 'institution' %>
+    <%= f.association :institution, selected: @institution, prompt: true, class: "form-control show-tick" %>
+  <% end %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation, label: 'Confirm Password' %>
+  <%= f.association :role, as: :radio_buttons %>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit', class: 'btn btn-outline btn-primary' %>
+  </div>
+<% end %>

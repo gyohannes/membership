@@ -1,0 +1,84 @@
+<% if current_user.super_admin? %>
+  <li>
+    <a href="javascript:void(0);" class="menu-toggle">
+      <i class="material-icons">group</i>
+      <span class="nav-label">Users</span>
+    </a>
+    <ul>
+      <li><%= link_to 'Org Unit Users', users_path(type: 'org unit') %></li>
+      <li><%= link_to 'Institution Users', users_path(type: 'institution') %></li>
+    </ul>
+  </li>
+  <li>
+    <a href="javascript:void(0);" class="menu-toggle">
+      <i class="material-icons">build</i>
+      <span class="nav-label">Organization Structure</span>
+    </a>
+    <ul>
+      <li><%= link_to 'Organization Types', organization_types_path %></li>
+      <li><%= link_to 'Organization Units', organization_units_path %></li>
+    </ul>
+  </li>
+
+  <li>
+  <a href="javascript:void(0);" class="menu-toggle">
+    <i class="material-icons">school</i>
+  <span class="nav-label">Institutions</span>
+  </a>
+  <ul>
+    <li><%= link_to 'Institution Types', institution_types_path %></li>
+    <li><%= link_to 'Institutions', institutions_path %></li>
+  </ul>
+  </li>
+  <li>
+  <a href="javascript:void(0);" class="menu-toggle">
+    <i class="material-icons">local_hospital</i>
+    <span class="nav-label">Facilities</span>
+  </a>
+  <ul>
+    <li><%= link_to 'Facility Types',facility_types_path %></li>
+    <li><%= link_to 'Facilities', facilities_path %></li>
+  </ul>
+  </li>
+  <li>
+  <a href="javascript:void(0);" class="menu-toggle">
+    <i class="material-icons">library_books</i>
+    <span class="nav-label">Trainings</span>
+  </a>
+  <ul>
+    <li><%= link_to 'Program Areas', program_areas_path %></li>
+    <li><%= link_to 'Training Methods', training_methods_path %></li>
+    <li><%= link_to 'Training Topics', training_titles_path %></li>
+    <li><%= link_to 'Trainings', trainings_path %></li>
+  </ul>
+  </li>
+  <li>
+    <%= link_to people_path do %>
+      <i class="material-icons">group</i>
+      <span class="nav-label">Health Workers</span>
+    <% end %>
+  </li>
+
+  <li>
+    <a href="javascript:void(0);" class="menu-toggle">
+      <i class="material-icons">insert_chart</i>
+      <span class="nav-label">Reports</span>
+    </a>
+    <ul>
+      <li><%= link_to 'Trainings', reports_trainings_path %></li>
+      <li><%= link_to 'Health Workers', reports_health_workers_path %></li>
+    </ul>
+  </li>
+
+  <li>
+    <a href="javascript:void(0);" class="menu-toggle">
+      <i class="material-icons">build</i>
+      <span class="nav-label">System Settings</span>
+    </a>
+    <ul>
+      <li><%= link_to 'Profession Categories', profession_categories_path %></li>
+      <li><%= link_to 'Professions', professions_path %></li>
+      <li><%= link_to 'Languages', languages_path %></li>
+    </ul>
+  </li>
+<% end %>

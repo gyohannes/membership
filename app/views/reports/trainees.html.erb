@@ -1,0 +1,32 @@
+<div class="panel-heading">
+  Trainees Report
+</div>
+
+<div class="panel-body">
+  <%= simple_form_for :search, url:  reports_trainees_path, remote: true, html: { novalidate: true } do |f| %>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div id="report_organization_unit_tree"></div>
+          <%=  f.input :organization_unit, as: :hidden, required: false %>
+      </div>
+      <div class="col-sm-8">
+        <%=  f.input :program_area, collection: ProgramArea.all, required: false %>
+        <%=  f.input :training_title, collection: TrainingTitle.all, required: false %>
+        <%=  f.input :category, collection: ['In-Service', 'Pre-Service'], required: false %>
+        <%=  f.input :training_type, collection: ['Basic', 'Refreshment', 'TOT'], required: false %>
+        <%=  f.input :trainee_status, collection: Trainee::STATUSES, required: false %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.button :button, 'Reset Form', type: :reset, class: 'btn btn-default' %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.button :submit, 'Search', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+
+  <div id="trainees_report">
+    <%= render 'trainees' %>
+  </div>
+
+</div>

@@ -1,0 +1,47 @@
+    <div class="panel-heading">
+            Institutions
+    </div>
+    <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Institution type</th>
+      <th>Address</th>
+      <th>Url</th>
+      <th>Contact person</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @institutions.each do |institution| %>
+      <tr>
+        <td><%= institution.name %></td>
+        <td><%= institution.institution_type %></td>
+        <td><%= institution.address %></td>
+        <td><%= institution.url %></td>
+        <td><%= institution.contact_person %></td>
+        <td><%= institution.email %></td>
+        <td><%= institution.phone %></td>
+        <td>
+          <%= link_to edit_institution_path(institution) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+
+          <%= link_to institution do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+      <%= link_to new_institution_path do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Institution</button>
+      <% end %>
+</div>

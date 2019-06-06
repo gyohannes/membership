@@ -1,0 +1,27 @@
+<div class="body table-responsive">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Organization Unit</th>
+      <th>Facility</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @health_workers.each do |health_worker| %>
+        <tr>
+          <td><%= health_worker.full_name %></td>
+          <td><%= health_worker.organization_unit %></td>
+          <td><%= health_worker.facility %></td>
+          <td><%= health_worker.phone_number %></td>
+          <td><%= health_worker.email %></td>
+          <td><%= link_to 'Details', person_path(health_worker) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

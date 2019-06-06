@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mp_year.name %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @mp_year.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @mp_year.to %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @mp_year.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @mp_year.description %>
+</p>
+
+<%= link_to 'Edit', edit_mp_year_path(@mp_year) %> |
+<%= link_to 'Back', mp_years_path %>

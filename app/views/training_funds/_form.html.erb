@@ -1,0 +1,10 @@
+<%= simple_form_for(@training_fund) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :training_id, collection: [@training_fund.training], prompt: false, class: "form-control show-tick" %>
+  <%= f.input :institution_id, label: 'Funding Organization', collection: Institution.all, class: "form-control show-tick" %>
+  <%= f.input :amount, class: "form-control" %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+  </div>
+<% end %>

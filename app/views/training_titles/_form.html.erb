@@ -1,0 +1,15 @@
+<%= simple_form_for(@training_title) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title, class: "form-control show-tick" %>
+  <%= f.input :program_area_id, collection: ProgramArea.all, class: "form-control show-tick" %>
+  <%= f.input :duration, class: "form-control show-tick" %>
+  <%= f.input :duration_in, as: :radio_buttons,  item_wrapper_tag: :span, wrapper: 'horizontal_collection', collection: ['Hours','Days','Weeks'] %>
+  <%= f.input :maximum_number_of_participants, class: "form-control show-tick" %>
+  <%= f.association :training_method %>
+  <%= f.input :description, class: "form-control show-tick" %>
+  <%= f.input :topic_image, as: :file %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+  </div>
+<% end %>

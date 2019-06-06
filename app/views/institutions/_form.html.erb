@@ -1,0 +1,16 @@
+<%= simple_form_for(@institution) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, class: "form-control show-tick" %>
+  <%= f.input :institution_type_id, collection: InstitutionType.all, class: "form-control show-tick" %>
+  <%= f.input :address, class: "form-control show-tick" %>
+  <%= f.input :url, class: "form-control show-tick" %>
+  <%= f.input :contact_person, class: "form-control show-tick" %>
+  <%= f.input :email, class: "form-control show-tick" %>
+  <%= f.input :phone, class: "form-control show-tick" %>
+  <%= f.input :description, class: "form-control show-tick" %>
+  <%= f.input :logo, as: :file, class: "form-control show-tick" %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

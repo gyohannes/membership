@@ -1,0 +1,25 @@
+<% @filtered_training_titles.each do |training_title| %>
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= training_title %></div>
+      <div class="panel-body">
+        <div>
+          <%= image_tag(training_title.topic_image.url(:medium), width: '100%', height: 200) %>
+          <h4><%= training_title.description %></h4>
+          <p>Program Area: <b><%= training_title.program_area %></b></p>
+          <p>Duration: <b><%= training_title.duration %> <%= training_title.duration_in %></b></p>
+          <p>Training Method: <b><%= training_title.training_method %></b></p>
+          <hr/>
+          <p class="pull-right">
+            <%= link_to edit_training_title_path(training_title) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit </button>
+            <% end %>
+            <%= link_to training_title do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details </button>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

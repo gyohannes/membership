@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Trainees Search Result
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Org Unit</th>
+        <th>Facility</th>
+        <th>Training Topic</th>
+        <th>Category</th>
+        <th>Training Type</th>
+        <th>Pre Training Score</th>
+        <th>Post Training Score</th>
+        <th>Trainee Status</th>
+        <th>Trainer Feedback</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @trainees.each do |trainee| %>
+        <tr>
+          <td><%= trainee.person %></td>
+          <td><%= trainee.person.organization_unit %></td>
+          <td><%= trainee.person.facility %></td>
+          <td><%= trainee.training.training_title %></td>
+          <td><%= trainee.training.training_type %></td>
+          <td><%= trainee.training.category %></td>
+          <td><%= trainee.pre_training_score %></td>
+          <td><%= trainee.post_training_score%></td>
+          <td><%= trainee.status %></td>
+          <td><%= trainee.trainer_feedback %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="panel-heading">
+    Institution Details
+</div>
+<div class='panel-body'>
+  <div class='row'>
+    <div class="col-sm-4">
+      <%= image_tag @institution.logo.url(:medium), height: '200' %>
+      <h5><%= @institution.description %></h5>
+    </div>
+    <div class='col-sm-8' style='border-left: 1px solid silver;'>
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Name</div>
+        <div class='col-sm-6'><%= @institution.name %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Type</div>
+        <div class='col-sm-6'><%= @institution.institution_type %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Address</div>
+        <div class='col-sm-6'><%= @institution.address %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>URL</div>
+        <div class='col-sm-6'><%= @institution.url %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Contact Person</div>
+        <div class='col-sm-6'><%= @institution.contact_person %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Contact Email</div>
+        <div class='col-sm-6'><%= @institution.email %></div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6 details-label'>Contact Phone</div>
+        <div class='col-sm-6'><%= @institution.phone %></div>
+      </div>
+
+    </div>
+
+</div>
+  <hr/>
+<%= link_to edit_institution_path(@institution) do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+
+</div>

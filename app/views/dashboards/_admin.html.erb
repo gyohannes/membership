@@ -1,0 +1,164 @@
+<% content_for :header do %>
+  <div class="block-header">
+    <h2>DASHBOARD</h2>
+  </div>
+
+  <div class="row clearfix">
+    <%= link_to people_path do %>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box infobox-type-5 hover-zoom-effect">
+          <div class="icon">
+            <i class="material-icons col-success">people</i>
+          </div>
+          <div class="content" style="min-height: 1486px;">
+            <div class="text">Total Members</div>
+            <div class="number"><%= @people.count %></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+      <%= link_to trainings_path(type: 'upcoming') do %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box infobox-type-5 hover-zoom-effect">
+        <div class="icon">
+          <i class="material-icons col-success">library_books</i>
+        </div>
+        <div class="content" style="min-height: 1486px;">
+          <div class="text">Training Topics</div>
+          <div class="number"><%= TrainingTitle.count %></div>
+        </div>
+      </div>
+        </div>
+      <% end %>
+      <%= link_to trainees_path do %>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box infobox-type-5 hover-zoom-effect">
+              <div class="icon">
+                <i class="material-icons col-success">list</i>
+              </div>
+              <div class="content" style="min-height: 1486px;">
+                <div class="text">Total Trainees</div>
+                <div class="number"><%= @trainees.count rescue nil %></div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+      <%= link_to trainings_path(type: 'progress') do %>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box infobox-type-5 hover-zoom-effect">
+              <div class="content" style="min-height: 1486px;">
+                <div class="text">Training Sessions Currently in Progress</div>
+                <div class="number"><%= @progressing_trainings.count %></div>
+              </div>
+              <div class="icon">
+                <i class="material-icons col-success">playlist_add_check</i>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+  <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Upcoming Trainings
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Training title</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Organized By</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @upcoming_trainings.each do |training| %>
+            <tr>
+              <td><%= training.training_title %></td>
+              <td><%= training.category %></td>
+              <td><%= training.training_type %></td>
+              <td><%= training.institution %></td>
+              <td><%= training.start_time %></td>
+              <td><%= training.end_time %></td>
+              <td><%= training.location %></td>
+              <td>
+                <label class="label <%= training.training_status == Training::NOT_STARTED ? 'label-warning' :
+                                            (training.training_status == Training::CANCELED ? 'label-danger' :
+                                                 (training.training_status == Training::COMPLETED ? 'label-success' : 'label-default')) %>">
+                  <%= training.training_status %>
+                </label>
+              </td>
+              </td>
+              <td>
+                <%= link_to training_path(training) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+                <% end %>
+                <%= link_to edit_training_path(training) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row clearfix">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Total Health Workers by <%= current_user.try(:parent_org_unit).try(:sub_unit_name).try(:to_sentence) %>
+        </div>
+        <div class="panel-body">
+          <%= pie_chart org_unit_facilities_organization_units_path, curve: false, code: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Number of Trainees by Program Area and Category
+        </div>
+        <div class="panel-body">
+          <%= column_chart org_unit_trainees_by_category_trainees_path rescue nil %>
+        </div>
+      </div>
+    </div>
+
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Number of Trainees by Program Area and Training Type
+      </div>
+      <div class="panel-body">
+        <%= column_chart org_unit_trainees_by_area_trainees_path rescue nil %>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Number of Trainees by Year
+      </div>
+      <div class="panel-body">
+        <%= column_chart org_unit_trainees_by_year_trainees_path rescue nil %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<% end  %>

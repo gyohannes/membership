@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  training_title: one
+  start_time: 2018-01-11 18:19:32
+  end_time: 2018-01-11 18:19:32
+  duration: 1.5
+  duration_in: MyString
+  expected_number_of_trainees: 1
+  institution: one
+  organization_unit: one
+  training_method: MyString
+
+two:
+  training_title: two
+  start_time: 2018-01-11 18:19:32
+  end_time: 2018-01-11 18:19:32
+  duration: 1.5
+  duration_in: MyString
+  expected_number_of_trainees: 1
+  institution: two
+  organization_unit: two
+  training_method: MyString

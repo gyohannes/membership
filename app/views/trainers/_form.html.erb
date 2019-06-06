@@ -1,0 +1,9 @@
+<%= simple_form_for(@trainer) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :training_id, collection: [@training], prompt: false, class: "form-control show-tick" %>
+  <%= f.association :person, label: 'Trainer Name', collection: @trainers.map{|x|[x.to_s, x.id]} %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

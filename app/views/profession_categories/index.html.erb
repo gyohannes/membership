@@ -1,0 +1,35 @@
+<div class="panel-heading">
+  Profession Categories
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profession_categories.each do |profession_category| %>
+      <tr>
+        <td><%= profession_category.name %></td>
+        <td>
+          <%= link_to edit_profession_category_path(profession_category) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+          <%= link_to profession_category, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-remove"></i> Delete </button>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to new_profession_category_path  do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Profession Category</button>
+    <% end %>
+</div>

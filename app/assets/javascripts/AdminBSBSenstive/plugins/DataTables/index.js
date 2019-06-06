@@ -1,0 +1,10 @@
+//= require AdminBSBSenstive/plugins/DataTables/media/js/jquery.dataTables
+//= require AdminBSBSenstive/plugins/DataTables/media/js/dataTables.bootstrap
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/dataTables.buttons.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/buttons.bootstrap.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/buttons.flash.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/jszip.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/pdfmake.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/vfs_fonts
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/buttons.html5.min
+//= require AdminBSBSenstive/plugins/DataTables/extensions/export/buttons.print.min

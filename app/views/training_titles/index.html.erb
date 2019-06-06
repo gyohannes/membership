@@ -1,0 +1,21 @@
+<% content_for :header do %>
+  <div class="row clearfix">
+    <%= simple_form_for :search, url: training_titles_path do |f| %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.input :program_area, collection: ProgramArea.all %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.input :training_title %>
+        </div>
+      </div>
+    <% end %>
+    <div id="filtered_training_titles">
+      <%= render 'training_titles' %>
+    </div>
+  </div>
+<% end %>
+<br>
+<%= link_to new_training_title_path do %>
+  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Training Topic </button>
+<% end %>

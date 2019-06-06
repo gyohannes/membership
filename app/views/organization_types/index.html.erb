@@ -1,0 +1,32 @@
+   <div class="panel-heading">
+     Organization Types
+    </div>
+    <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organization_types.each do |organization_type| %>
+      <tr>
+        <td><%= organization_type.name %></td>
+        <td><%= organization_type.description %></td>
+        <td>
+          <%= link_to edit_organization_type_path(organization_type) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+      <%= link_to new_organization_type_path do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Organization Unit Type</button>
+      <% end %>
+</div>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Training:</strong>
+  <%= @trainee_distribution.training %>
+</p>
+
+<p>
+  <strong>Organization unit:</strong>
+  <%= @trainee_distribution.organization_unit %>
+</p>
+
+<p>
+  <strong>Number of trainees:</strong>
+  <%= @trainee_distribution.number_of_trainees %>
+</p>
+
+<%= link_to 'Edit', edit_trainee_distribution_path(@trainee_distribution) %> |
+<%= link_to 'Back', trainee_distributions_path %>

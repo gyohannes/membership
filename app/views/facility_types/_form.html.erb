@@ -1,0 +1,9 @@
+<%= simple_form_for(@facility_type) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, class: "form-control show-tick" %>
+  <%= f.input :description, class: "form-control show-tick" %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

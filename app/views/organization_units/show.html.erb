@@ -1,0 +1,65 @@
+<div class="panel-heading">
+  Organization Unit Details
+</div>
+<div class='panel-body'>
+  <div class='row'>
+    <div class='col-sm-4' style='border-right: 1px solid silver;'>
+      <ul>
+        <li><label>Name</label> <%= @organization_unit.name %></li>
+        <li><label>Short Name</label> <%= @organization_unit.short_name %></li>
+        <li><label>Code</label> <%= @organization_unit.code %></li>
+        <li><label>Organization Unit Type</label> <%= @organization_unit.organization_type %></li>
+        <li><label>Parent Organization unit</label> <%= @organization_unit.parent_organization_unit %></li>
+        <li><label>Contact Person</label> <%= @organization_unit.contact_person %></li>
+        <li><label>Contact Phone</label> <%= @organization_unit.contact_phone %></li>
+        <li><label>Contact Phone</label> <%= @organization_unit.contact_phone %></li>
+        <li><label>URL</label> <%= @organization_unit.url %></li>
+        <li><label>Latitude</label> <%= @organization_unit.latitude %></li>
+        <li><label>Longitude</label> <%= @organization_unit.longitude %></li>
+        <li><label>Description</label> <%= @organization_unit.description %></li>
+
+      </ul>
+      <hr/>
+      <%= link_to edit_organization_unit_path(@organization_unit) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+      <% end %>
+    </div>
+    <div class='col-sm-7'>
+      <div class="body table-responsive">
+        <legend>Health Workers</legend>
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profession</th>
+            <th>Job Title</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @organization_unit.people.each do |person| %>
+            <tr>
+              <td><%= person.full_name %></td>
+              <td><%= person.profession %></td>
+              <td><%= person.job_title %></td>
+              <td>
+                <%= link_to person_path(person) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Details</button>
+                <% end %>
+                <%= link_to  edit_person_path(person) do %>
+                <% end %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <br>
+        <%= link_to new_person_path(organization_unit: @organization_unit.id) do %>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Health Worker</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mp_amount_setting.name %>
+</p>
+
+<p>
+  <strong>Mp year:</strong>
+  <%= @mp_amount_setting.mp_year %>
+</p>
+
+<p>
+  <strong>Membership type:</strong>
+  <%= @mp_amount_setting.membership_type %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @mp_amount_setting.amount %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @mp_amount_setting.description %>
+</p>
+
+<%= link_to 'Edit', edit_mp_amount_setting_path(@mp_amount_setting) %> |
+<%= link_to 'Back', mp_amount_settings_path %>

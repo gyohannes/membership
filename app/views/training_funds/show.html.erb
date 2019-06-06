@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Training:</strong>
+  <%= @training_fund.training %>
+</p>
+
+<p>
+  <strong>Institution:</strong>
+  <%= @training_fund.institution %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @training_fund.amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_training_fund_path(@training_fund) %> |
+<%= link_to 'Back', training_funds_path %>

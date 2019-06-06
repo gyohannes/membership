@@ -1,0 +1,39 @@
+<% unless @trainees.blank? %>
+  <%= form_tag trainees_path do %>
+      <%= hidden_field_tag 'training', @training.id %>
+  <table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Profession</th>
+      <th>Org Unit</th>
+      <th>Facility</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @trainees.each do |trainee| %>
+      <%= simple_fields_for 'trainees[]', trainee do |f| %>
+        <tr>
+          <td><%= trainee.person.full_name %></td>
+          <td><%= trainee.person.profession %></td>
+          <td><%= trainee.person.organization_unit %></td>
+          <td><%= trainee.person.facility %></td>
+          <td>
+            <%= f.hidden_field(:training_id, value: @training.id) %>
+            <%= f.hidden_field(:person_id, value: trainee.person_id) %>
+            <%= f.check_box(:status, {id: "person_#{trainee.person_id}", class: "filled-in chk-col-green",
+                                      disabled: trainee.person.trained(@training)}, "true", nil)  %>
+            <label for=<%= "person_#{trainee.person_id}" %>> </label>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+      <div class="actions">
+        <%= submit_tag "Save", class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+<% end %>

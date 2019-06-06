@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @trainer_profile.person %>
+</p>
+
+<p>
+  <strong>Trainer type:</strong>
+  <%= @trainer_profile.trainer_type %>
+</p>
+
+<p>
+  <strong>Primary job:</strong>
+  <%= @trainer_profile.primary_job %>
+</p>
+
+<p>
+  <strong>Secondary job:</strong>
+  <%= @trainer_profile.secondary_job %>
+</p>
+
+<%= link_to 'Edit', edit_trainer_profile_path(@trainer_profile) %> |
+<%= link_to 'Back', trainer_profiles_path %>

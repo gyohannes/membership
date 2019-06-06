@@ -1,0 +1,2 @@
+class MpYear < ApplicationRecord
+end

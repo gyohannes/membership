@@ -1,0 +1,9 @@
+<%= simple_form_for(@profession) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :profession_category_id, collection: ProfessionCategory.all, class: "form-control show-tick" %>
+  <%= f.input :name, class: "form-control show-tick" %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

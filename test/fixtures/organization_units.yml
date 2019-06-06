@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  short_name: MyString
+  url: MyString
+  organization_type: one
+  parent_organization_unit_id: 1
+  latitude: 1.5
+  longtitude: 1.5
+
+two:
+  name: MyString
+  short_name: MyString
+  url: MyString
+  organization_type: two
+  parent_organization_unit_id: 1
+  latitude: 1.5
+  longtitude: 1.5

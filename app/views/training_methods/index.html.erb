@@ -1,0 +1,36 @@
+<div class="panel-heading">
+  Training Methods
+  </div>
+<div class="panel-body">
+<table class="table dataTable table-striped table-bordered table-hover js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @training_methods.each do |training_method| %>
+      <tr>
+        <td><%= training_method.name %></td>
+        <td><%= training_method.description %></td>
+        <td>
+          <%= link_to edit_training_method_path(training_method) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-editr"></i> Edit</button>
+          <% end %>
+          <%= link_to  training_method, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-remove"></i> Delete</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to new_training_method_path  do %>
+  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Add Training Method</button>
+<% end %>
+</div>

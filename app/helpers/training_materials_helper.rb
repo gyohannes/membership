@@ -1,0 +1,2 @@
+module TrainingMaterialsHelper
+end

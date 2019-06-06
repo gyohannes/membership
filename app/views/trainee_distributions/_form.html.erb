@@ -1,0 +1,10 @@
+<%= simple_form_for(@trainee_distribution) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :training_id, collection: [@trainee_distribution.training], prompt: false, class: "form-control show-tick" %>
+    <%= f.input :organization_unit_id, collection: @org_units, class: "form-control show-tick" %>
+    <%= f.input :number_of_trainees, class: "form-control show-tick" %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

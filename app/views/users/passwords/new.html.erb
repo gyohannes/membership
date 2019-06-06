@@ -1,0 +1,10 @@
+<div class="fp-top-info">Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.</div>
+<br/>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-group has-feedback">
+    <%= f.email_field :email, class: "form-control", placeholder:"Email", required: true, autofocus: true %>
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+  </div>
+  <%= f.button :submit, "Reset My Password", class: "btn btn-success btn-block btn-flat" %>
+<% end %>

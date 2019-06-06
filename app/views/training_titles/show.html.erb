@@ -1,0 +1,155 @@
+
+<div class="panel-heading">
+  Training Topic Details
+</div>
+
+<div class="panel-body">
+  <div class="col-sm-4">
+    <p>
+      <strong>Title:</strong>
+      <%= @training_title.title %>
+    </p>
+
+    <p>
+      <strong>Program area:</strong>
+      <%= @training_title.program_area %>
+    </p>
+
+    <p>
+      <strong>Training Method:</strong>
+      <%= @training_title.training_method %>
+    </p>
+
+    <p>
+      <strong>Durarion:</strong>
+      <%= @training_title.duration %> <%= @training_title.duration_in %>
+    </p>
+
+    <p>
+      <strong>Maximum Number of Participants:</strong>
+      <%= @training_title.maximum_number_of_participants %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @training_title.description %>
+    </p>
+    <hr/>
+    <%= link_to edit_training_title_path(@training_title) do %>
+      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit Training Topic</button>
+    <% end %>
+  </div>
+
+  <legend class="col-sm-8" style="border-left: 1px solid silver">
+    <legend>
+      Training Sessions
+    </legend>
+    <div class="panel-body">
+      <table class="table js-exportable">
+        <thead>
+        <tr>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <% for training in @training_title.trainings %>
+          <tr>
+            <td><%= training.training_type %></td>
+            <td><%= training.category %></td>
+            <td><%= training.start_time %></td>
+            <td><%= training.end_time %></td>
+            <td><%= training.location %></td>
+            <td>
+              <label class="label <%= training.training_status == Training::NOT_STARTED ? 'label-warning' :
+                                                                        (training.training_status == Training::CANCELED ? 'label-danger' :
+                                                                             (training.training_status == Training::COMPLETED ? 'label-success' : 'label-default')) %>">
+              <%= training.training_status %>
+              </label>
+            </td>
+            <td>
+              <%= link_to training do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <hr/>
+      <%= link_to new_training_path(training_title: @training_title.id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Create New Training Session</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+  Training Materials
+</div>
+
+<div class="panel-body">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Attachment</th>
+      <th></th>
+    </tr>
+    </thead>
+    <% for material in @training_title.training_materials do %>
+    <tr>
+      <td><%= material.name %></td>
+      <td>
+        <% unless material.attachment.blank? %>
+          <%= link_to material.attachment.url do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-download"></i> Download</button>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to edit_training_material_url(material) do %>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+        <% end %>
+        <%= link_to material, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Remove</button>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#defaultModal"><i class="fa fa-plus"></i> Add Training Material</button>
+
+  <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="defaultModalLabel">New Training Material</h4>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(TrainingMaterial.new) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+              <%= f.association :training_title, collection: [@training_title], prompt: false %>
+              <%= f.input :name %>
+              <%= f.input :attachment, as: :file %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

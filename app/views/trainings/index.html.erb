@@ -1,0 +1,55 @@
+    <div class="panel-heading">
+      Trainings
+    </div>
+    <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+      <thead>
+        <tr>
+          <th>Training title</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Organized By</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @trainings.each do |training| %>
+          <tr>
+            <td><%= training.training_title %></td>
+            <td><%= training.category %></td>
+            <td><%= training.training_type %></td>
+            <td><%= training.institution %></td>
+            <td><%= training.start_time %></td>
+            <td><%= training.end_time %></td>
+            <td><%= training.location %></td>
+            <td>
+              <label class="label <%= training.training_status == Training::NOT_STARTED ? 'label-warning' :
+                                          (training.training_status == Training::CANCELED ? 'label-danger' :
+                                               (training.training_status == Training::COMPLETED ? 'label-success' : 'label-default')) %>">
+                <%= training.training_status %>
+              </label>
+            </td>
+            </td>
+            <td>
+              <%= link_to training_path(training) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+              <% end %>
+              <%= link_to edit_training_path(training) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+              <% end %>
+                </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <hr/>
+
+      <%= link_to new_training_path do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Training</button>
+      <% end %>
+</div>

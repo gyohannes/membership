@@ -1,0 +1,37 @@
+<div class="body table-responsive">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Qualification</th>
+      <th>Org Unit</th>
+      <th>Facility</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @people.each do |person| %>
+        <tr>
+          <td><%= person.full_name %></td>
+          <td><%= person.profession %></td>
+          <td><%= person.organization_unit %></td>
+          <td><%= person.facility %></td>
+          <td>
+            <%= link_to person_path(person) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+            <% end %>
+            <%= link_to edit_person_path(person) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to new_person_path(organization_unit: @organization_unit.try(:id)) do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Member</button>
+  <% end %>
+
+</div>

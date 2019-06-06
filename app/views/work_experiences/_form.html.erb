@@ -1,0 +1,16 @@
+<%= simple_form_for(@work_experience) do |f| %>
+  <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input_field :person_id, as: :hidden, input_html: {value: @work_experience.person_id} %>
+      <%= f.input :company, class: "form-control show-tick" %>
+      <%= f.input :job_title, class: "form-control show-tick" %>
+      <%= f.input :from, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+      <%= f.input :to, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+      <%= f.input :description %>
+    </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

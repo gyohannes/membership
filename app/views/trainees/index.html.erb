@@ -1,0 +1,41 @@
+<div class="panel-heading">
+    Trainees List: <b><%= @training %></b>
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Org Unit</th>
+      <th>Facility</th>
+      <th>Training Topic</th>
+      <th>Type</th>
+      <th>Pre Training Score</th>
+      <th>Post Training Score</th>
+      <th>Status</th>
+      <th>Trainer Feedback</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trainees.each do |trainee| %>
+      <tr>
+        <td><%= trainee.person %></td>
+        <td><%= trainee.person.organization_unit %></td>
+        <td><%= trainee.person.facility %></td>
+        <td><%= trainee.training.training_title %></td>
+        <td><%= trainee.training.category %></td>
+        <td><%= trainee.pre_training_score %></td>
+        <td><%= trainee.post_training_score%></td>
+        <td><%= trainee.trainee_status %></td>
+        <td><%= trainee.trainer_feedback %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+  <% unless @training.blank? %>
+    <%= link_to 'Add Trainees', new_trainee_path(training: @training.id), class: 'btn btn-primary' %>
+  <% end %>
+</div>

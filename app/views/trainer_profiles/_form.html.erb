@@ -1,0 +1,19 @@
+<%= simple_nested_form_for(@trainer_profile) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input_field :person_id, as: :hidden, input_html: {value: @trainer_profile.person_id} %>
+
+  <%= f.input :trainer_type, as: :radio_buttons, label: 'Are you primarly a', collection: ['Classrooom Trainer', 'Clinical Trainer'], class: "form-control show-tick" %>
+
+  <legend>What are your current job responsibilities? Check one in each category, if applicable</legend>
+  <%= f.input :primary_job, label: 'Primary job responsibilities', as: :radio_buttons, collection: ['Direct service provider','Trainer, Educator', 'Administrator/Manager','Other'], class: "form-control show-tick" %>
+  <%= f.input :secondary_job, label: 'Secondary job responsibilities', as: :radio_buttons, collection: ['Direct service provider','Trainer, Educator', 'Administrator/Manager','Other'], class: "form-control show-tick" %>
+
+  <%= render partial: 'trainer_training_title_fields', locals: {f: f} %><br/><br/>
+
+  <%= render partial: 'trainer_language_fields', locals: {f: f} %>
+
+    <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

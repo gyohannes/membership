@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  people: one
+  mp_year: one
+  remark: MyText
+  status: false
+
+two:
+  people: two
+  mp_year: two
+  remark: MyText
+  status: false

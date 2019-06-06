@@ -1,0 +1,25 @@
+    <div class="panel-heading">
+        Users
+    </div>
+
+    <div class="panel-body">
+      <% if @type == 'institution' %>
+          <%= render partial: 'users' %>
+        <%= link_to new_user_path(type: 'institution') do %>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Institution User</button>
+        <% end %>
+      <% else %>
+        <div class="row">
+        <div class="col-sm-4">
+          <div id="user_tree"></div>
+          <h4><%= @institution %></h4>
+        </div>
+
+        <div class="col-sm-8">
+          <div id="users">
+            <%= render partial: 'users' %>
+          </div>
+        </div>
+        </div>
+      <% end %>
+    </div>

@@ -1,0 +1,29 @@
+    <div class="header">
+        <h2>
+            Roles
+        </h2>
+    </div>
+    <div class="body table-responsive">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td><%= role.name %></td>
+        <td><%= role.description %></td>
+        <td><%= link_to 'Edit', edit_role_path(role) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to 'Add Role', new_role_path, class: 'btn btn-primary' %>
+</div>

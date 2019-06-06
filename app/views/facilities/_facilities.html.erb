@@ -1,0 +1,34 @@
+<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Facility type</th>
+    <th>Organization unit</th>
+    <th>Ownership</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @facilities.each do |facility| %>
+      <tr>
+        <td><%= facility.name %></td>
+        <td><%= facility.facility_type %></td>
+        <td><%= facility.organization_unit %></td>
+        <td><%= facility.ownership %></td>
+        <td>
+          <%= link_to facility_path(facility) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+            <% end %>
+          <%= link_to  edit_facility_path(facility)  do %>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br/><br/>
+<%= link_to new_facility_path(organization_unit: @organization_unit.try(:id)) do %>
+  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Facility</button>
+<% end %>

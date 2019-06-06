@@ -1,0 +1,34 @@
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Short Name</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @organization_units.each do |organization_unit| %>
+        <tr>
+          <td><%= organization_unit.name %></td>
+          <td><%= organization_unit.short_name %></td>
+          <td><%= organization_unit.organization_type %></td>
+          <td>
+            <%= link_to organization_unit_path(organization_unit) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+            <% end %>
+            <%= link_to edit_organization_unit_path(organization_unit) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+              <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br/><br/>
+  <%  unless @parent.blank? %>
+  <%= link_to new_organization_unit_path(parent: @parent.try(:id))  do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Organization Unit</button>
+  <% end %>
+  <% end %>

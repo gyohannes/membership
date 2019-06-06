@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mp Amount Settings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mp year</th>
+      <th>Membership type</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mp_amount_settings.each do |mp_amount_setting| %>
+      <tr>
+        <td><%= mp_amount_setting.name %></td>
+        <td><%= mp_amount_setting.mp_year %></td>
+        <td><%= mp_amount_setting.membership_type %></td>
+        <td><%= mp_amount_setting.amount %></td>
+        <td><%= mp_amount_setting.description %></td>
+        <td><%= link_to 'Show', mp_amount_setting %></td>
+        <td><%= link_to 'Edit', edit_mp_amount_setting_path(mp_amount_setting) %></td>
+        <td><%= link_to 'Destroy', mp_amount_setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mp Amount Setting', new_mp_amount_setting_path %>

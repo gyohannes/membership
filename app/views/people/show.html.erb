@@ -1,0 +1,267 @@
+      <div class="panel-heading">
+          Member Details
+      </div>
+      <div class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+          <li role="presentation" class="active"><a href="#personal_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Personal Details</a></li>
+          <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Education</a></li>
+          <li role="presentation"><a href="#experience" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Work Experience</a></li>
+          <li role="presentation"><a href="#trainer" data-toggle="tab"><i class="fa fa-address-card m-r-5"></i> Trainer Profile</a></li>
+          <li role="presentation"><a href="#training" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Trainings</a></li>
+          <li role="presentation"><a href="#certificates" data-toggle="tab"><i class="fa fa-certificate m-r-5"></i> Certifications</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="personal_details">
+            <div class='row'>
+              <div class='col-sm-4'>
+                <%= image_tag @person.photo.url(:medium) %>
+              </div>
+              <div class='col-sm-8'>
+                <div class='row'>
+                  <div class='col-sm-3'><b>Name</b></div>
+                  <div class='col-sm-6'><%= @person.full_name %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Job Title</b></div>
+                  <div class='col-sm-6'><%= @person.job_title %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Profession Category</b></div>
+                  <div class='col-sm-6'><%= @person.profession_category %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Profession</b></div>
+                  <div class='col-sm-6'><%= @person.profession %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Gender</b></div>
+                  <div class='col-sm-6'><%= @person.gender %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>DOB</b></div>
+                  <div class='col-sm-6'><%= @person.date_of_birth %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Email</b></div>
+                  <div class='col-sm-6'><%= @person.email %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Phone Number</b></div>
+                  <div class='col-sm-6'><%= @person.phone_number %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Address</b></div>
+                  <div class='col-sm-6'><%= @person.address %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Organization Unit</b></div>
+                  <div class='col-sm-6'><%= @person.organization_unit %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Facility</b></div>
+                  <div class='col-sm-6'><%= @person.facility %></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'><b>Institution</b></div>
+                  <div class='col-sm-6'><%= @person.institution %></div>
+                </div>
+                <hr/>
+                <%= link_to edit_person_path(@person) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="education">
+            <table class="table table-responsive">
+              <thead>
+              <tr>
+                <th>Study Field</th>
+                <th>Institution</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Qualification</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @person.educations.each do |ed| %>
+                <tr>
+                  <td><%= ed.study_field %></td>
+                  <td><%= ed.institution_name %></td>
+                  <td><%= ed.from %></td>
+                  <td><%= ed.to %></td>
+                  <td><%= ed.qualification %></td>
+                  <td>
+                    <%= link_to ed do %>
+                      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i>Edit</button>
+                    <% end %>
+                    <%= link_to ed, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                      <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-plus"></i> Delete </button>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <%= link_to new_education_path(person: @person.id) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Education</button>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="experience">
+            <table class="table table-responsive">
+              <thead>
+              <tr>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @person.work_experiences.each do |experience| %>
+                  <tr>
+                    <td><%= experience.company %></td>
+                    <td><%= experience.job_title %></td>
+                    <td><%= experience.from %></td>
+                    <td><%= experience.to %></td>
+                    <td><%= experience.description %></td>
+                    <td>
+                      <%= link_to experience do %>
+                        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                        <% end %>
+                      <%= link_to experience, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                        <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+                      <% end %>
+                    </td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <%= link_to new_work_experience_path(person: @person.id) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Work Experience</button>
+              <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="trainer">
+            <% unless @person.trainer_profile.blank? %>
+                <div class='row'>
+                  <div class='col-sm-3'>Trainer Type</div>
+                  <div class='col-sm-6'><b><%= @person.trainer_profile.trainer_type %></b></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'>Primary Job Responsiblities</div>
+                  <div class='col-sm-6'><b><%= @person.trainer_profile.primary_job %></b></div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-sm-3'>Secondary Job Responsibilities</div>
+                  <div class='col-sm-6'><b><%= @person.trainer_profile.secondary_job %></b></div>
+                </div>
+              <br/>
+                <div class='row'>
+                  <legend>Training Topics in which you are competent as a trainer</legend>
+                  <ul>
+                  <% @person.trainer_profile.trainer_training_titles.each do |topic| %>
+                    <li><%= topic.training_title %></li>
+                  <% end %>
+                  </ul>
+                </div>
+
+                <div class='row'>
+                  <legend>Languages spoken fluently</legend>
+                  <ul>
+                    <% @person.trainer_profile.trainer_languages.each do |language| %>
+                        <li><%= language.language %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <hr/>
+                <%= link_to edit_trainer_profile_path(@person.trainer_profile) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i>Edit</button>
+                <% end %>
+            <% end %>
+            <% if @person.trainer_profile.blank? %>
+              <%= link_to new_trainer_profile_path(person: @person.id) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i>Add Trainer Profile</button>
+              <% end %>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="training">
+            <legend>Trainings Taken</legend>
+            <% unless @person.trainees.blank? %>
+            <table class="table table-responsive">
+              <thead>
+              <tr>
+                <th>Training Topic</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Pre Training Score</th>
+                <th>Post Training Score</th>
+                <th>Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @person.trainees.each do |training| %>
+                  <tr>
+                    <td><%= training.training %></td>
+                    <td><%= training.training.start_time %></td>
+                    <td><%= training.training.end_time %></td>
+                    <td><%= training.pre_training_score %></td>
+                    <td><%= training.post_training_score %></td>
+                    <td><%= training.trainee_status %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <% end %>
+
+            <legend>Trainings Given</legend>
+            <% unless @person.trainers.blank? %>
+                <table class="table table-responsive">
+                  <thead>
+                  <tr>
+                    <th>Training Topic</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @person.trainers.each do |training| %>
+                      <tr>
+                        <td><%= training.training %></td>
+                        <td><%= training.training.start_time %></td>
+                        <td><%= training.training.end_time %></td>
+                        <td>
+                          <%= link_to training_path(training.training) do %>
+                            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+                          <% end %>
+                        </td>
+                        </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="certificates">
+            <h1>#TODO</h1>
+          </div>
+        </div>
+      </div>

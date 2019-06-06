@@ -1,0 +1,37 @@
+<div class="panel-heading">Budget Years</div>
+<div class="panel-body">
+<table class="table js-exportable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @budget_years.each do |budget_year| %>
+      <tr>
+        <td><%= budget_year.name %></td>
+        <td><%= budget_year.from %></td>
+        <td><%= budget_year.to %></td>
+        <td><%= budget_year.budget_year_status %></td>
+        <td>
+          <%= link_to edit_budget_year_path(budget_year) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit </button>
+            <% end %>
+          <%= link_to budget_year, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-remove"></i> Remove </button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr/>
+  <%= link_to new_budget_year_path do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Budget Year </button>
+  <% end %>
+</div>

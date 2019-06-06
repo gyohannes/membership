@@ -1,0 +1,33 @@
+<div class="panel-heading">
+    Training Funds
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Training</th>
+      <th>Institution</th>
+      <th>Amount</th>
+      <th>Currency</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @training_funds.each do |training_fund| %>
+      <tr>
+        <td><%= training_fund.training %></td>
+        <td><%= training_fund.institution %></td>
+        <td><%= training_fund.amount %></td>
+        <td><%= training_fund.currency %></td>
+        <td>
+          <%= link_to 'Edit', edit_training_fund_path(training_fund) %>
+          <%= link_to 'Delete', training_fund, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <hr/>
+<%= link_to 'New Training Fund', new_training_fund_path %>
+</div>

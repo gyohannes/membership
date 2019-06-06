@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mp Years</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mp_years.each do |mp_year| %>
+      <tr>
+        <td><%= mp_year.name %></td>
+        <td><%= mp_year.from %></td>
+        <td><%= mp_year.to %></td>
+        <td><%= mp_year.status %></td>
+        <td><%= mp_year.description %></td>
+        <td><%= link_to 'Show', mp_year %></td>
+        <td><%= link_to 'Edit', edit_mp_year_path(mp_year) %></td>
+        <td><%= link_to 'Destroy', mp_year, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mp Year', new_mp_year_path %>

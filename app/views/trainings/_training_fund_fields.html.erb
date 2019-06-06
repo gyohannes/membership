@@ -1,0 +1,36 @@
+    <div class="card">
+        <div class="header">
+            <h2>
+                Funders
+            </h2>
+        </div>
+        <div class="body table-responsive">
+        <%= f.simple_fields_for :training_funds, :wrapper => false do |tf| %>
+            <div class='fields row'>
+                <div class='col-sm-6'>    
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label class="form-label">Institution</label>
+                            <%= tf.input_field :institution_id, collection: Institution.all, class: "form-control show-tick" %>
+                        </div>
+                        <%= tf.full_error :institution_id %>
+                    </div>
+                </div>
+                <div class='col-sm-4'>  
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label class="form-label">Amount</label>
+                            <%= tf.input_field :amount, class: "form-control show-tick" %>
+                        </div>
+                        <%= tf.full_error :amount %>
+                    </div>
+                </div>
+                <div class='col-sm-2'>  
+                    <%= tf.link_to_remove "remove" %>
+                </div>
+            </div>
+            <%= javascript_include_tag 'AdminBSBMaterialDesign/form_index' %>
+        <% end %>
+    <p><%= f.link_to_add "Add Funder", :training_funds %></p>
+    </div>
+    </div>        
