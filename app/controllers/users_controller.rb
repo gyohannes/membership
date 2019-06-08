@@ -1,12 +1,19 @@
 class UsersController < ApplicationController
   layout 'application'
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :confirm]
 
   # GET /users
   # GET /users.json
   def index
-    @type = params[:type]
-    @users = User.load_users(current_user, @type)
+    @users = User.all
+  end
+
+  def confirm
+    respond_to do |format|
+      if @user.confirm
+        format.html { redirect_to users_path, notice: 'User was successfully confirmed.' }
+      end
+    end
   end
 
   def load_users

@@ -5,8 +5,7 @@
     <%= f.input :name %>
     <%= f.input :from, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
     <%= f.input :to, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-    <%= f.input :status %>
-    <%= f.input :description %>
+    <%= f.input :status, label: 'Active', label_html: {class: 'transparent_label'}, input_html:{class: "filled-in chk-col-pink"} %>
   </div>
 
   <div class="form-actions">

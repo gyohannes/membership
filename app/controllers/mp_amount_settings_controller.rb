@@ -28,7 +28,7 @@ class MpAmountSettingsController < ApplicationController
 
     respond_to do |format|
       if @mp_amount_setting.save
-        format.html { redirect_to @mp_amount_setting, notice: 'Mp amount setting was successfully created.' }
+        format.html { redirect_to mp_amount_settings_path, notice: 'Mp amount setting was successfully created.' }
         format.json { render :show, status: :created, location: @mp_amount_setting }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MpAmountSettingsController < ApplicationController
   def update
     respond_to do |format|
       if @mp_amount_setting.update(mp_amount_setting_params)
-        format.html { redirect_to @mp_amount_setting, notice: 'Mp amount setting was successfully updated.' }
+        format.html { redirect_to mp_amount_settings_path, notice: 'Mp amount setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @mp_amount_setting }
       else
         format.html { render :edit }

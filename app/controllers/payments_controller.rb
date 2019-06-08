@@ -1,10 +1,26 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  before_action :set_payment, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :load, only: [:new, :create, :edit, :update]
 
+  def load
+    if params[:person]
+      @people = [Person.find(params[:person])]
+    else
+      @people = Person.all
+    end
+  end
   # GET /payments
   # GET /payments.json
   def index
     @payments = Payment.all
+  end
+
+  def confirm
+    @payment.update(status: true)
+    flash[:notice] = 'Payment was successfully confirmed.'
+    redirect_to @payment.person
   end
 
   # GET /payments/1
@@ -15,10 +31,13 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
+    @payment.person_id = params[:person]
+    session[:return_to] = request.referer
   end
 
   # GET /payments/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /payments
@@ -28,7 +47,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Payment was successfully created.' }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new }
@@ -42,7 +61,7 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Payment was successfully updated.' }
         format.json { render :show, status: :ok, location: @payment }
       else
         format.html { render :edit }

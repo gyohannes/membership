@@ -1,7 +1,6 @@
 class BudgetYear < ApplicationRecord
   has_many :trainings
 
-
   def self.active
     where(status: true).last
   end

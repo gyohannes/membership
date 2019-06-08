@@ -28,7 +28,7 @@ class MpYearsController < ApplicationController
 
     respond_to do |format|
       if @mp_year.save
-        format.html { redirect_to @mp_year, notice: 'Mp year was successfully created.' }
+        format.html { redirect_to mp_years_path, notice: 'Mp year was successfully created.' }
         format.json { render :show, status: :created, location: @mp_year }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MpYearsController < ApplicationController
   def update
     respond_to do |format|
       if @mp_year.update(mp_year_params)
-        format.html { redirect_to @mp_year, notice: 'Mp year was successfully updated.' }
+        format.html { redirect_to mp_years_path, notice: 'Mp year was successfully updated.' }
         format.json { render :show, status: :ok, location: @mp_year }
       else
         format.html { render :edit }

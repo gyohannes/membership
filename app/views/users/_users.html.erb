@@ -2,7 +2,8 @@
   <thead>
   <tr>
     <th>Email</th>
-    <th>Role</th>
+    <th>Admin</th>
+    <th>Confirmation</th>
     <th></th>
   </tr>
   </thead>
@@ -11,7 +12,8 @@
   <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.role %></td>
+        <td><%= user.admin_status %></td>
+        <td><%= link_to 'Confirm', confirm_user_path(user), class: 'btn btn-primary' unless user.confirmed? %></td>
         <td>
           <%= link_to edit_user_path(user) do %>
             <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>

@@ -9,6 +9,19 @@ class PeopleController < ApplicationController
     @people = parent_org_unit.try(:sub_people) || []
   end
 
+  def members_by_type
+    members = Person.joins(:membership_type).group('membership_types.name').count
+    render json: members
+  end
+
+  def members_by_membership_type_and_payment_status
+    members = []
+    ['Paid', 'Not Paid'].each do |c|
+      members << {name: c, data: MembershipType.all.map{|mt| [mt.to_s, mt.members_by_status(c).count]} }
+    end
+    render json: members
+  end
+
   def load_people
     @organization_unit  = OrganizationUnit.find(params[:node])
     @people = @organization_unit.sub_people
@@ -17,6 +30,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    session[:return_to] = request.referer
   end
 
   # GET /people/new

@@ -19,6 +19,12 @@ class Person < ApplicationRecord
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "missing/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
+  after_create :set_user
+
+  def set_user
+    u = User.create(email: email, password: '123456', password_confirmation: '123456')
+    self.update(user_id: u.id)
+  end
 
   def trained(training)
     !trainees.joins(:training).where('training_title_id = ? and trainings.category = ? and trainees.status in (?) ',
@@ -26,7 +32,7 @@ class Person < ApplicationRecord
   end
 
   def full_name
-    [title, first_name, middle_name, last_name].join(' ')
+    [first_name, middle_name, last_name].join(' ')
   end
 
   def to_s

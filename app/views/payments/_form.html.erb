@@ -2,11 +2,10 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :person %>
-    <%= f.association :mp_year %>
+    <%= f.input :person_id, label: 'Member', collection: @people.map{|p| [p.to_s, p.try(:id)]} %>
+    <%= f.association :mp_year, label: 'Payment Year' %>
     <%= f.input :remark %>
-    <%= f.input :status %>
-    <%= f.input :attachment, as: :file, class: "form-control show-tick" %>
+    <%= f.input :attachment, label: 'Attach Receipt', as: :file, class: "form-control show-tick" %>
   </div>
 
   <div class="form-actions">

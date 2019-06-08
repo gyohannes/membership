@@ -28,7 +28,7 @@ class MembershipTypesController < ApplicationController
 
     respond_to do |format|
       if @membership_type.save
-        format.html { redirect_to @membership_type, notice: 'Membership type was successfully created.' }
+        format.html { redirect_to membership_types_path, notice: 'Membership type was successfully created.' }
         format.json { render :show, status: :created, location: @membership_type }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MembershipTypesController < ApplicationController
   def update
     respond_to do |format|
       if @membership_type.update(membership_type_params)
-        format.html { redirect_to @membership_type, notice: 'Membership type was successfully updated.' }
+        format.html { redirect_to membership_types_path, notice: 'Membership type was successfully updated.' }
         format.json { render :show, status: :ok, location: @membership_type }
       else
         format.html { render :edit }

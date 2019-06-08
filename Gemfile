@@ -16,6 +16,7 @@ gem "chartkick"
 gem "highcharts-rails"
 gem 'best_in_place'
 gem 'jquery-rails'
+gem 'cancancan', '~> 2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

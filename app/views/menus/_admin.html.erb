@@ -1,14 +1,10 @@
 <% if current_user.admin? %>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">group</i>
-      <span class="nav-label">Users</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Org Unit Users', users_path(type: 'org unit') %></li>
-      <li><%= link_to 'Institution Users', users_path(type: 'institution') %></li>
-    </ul>
-  </li>
+    <li>
+      <%= link_to users_path do %>
+          <i class="material-icons">group</i>
+          <span class="nav-label">Users</span>
+      <% end %>
+    </li>
 
   <li>
     <a href="javascript:void(0);" class="menu-toggle">
@@ -16,10 +12,10 @@
       <span class="nav-label">System Settings</span>
     </a>
     <ul>
-      <li><%= link_to 'Budget Years', budget_years_path %></li>
+      <li><%= link_to 'Payment Years', mp_years_path %></li>
+      <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
       <li><%= link_to 'Profession Categories', profession_categories_path %></li>
       <li><%= link_to 'Professions', professions_path %></li>
-      <li><%= link_to 'Languages', languages_path %></li>
     </ul>
   </li>
 
@@ -37,22 +33,18 @@
     <li>
     <a href="javascript:void(0);" class="menu-toggle">
       <i class="material-icons">group</i>
-      <span class="nav-label">Membership</span>
+      <span class="nav-label">Members</span>
     </a>
     <ul>
-      <li><%= link_to 'Members', people_path %></li>
       <li><%= link_to 'Membership Types', membership_types_path %></li>
-      <li><%= link_to 'Payment Years', mp_years_path %></li>
-      <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
-      <li><%= link_to 'Membership Fees', payments_path %></li>
-      
+      <li><%= link_to 'Members', people_path %></li>
     </ul>
   </li>
 
   <li>
-    <%= link_to reports_trainees_path do %>
-      <i class="material-icons">insert_chart</i>
-      <span class="nav-label">Reports</span>
+    <%= link_to payments_path do %>
+      <i class="material-icons">attach_money</i>
+      <span class="nav-label">Payments</span>
     <% end %>
   </li>
 

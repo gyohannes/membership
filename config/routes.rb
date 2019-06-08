@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :payments
+  resources :payments do
+    member do
+      get 'confirm'
+    end
+  end
   resources :mp_amount_settings
   resources :mp_years
   resources :membership_types
@@ -42,6 +46,8 @@ Rails.application.routes.draw do
     collection do
       get 'load_people'
       get 'load_professions'
+      get 'members_by_type'
+      get 'members_by_membership_type_and_payment_status'
     end
   end
   resources :facilities do
@@ -86,6 +92,9 @@ Rails.application.routes.draw do
   }
   scope "/admin" do
     resources :users do
+      member do
+        get 'confirm'
+      end
       collection do
         get 'load_users'
         get 'institution_users'

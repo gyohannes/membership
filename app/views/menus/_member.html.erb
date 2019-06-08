@@ -1,0 +1,9 @@
+<% unless current_user.admin? %>
+  <li>
+    <%= link_to current_user.person do %>
+        <i class="material-icons">person</i>
+        <span>My Profile</span>
+    <% end %>
+  </li>
+
+<% end %>

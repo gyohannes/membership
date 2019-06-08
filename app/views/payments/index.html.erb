@@ -6,8 +6,10 @@
   <thead>
     <tr>
       <th>Member</th>
-      <th>Payment Year</th>
-      <th>Remark</th>
+      <th>Year</th>
+      <th>Amount</th>
+      <th>Paid Date</th>
+      <th>Attachment</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -16,13 +18,20 @@
   <tbody>
     <% @payments.each do |payment| %>
       <tr>
-        <td><%= payment.people %></td>
+        <td><%= payment.person %></td>
         <td><%= payment.mp_year %></td>
-        <td><%= payment.remark %></td>
-        <td><%= payment.status %></td>
-        <td><%= link_to 'Show', payment %>
-        <%= link_to 'Edit', edit_payment_path(payment) %>
-        <%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= payment.mp_year.mp_amount_setting.amount %></td>
+        <td><%= payment.created_at %></td>
+        <td><%= link_to 'Download', payment.attachment.url %></td>
+        <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+        <td>
+          <%= link_to edit_payment_path(payment) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+          <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -9,7 +9,6 @@
       <th>From</th>
       <th>To</th>
       <th>Status</th>
-      <th>Description</th>
       <th></th>
     </tr>
   </thead>
@@ -20,11 +19,8 @@
         <td><%= mp_year.name %></td>
         <td><%= mp_year.from %></td>
         <td><%= mp_year.to %></td>
-        <td><%= mp_year.status %></td>
-        <td><%= mp_year.description %></td>
-        <td><%= link_to 'Show', mp_year %>
-        <%= link_to 'Edit', edit_mp_year_path(mp_year) %>
-        <%= link_to 'Destroy', mp_year, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= mp_year.payment_year_status %></td>
+        <td><%= link_to 'Edit', edit_mp_year_path(mp_year) %></td>
       </tr>
     <% end %>
   </tbody>

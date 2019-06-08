@@ -3,9 +3,9 @@
     <thead>
     <tr>
       <th>Name</th>
-      <th>Qualification</th>
-      <th>Org Unit</th>
-      <th>Facility</th>
+      <th>Membership Type</th>
+      <th>Phone Number</th>
+      <th>Email</th>
       <th></th>
     </tr>
     </thead>
@@ -14,9 +14,9 @@
     <% @people.each do |person| %>
         <tr>
           <td><%= person.full_name %></td>
-          <td><%= person.profession %></td>
-          <td><%= person.organization_unit %></td>
-          <td><%= person.facility %></td>
+          <td><%= person.membership_type %></td>
+          <td><%= person.phone_number %></td>
+          <td><%= person.email %></td>
           <td>
             <%= link_to person_path(person) do %>
               <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
