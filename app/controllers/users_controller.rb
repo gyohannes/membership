@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @type = params[:type]
+    @users = User.load_users(current_user, @type)
   end
 
   def confirm

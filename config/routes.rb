@@ -104,6 +104,8 @@ Rails.application.routes.draw do
     end
   end
   get 'home/index'
+  get 'home/payment_dashboard'
+  get 'home/training_dashboard'
   root to: "home#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

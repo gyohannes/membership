@@ -1,5 +1,7 @@
 <% if current_user.admin? or current_user.super_admin? %>
-  <%= render 'dashboards/admin' %>
+  <%= render 'dashboards/payment_dashboard' %>
+<% elsif @institution %>
+    <%= render 'dashboards/institution' %>
 <% else %>
     <%= render 'dashboards/member' %>
 <% end %>

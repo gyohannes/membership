@@ -1,0 +1,17 @@
+<%= simple_nested_form_for(@training) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :budget_year_id, as: :hidden, input_html: { value: BudgetYear.active.try(:id)} %>
+  <%= f.input :organization_unit_id, as: :hidden, input_html: { value: current_user.organization_unit.try(:id)} %>
+  <%= f.input :training_title_id, collection: TrainingTitle.all, class: "form-control show-tick" %>
+  <%= f.input :training_type, label: 'Category', collection: ['In-Service', 'Pre-Service'], class: "form-control show-tick" %>
+  <%= f.input :category, label: 'Type', collection: ['Basic', 'Refreshment', 'TOT'], class: "form-control show-tick" %>
+  <%= f.association :institution, label: 'Organized by', collection: @institutions %>
+  <%= f.input :start_time, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+  <%= f.input :end_time, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+  <%= f.input :location, class: "form-control show-tick" %>
+  <%= f.input :description, class: "form-control show-tick" %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

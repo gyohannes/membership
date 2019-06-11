@@ -1,5 +1,16 @@
 <% if current_user.admin? %>
     <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">dashboard</i>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Payment Dashboard', home_payment_dashboard_path %></li>
+        <li><%= link_to 'Training Dashboard', home_training_dashboard_path %></li>
+      </ul>
+    </li>
+
+    <li>
       <%= link_to users_path do %>
           <i class="material-icons">group</i>
           <span class="nav-label">Users</span>
@@ -12,8 +23,8 @@
       <span class="nav-label">System Settings</span>
     </a>
     <ul>
-      <li><%= link_to 'Payment Years', mp_years_path %></li>
-      <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
+      <li><%= link_to 'Budget Years', budget_years_path %></li>
+      <li><%= link_to 'Languages', languages_path %></li>
       <li><%= link_to 'Profession Categories', profession_categories_path %></li>
       <li><%= link_to 'Professions', professions_path %></li>
     </ul>
@@ -29,23 +40,58 @@
       <li><%= link_to 'Organization Units', organization_units_path %></li>
     </ul>
   </li>
- 
-    <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">group</i>
-      <span class="nav-label">Members</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Membership Types', membership_types_path %></li>
-      <li><%= link_to 'Members', people_path %></li>
-    </ul>
-  </li>
 
-  <li>
-    <%= link_to payments_path do %>
-      <i class="material-icons">attach_money</i>
-      <span class="nav-label">Payments</span>
-    <% end %>
-  </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">widgets</i>
+        <span class="nav-label">Membership</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Membership Types', membership_types_path %></li>
+        <li><%= link_to 'Members', people_path %></li>
+        <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
+        <li><%= link_to 'Member Paymments', payments_path %></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">school</i>
+        <span class="nav-label">Institutions</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Institution Types', institution_types_path %></li>
+        <li><%= link_to 'Institutions', institutions_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">local_hospital</i>
+        <span class="nav-label">Facilities</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Facility Types',facility_types_path %></li>
+        <li><%= link_to 'Facilities', facilities_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">library_books</i>
+        <span class="nav-label">Trainings</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Program Areas', program_areas_path %></li>
+        <li><%= link_to 'Training Methods', training_methods_path %></li>
+        <li><%= link_to 'Training Topics', training_titles_path %></li>
+        <li><%= link_to 'Trainings', trainings_path %></li>
+      </ul>
+    </li>
+
+    <li>
+      <%= link_to reports_trainees_path do %>
+          <i class="material-icons">insert_chart</i>
+          <span class="nav-label">Reports</span>
+      <% end %>
+    </li>
 
 <% end %>

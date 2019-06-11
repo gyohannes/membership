@@ -1,0 +1,29 @@
+<% unless @trainee_distributions.blank? %>
+  <%= form_tag trainee_distributions_path do %>
+    <%= hidden_field_tag 'training', @training.id %>
+    <table class="table table-striped js-exportable">
+      <thead>
+      <tr>
+        <th>Organization Unit</th>
+        <th>Number of Trainees</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @trainee_distributions.each do |distribution| %>
+        <%= fields_for 'distributions[]', distribution do |f| %>
+          <%= f.hidden_field 'training_id' %>
+          <%= f.hidden_field 'organization_unit_id' %>
+          <tr>
+            <td><%= distribution.organization_unit %></td>
+            <td><%= f.number_field 'number_of_trainees' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="actions">
+      <%= submit_tag "Save", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>

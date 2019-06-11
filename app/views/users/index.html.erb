@@ -11,7 +11,9 @@
       <% else %>
         <div class="row">
         <div class="col-sm-4">
-          <div id="user_tree"></div>
+          <% if current_user.organization_unit %>
+            <div id="user_tree"></div>
+          <% end %>
           <h4><%= @institution %></h4>
         </div>
 

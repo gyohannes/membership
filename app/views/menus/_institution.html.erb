@@ -1,0 +1,37 @@
+<% unless current_user.institution.blank? %>
+  <li>
+    <%= link_to institution_path(@institution) do %>
+        <i class="material-icons">details</i>
+        <span>Institution Details</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to users_path(type: 'institution') do %>
+        <i class="material-icons">group</i>
+        <span>Users</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to training_titles_path do %>
+      <i class="material-icons">library_books</i>
+      <span>Training Topics</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to trainings_path do %>
+      <i class="material-icons">library_books</i>
+      <span>Trainings</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to reports_trainees_path do %>
+      <i class="material-icons">insert_chart</i>
+      <span class="nav-label">Reports</span>
+    <% end %>
+  </li>
+
+<% end %>

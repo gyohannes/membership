@@ -1,5 +1,6 @@
 class BudgetYear < ApplicationRecord
   has_many :trainings
+  has_many :payments
 
   def self.active
     where(status: true).last
@@ -7,6 +8,14 @@ class BudgetYear < ApplicationRecord
 
   def budget_year_status
     status == true ? 'Active' : ''
+  end
+
+  def paid_members
+    payments.joins(:person)
+  end
+
+  def total_paid_amount
+    payments.joins(:budget_year=>:mp_amount_setting).sum(:amount)
   end
 
   def trainees_by_year(orga_unit, type)

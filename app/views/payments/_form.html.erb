@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :person_id, label: 'Member', collection: @people.map{|p| [p.to_s, p.try(:id)]} %>
-    <%= f.association :mp_year, label: 'Payment Year' %>
+    <%= f.association :budget_year %>
     <%= f.input :remark %>
     <%= f.input :attachment, label: 'Attach Receipt', as: :file, class: "form-control show-tick" %>
   </div>

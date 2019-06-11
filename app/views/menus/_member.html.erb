@@ -1,4 +1,4 @@
-<% unless current_user.admin? %>
+<% if !current_user.admin? and @institution.blank? %>
   <li>
     <%= link_to current_user.person do %>
         <i class="material-icons">person</i>

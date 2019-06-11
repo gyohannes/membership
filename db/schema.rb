@@ -99,14 +99,14 @@ ActiveRecord::Schema.define(version: 20190606141838) do
 
   create_table "mp_amount_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.bigint "mp_year_id"
+    t.bigint "budget_year_id"
     t.bigint "membership_type_id"
     t.float "amount", limit: 24
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["budget_year_id"], name: "index_mp_amount_settings_on_budget_year_id"
     t.index ["membership_type_id"], name: "index_mp_amount_settings_on_membership_type_id"
-    t.index ["mp_year_id"], name: "index_mp_amount_settings_on_mp_year_id"
   end
 
   create_table "mp_years", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20190606141838) do
 
   create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "person_id"
-    t.bigint "mp_year_id"
+    t.bigint "budget_year_id"
     t.text "remark"
     t.boolean "status"
     t.datetime "created_at", null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20190606141838) do
     t.string "attachment_content_type"
     t.integer "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.index ["mp_year_id"], name: "index_payments_on_mp_year_id"
+    t.index ["budget_year_id"], name: "index_payments_on_budget_year_id"
     t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
@@ -350,9 +350,12 @@ ActiveRecord::Schema.define(version: 20190606141838) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "role_id"
     t.string "user_name"
     t.integer "organization_unit_id"
-    t.boolean "admin"
+    t.integer "facility_id"
+    t.integer "institution_id"
+    t.string "user_type"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -389,10 +392,10 @@ ActiveRecord::Schema.define(version: 20190606141838) do
   add_foreign_key "facilities", "facility_types"
   add_foreign_key "facilities", "organization_units"
   add_foreign_key "institutions", "institution_types"
+  add_foreign_key "mp_amount_settings", "budget_years"
   add_foreign_key "mp_amount_settings", "membership_types"
-  add_foreign_key "mp_amount_settings", "mp_years"
   add_foreign_key "organization_units", "organization_types"
-  add_foreign_key "payments", "mp_years"
+  add_foreign_key "payments", "budget_years"
   add_foreign_key "payments", "people"
   add_foreign_key "people", "facilities"
   add_foreign_key "people", "institutions"

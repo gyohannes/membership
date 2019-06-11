@@ -1,0 +1,199 @@
+<div class="panel-heading">
+    Training Session Details
+</div>
+<div class="panel-body">
+  <%= hidden_field_tag 'training', @training.id %>
+    <!-- Nav tabs -->
+  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+    <li role="presentation" class="active"><a href="#training_info" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Training Session</a> </li>
+    <li role="presentation"><a href="#funding" data-toggle="tab"><i class="fa fa-dollar m-r-5"></i> Funding</a></li>
+    <li role="presentation"><a href="#distribution" data-toggle="tab"><i class="fa fa-check m-r-5"></i> Trainee Assignment </a></li>
+    <li role="presentation"><a href="#trainers" data-toggle="tab"> <i class="fa fa-user-circle m-r-5"></i> Trainers</a></li>
+    <li role="presentation"><a href="#trainees" data-toggle="tab"><i class="fa fa-group m-r-5"></i> Trainees</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="training_info">
+      <ul>
+        <li><label class="details-label">Training title:</label> <%= @training.training_title %></td></li>
+        <li><label>Category:</label> <%= @training.training_type %></li>
+        <li><label>Type:</label> <%= @training.category %></li>
+        <li><label>Organized By:</label> <%= @training.institution %></li>
+        <li><label>Start date:</label> <%= @training.start_time %></li>
+        <li><label>End date:</label> <%= @training.end_time %></li>
+        <li><label>Location</label> <%= @training.location %></li>
+        <li><label>Description</label> <%= @training.description %></li>
+        <li><label>Status</label>
+          <label class="label <%= @training.training_status == Training::NOT_STARTED ? 'label-warning' :
+                                      (@training.training_status == Training::CANCELED ? 'label-danger' :
+                                           (@training.training_status == Training::COMPLETED ? 'label-success' : 'label-default')) %>">
+            <%= @training.training_status %>
+          </label> &nbsp;&nbsp;<% if @training.status == Training::CANCELED %>
+            <%= link_to undo_cancel_training_path(@training), data: { confirm: 'Are you sure you want to re-enable this training session?' } do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-check"></i> Undo Cancel</button>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+      <hr/>
+      <% unless @training.status == Training::CANCELED %>
+      <%= link_to edit_training_path(@training) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+      <% end %>
+
+        <%= link_to cancel_training_path(@training), method: :delete, data: { confirm: 'Are you sure you want to cancel this training session?' } do %>
+          <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Cancel Training</button>
+        <% end %>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane fade in" id="funding">
+      <% unless @training.training_funds.blank? %>
+        <table class="table table-responsive table-condensed">
+          <thead>
+            <tr>
+              <th>Institution</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @training.training_funds.each do |tf| %>
+                <tr>
+                  <td><%= link_to tf.institution, institution_path(tf.institution) %> </td>
+                  <td><%= tf.amount %></td>
+                  <td>
+                    <%= link_to edit_training_fund_path(tf)  do %>
+                      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+          </tbody>
+      </table>
+      <% end %>
+      <hr/>
+      <%= link_to new_training_fund_path(training: @training.id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Funding</button>
+      <% end %>
+
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade in" id="distribution">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div id="trainee_distribution_tree">
+            </div>
+          </div>
+
+          <div class="col-sm-8">
+            <a class="list-group-item">
+              <div class="row clearfix">
+                <div class="col-sm-8"><label>Maximum Possible Number of Trainees</label></div>
+                <div class="col-sm-4"><button class="btn btn-primary btn-block" type="button"><%= @training.max_possible_trainees(current_user.parent_org_unit) %></button></div>
+              </div>
+            </a><br/>
+            <div id="trainee_distributions">
+              <table class="table table-striped js-exportable">
+                <thead>
+                <tr>
+                  <th>Organization Unit</th>
+                  <th>Number of Trainees</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @trainee_distributions.each do |distribution| %>
+                    <tr>
+                      <td><%= distribution.organization_unit %></td>
+                      <td><%= distribution.number_of_trainees %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade in" id="trainers">
+      <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+        <thead>
+        <tr>
+          <th>Trainer Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @training.trainers.each do |trainer| %>
+            <tr>
+              <td><%= trainer.person %></td>
+              <td><%= trainer.person.phone_number %></td>
+              <td><%= trainer.person.email %></td>
+              <td>
+                <%= link_to edit_trainer_path(trainer) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                <% end %>
+                <%= link_to trainer, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-edit"></i> Remove</button>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <hr/>
+      <%= link_to new_trainer_path(training: @training.id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Add Trainer</button>
+      <% end %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade in" id="trainees">
+      <table class="table table-striped table-hover dataTable js-exportable">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Org Unit</th>
+          <th>Facility</th>
+          <th>Pre Training Score</th>
+          <th>Post Training Score</th>
+          <th>Status</th>
+          <th>Trainer Feedback</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @training.trainees.each do |trainee| %>
+            <tr>
+              <td><%= trainee.person %></td>
+              <td><%= trainee.person.organization_unit %></td>
+              <td><%= trainee.person.facility %></td>
+              <td><a><%= best_in_place trainee, :pre_training_score, as: :input, place_holder: "Click here to add value" %></a></td>
+              <td><a><%= best_in_place trainee, :post_training_score, :as => :input, place_holder: "Click here to add value" %></a></td>
+              <td><a><%= best_in_place trainee, :status, :as => :input, as: :select, collection:
+                  [[Trainee::PENDING, Trainee::PENDING], [Trainee::COMPLETED, Trainee::COMPLETED], [Trainee::NOTCOMPLETED, Trainee::NOTCOMPLETED]], :display_as => :status %></a></td>
+              <td><a><%= best_in_place trainee, :trainer_feedback, as: :textarea, :as => :textarea, place_holder: "Click here to add value" %></a></td>
+              <td>
+                <%= link_to trainee, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Remove </button>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <hr/>
+      <%= link_to new_trainee_path(training: @training.id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Trainers </button>
+      <% end %>
+    </div>
+
+  </div>
+</div>

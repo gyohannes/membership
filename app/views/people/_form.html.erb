@@ -3,16 +3,16 @@
     <div class="row">
 
       <div class="col-sm-6">
-        <%= f.input :organization_unit_id, collection: [@organization_unit] if @organization_unit %>
-        <%= f.input :facility_id, collection: @organization_unit.try(:facilities) if @facility %>
-        <%= f.input :institution_id, collection: Institution.all if @institution %>
         <%= f.input :title %>
-        <%= f.association :membership_type %>
         <%= f.input :first_name, class: "form-control show-tick" %>
         <%= f.input :middle_name, class: "form-control show-tick" %>
         <%= f.input :last_name, class: "form-control show-tick" %>
         <%= f.input :gender, as: :radio_buttons, wrapper: :horizontal_collection, item_wrapper_tag: 'span', collection: ['Male', 'Female'] %>
         <%= f.input :date_of_birth, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+        <%= f.association :membership_type %>
+        <%= f.input :organization_unit_id, collection: [@organization_unit] if @organization_unit %>
+        <%= f.input :facility_id, collection: @organization_unit.try(:facilities) %>
+        <%= f.input :institution_id, collection: Institution.all if @institution %>
       </div>
 
       <div class="col-sm-6" style="border-left: 1px solid silver">
