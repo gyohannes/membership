@@ -18,7 +18,7 @@
       </div>
     <% end %>
 
-      <%= link_to trainings_path(type: 'upcoming') do %>
+      <%= link_to people_path(type: 'paid') do %>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box infobox-type-5 hover-zoom-effect">
         <div class="icon">
@@ -31,7 +31,7 @@
       </div>
         </div>
       <% end %>
-      <%= link_to trainees_path do %>
+      <%= link_to people_path(type: 'not paid') do %>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="icon">
@@ -44,7 +44,7 @@
             </div>
           </div>
       <% end %>
-      <%= link_to trainings_path(type: 'progress') do %>
+      <%= link_to payments_path(year: BudgetYear.active) do %>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="content" style="min-height: 1486px;">

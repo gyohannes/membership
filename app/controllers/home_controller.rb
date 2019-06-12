@@ -28,7 +28,7 @@ class HomeController < ApplicationController
   end
 
   def payment_dashboard
-    @people = current_user.organization_unit.try(:sub_people).where('institution_id = ?', nil) || []
+    @people = current_user.organization_unit.try(:sub_people) || []
   end
 
   def training_dashboard

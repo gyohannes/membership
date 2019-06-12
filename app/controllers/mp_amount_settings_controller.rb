@@ -69,6 +69,6 @@ class MpAmountSettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mp_amount_setting_params
-      params.require(:mp_amount_setting).permit(:name, :mp_year_id, :membership_type_id, :amount, :description)
+      params.require(:mp_amount_setting).permit(:name, :budget_year_id, :membership_type_id, :amount, :description)
     end
 end

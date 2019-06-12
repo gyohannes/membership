@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Member</th>
-      <th>Year</th>
+      <th>Budget Year</th>
       <th>Amount</th>
       <th>Paid Date</th>
       <th>Attachment</th>
@@ -19,8 +19,8 @@
     <% @payments.each do |payment| %>
       <tr>
         <td><%= payment.person %></td>
-        <td><%= payment.mp_year %></td>
-        <td><%= payment.mp_year.mp_amount_setting.amount %></td>
+        <td><%= payment.budget_year %></td>
+        <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) %></td>
         <td><%= payment.created_at %></td>
         <td><%= link_to 'Download', payment.attachment.url %></td>
         <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
