@@ -14,7 +14,12 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    if params['year']
+      budget_year = BudgetYear.find(params['year'])
+      @payments = budget_year.budget_year_payments
+    else
+      @payments = Payment.all
+    end
   end
 
   def confirm

@@ -10,12 +10,15 @@
         <div id="report_organization_unit_tree"></div>
           <%=  f.input :organization_unit, as: :hidden, required: false %>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-4">
         <%=  f.input :program_area, collection: ProgramArea.all, required: false %>
         <%=  f.input :training_title, collection: TrainingTitle.all, required: false %>
         <%=  f.input :category, collection: ['In-Service', 'Pre-Service'], required: false %>
+      </div>
+      <div class="col-sm-4">
         <%=  f.input :training_type, collection: ['Basic', 'Refreshment', 'TOT'], required: false %>
         <%=  f.input :trainee_status, collection: Trainee::STATUSES, required: false %>
+      </div>
       </div>
     </div>
     <div class="form-actions">

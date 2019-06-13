@@ -3,7 +3,8 @@ class HomeController < ApplicationController
 
   def index
     @people = current_user.organization_unit.try(:sub_people) || []
-
+    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
     #upcoming trainings
     type_upcoming = 'upcoming'
     @upcoming_trainings = Training.load_trainings(current_user,type_upcoming)
@@ -29,6 +30,8 @@ class HomeController < ApplicationController
 
   def payment_dashboard
     @people = current_user.organization_unit.try(:sub_people) || []
+    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
   end
 
   def training_dashboard

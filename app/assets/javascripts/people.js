@@ -25,6 +25,58 @@ $(function () {
         }
     });
 
+    $.ajax({
+        url: '/organization_units/load_tree',
+        success: function(response){
+            $('#members_paid_tree').treeview({
+                data: response,
+                levels: 2,
+                onNodeSelected: function (event, data) {
+                    $.ajax({
+                        url:'/people/load_members_paid',
+                        data: { node: data.id},
+                        success: function (response) {
+                            $('#members_paid').html(response)
+                            $('.js-exportable').DataTable({
+                                dom: 'lrBfrtip',
+                                responsive: true,
+                                buttons: [
+                                    'copy', 'csv', 'excel', 'pdf', 'print'
+                                ]
+                            });
+                        }
+                    })
+                }
+            });
+        }
+    });
+
+    $.ajax({
+        url: '/organization_units/load_tree',
+        success: function(response){
+            $('#members_not_paid_tree').treeview({
+                data: response,
+                levels: 2,
+                onNodeSelected: function (event, data) {
+                    $.ajax({
+                        url:'/people/load_members_not_paid',
+                        data: { node: data.id},
+                        success: function (response) {
+                            $('#members_not_paid').html(response)
+                            $('.js-exportable').DataTable({
+                                dom: 'lrBfrtip',
+                                responsive: true,
+                                buttons: [
+                                    'copy', 'csv', 'excel', 'pdf', 'print'
+                                ]
+                            });
+                        }
+                    })
+                }
+            });
+        }
+    });
+
     $("#person_profession_category_id").change(function(){
         var profession_category = $(this).val();
         $.ajax({

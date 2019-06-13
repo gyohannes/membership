@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   post 'reports/health_workers'
   get 'reports/trainees'
   post 'reports/trainees'
+  get 'reports/members'
+  post 'reports/members'
 
   resources :trainees do
     collection do
@@ -48,6 +50,10 @@ Rails.application.routes.draw do
       get 'load_professions'
       get 'members_by_type'
       get 'members_by_membership_type_and_payment_status'
+      get 'members_paid'
+      get 'load_members_paid'
+      get 'members_not_paid'
+      get 'load_members_not_paid'
     end
   end
   resources :facilities do

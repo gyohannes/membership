@@ -1,0 +1,15 @@
+<div class="panel-heading">
+  Members Paid for <%= BudgetYear.active %>
+</div>
+
+<div class="panel-body">
+  <div class="col-sm-4">
+    <div id="members_paid_tree"></div>
+  </div>
+
+  <div class="col-sm-8">
+    <div id="members_paid">
+      <%= render partial: 'members_paid' %>
+    </div>
+  </div>
+</div>

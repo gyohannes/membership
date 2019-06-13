@@ -4,9 +4,27 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    parent_org_unit = current_user.super_admin? ? OrganizationUnit.top_organization_unit :
-                          current_user.organization_unit
-    @people = parent_org_unit.try(:sub_people) || []
+    @people = current_user.organization_unit.try(:sub_people) || []
+  end
+
+  def members_paid
+    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+  end
+
+  def load_members_paid
+    @organization_unit  = OrganizationUnit.find(params[:node])
+    @members_paid = @organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    render partial: 'members_paid'
+  end
+
+  def members_not_paid
+    @members_not_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
+  end
+
+  def load_members_not_paid
+    @organization_unit  = OrganizationUnit.find(params[:node])
+    @members_not_paid = @organization_unit.sub_people.joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
+    render partial: 'members_not_paid'
   end
 
   def members_by_type

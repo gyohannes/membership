@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-    <% @people.each do |person| %>
+    <% @members.each do |person| %>
         <tr>
           <td><%= person.full_name %></td>
           <td><%= person.membership_type %></td>
@@ -21,10 +21,10 @@
           <td><%= person.email %></td>
           <td>
             <%= link_to person_path(person) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
             <% end %>
             <%= link_to edit_person_path(person) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
             <% end %>
           </td>
         </tr>
@@ -32,8 +32,5 @@
     </tbody>
   </table>
   <br>
-  <%= link_to new_person_path(organization_unit: @organization_unit.try(:id)) do %>
-    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Member</button>
-  <% end %>
 
 </div>

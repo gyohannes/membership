@@ -28,4 +28,17 @@ class ReportsController < ApplicationController
     end
   end
 
+    def members
+      @members = []
+      if request.post?
+        status = params[:search][:payment_status] == 'true' ? true : false
+        @members = Person.search(params[:search][:organization_unit], params[:search][:membership_type],
+                                 params[:search][:budget_year],status)
+        respond_to do |format|
+          format.js
+          format.html
+        end
+      end
+  end
+
 end

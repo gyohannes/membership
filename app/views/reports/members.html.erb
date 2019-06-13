@@ -1,0 +1,35 @@
+<div class="panel-heading">
+  Members Report
+</div>
+
+<div class="panel-body">
+  <%= simple_form_for :search, url:  reports_members_path, remote: true, html: { novalidate: true } do |f| %>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <fieldset class="sub_form">
+            <legend>Members</legend>
+          <div id="report_members_organization_unit_tree"></div>
+          <%=  f.input :organization_unit, as: :hidden, required: false %>
+          <%=  f.input :membership_type, collection: MembershipType.all, required: false %>
+          </fieldset>
+        </div>
+        <div class="col-sm-6">
+          <fieldset class="sub_form">
+            <legend>Payment Status</legend>
+          <%=  f.input :budget_year, collection: BudgetYear.all, required: false %>
+          <%=  f.input :payment_status, collection: [['Paid', true], ['Not Paid', false]], required: false %>
+          </fieldset>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.button :button, 'Reset Form', type: :reset, class: 'btn btn-default' %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= f.button :submit, 'Search', class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+
+
+  <div id="members_report">
+    <%= render 'members' %>
+  </div>
+</div>

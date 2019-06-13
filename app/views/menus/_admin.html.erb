@@ -88,10 +88,14 @@
     </li>
 
     <li>
-      <%= link_to reports_trainees_path do %>
-          <i class="material-icons">insert_chart</i>
-          <span class="nav-label">Reports</span>
-      <% end %>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">insert_chart</i>
+        <span class="nav-label">Reports</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Members Report', reports_members_path %></li>
+        <li><%= link_to 'Trainees Report', reports_trainees_path %></li>
+      </ul>
     </li>
 
 <% end %>

@@ -19,8 +19,12 @@ class BudgetYear < ApplicationRecord
     payments.joins(:person)
   end
 
+  def budget_year_payments
+    payments.joins(:budget_year).where('budget_years.id = ?', self.id)
+  end
+
   def total_paid_amount
-    payments.joins(:budget_year=>:mp_amount_settings).where('budget_years.status = ?', true).sum(:amount)
+    budget_year_payments.joins(:budget_year=>:mp_amount_settings).sum(:amount)
   end
 
   def trainees_by_year(orga_unit, type)
