@@ -26,8 +26,14 @@ class Person < ApplicationRecord
   after_create :set_user
 
   def set_user
-    u = User.create(email: email, password: '123456', password_confirmation: '123456')
+    u = User.create(email: email, password: '123456', password_confirmation: '123456', 
+      organization_unit_id: organization_unit_id, facility_id: facility_id, institution_id: institution_id)
     self.update(user_id: u.id)
+  end
+
+  def payment_amount(budget_year)
+    by = BudgetYear.find(budget_year)
+    by.mp_amount_settings.where('membership_type_id = ?', self.membership_type_id).first.try(:amount)
   end
 
   def self.search(org_unit, membership_type, year, status=nil)

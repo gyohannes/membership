@@ -49,7 +49,7 @@
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="content" style="min-height: 1486px;">
                 <div class="text">Total Paid Amount</div>
-                <div class="number"><%= BudgetYear.active.try(:total_paid_amount) %></div>
+                <div class="number"><%= BudgetYear.active.try(:total_paid_amount) %> of <%= BudgetYear.active.try(:expected_payment_amount) %></div>
               </div>
               <div class="icon">
                 <i class="material-icons col-success">attach_money</i>
