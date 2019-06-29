@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @upcoming_events = Event.where('start_date > ?', Date.today)
     @people = current_user.organization_unit.try(:sub_people) || []
     @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
     @members_not_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))

@@ -22,6 +22,16 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def member_fees
+    @unpaid_fees = []
+    @type = params[:type]
+
+    if @type == 'Unpaid'
+      @unpaid_fees = current_user.person.unpaid_fees
+    end
+    @payments = current_user.person.payments
+  end
+
   def confirm
     @payment.update(status: true)
     flash[:notice] = 'Payment was successfully confirmed.'
@@ -37,6 +47,7 @@ class PaymentsController < ApplicationController
   def new
     @payment = Payment.new
     @payment.person_id = params[:person]
+    @payment.budget_year_id = params[:year]
     session[:return_to] = request.referer
   end
 

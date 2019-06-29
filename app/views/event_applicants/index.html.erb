@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Applicants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Event</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_applicants.each do |event_applicant| %>
+      <tr>
+        <td><%= event_applicant.person %></td>
+        <td><%= event_applicant.event %></td>
+        <td><%= event_applicant.status %></td>
+        <td><%= link_to 'Show', event_applicant %></td>
+        <td><%= link_to 'Edit', edit_event_applicant_path(event_applicant) %></td>
+        <td><%= link_to 'Destroy', event_applicant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Applicant', new_event_applicant_path %>

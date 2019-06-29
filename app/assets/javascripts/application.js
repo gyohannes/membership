@@ -7,6 +7,7 @@
 //= require AdminBSBSenstive/plugins/bootstrap/dist/js/bootstrap.min
 //= require jquery_nested_form
 //= require bootstrap-treeview
+//= require bootstrap-wysihtml5
 //= require organization_units
 //= require facilities
 //= require users

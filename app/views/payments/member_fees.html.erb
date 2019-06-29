@@ -1,0 +1,75 @@
+<% content_for :header do %>
+    <div class="panel-body">
+<% if @type == 'Unpaid' || @type == 'All' %>
+          <div class="panel panel-default">
+      <div class="panel-heading">
+        Unpaid Membership Fees
+      </div>
+      <div class="panel-body">
+      <table class="table table-responsive">
+        <thead>
+        <tr>
+          <th>Budget Year</th>
+          <th>Amount</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @unpaid_fees.each do |year| %>
+          <tr>
+            <td><%= year %></td>
+            <td><%= current_user.person.payment_amount(year.id) rescue nil %></td>
+            <td>
+              <%= link_to new_payment_path(person: current_user.person.try(:id), year: year.id) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Pay Now </button>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+          </div>
+  <% end %>
+<% if @type == 'All' || @type == 'Paid' %>
+          <div class="panel panel-default">
+      <div class="panel-heading">
+        Paid Membership Fees
+      </div>
+      <div class="panel-body">
+    <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th>Budget Year</th>
+      <th>Amount</th>
+      <th>Paid Date</th>
+      <th>Attachment</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.budget_year %></td>
+          <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
+          <td><%= payment.created_at %></td>
+          <td><%= link_to 'Download', payment.attachment.url %></td>
+          <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+          <td>
+            <%= link_to edit_payment_path(payment) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+            <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+      </div>
+          </div>
+  <% end %>
+    </div>
+<% end %>

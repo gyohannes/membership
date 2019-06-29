@@ -1,3 +1,6 @@
+ul.wysihtml5-toolbar > li {
+    margin: 0;
+}
 fieldset.sub_form{
     padding: 5px 20px;
     border: 1px solid #d4d3f2;
@@ -44,7 +47,7 @@ form label{
     width: 33%;
 }
 
-.form-control{
+.form-group .form-control{
     width: inherit;
 }
 #new_user .form-control{

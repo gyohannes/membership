@@ -1,0 +1,29 @@
+<%= simple_form_for(@event) do |f| %>
+  <%= f.error_notification %>
+<div class="row">
+  <div class="col-sm-7">
+    <fieldset class="sub_form">
+    <legend>Event Details </legend>
+    <%= f.association :user, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :title %>
+    <%= f.input :start_date, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :end_date, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :maximum_participants %>
+    <%= f.input :event_details, label: false, placeholder: 'Event detail', wrapper: 'vertical_form', input_html: {class: 'wysihtml5'} %>
+  </fieldset>
+  </div>
+  <div class="col-sm-5">
+    <fieldset class="sub_form">
+    <legend>Address</legend>
+    <%= f.input :location %>
+    <%= f.input :contact_person %>
+    <%= f.input :contact_phone %>
+    <%= f.input :contact_email %>
+  </fieldset>
+  </div>
+</div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

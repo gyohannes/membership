@@ -1,4 +1,4 @@
-<% if current_user.admin? %>
+<% if current_user.has_role("Admin") %>
     <li>
       <a href="javascript:void(0);" class="menu-toggle">
         <i class="material-icons">dashboard</i>
@@ -51,6 +51,7 @@
         <li><%= link_to 'Members', people_path %></li>
         <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
         <li><%= link_to 'Member Payments', payments_path %></li>
+        <li><%= link_to 'Representative Election', payments_path %></li>
       </ul>
     </li>
 
@@ -80,11 +81,19 @@
         <span class="nav-label">Trainings</span>
       </a>
       <ul>
+        <li><%= link_to 'Trainings', trainings_path %></li>
         <li><%= link_to 'Program Areas', program_areas_path %></li>
         <li><%= link_to 'Training Methods', training_methods_path %></li>
         <li><%= link_to 'Training Topics', training_titles_path %></li>
-        <li><%= link_to 'Trainings', trainings_path %></li>
+        <li><a href="http://www.emwacpd.org/"> CPD Online Self Study</a></li>
       </ul>
+    </li>
+
+    <li>
+      <%= link_to events_path do %>
+          <i class="material-icons">group</i>
+          <span class="nav-label">Events</span>
+      <% end %>
     </li>
 
     <li>

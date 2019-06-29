@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @event_applicant.person %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event_applicant.event %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event_applicant.status %>
+</p>
+
+<%= link_to 'Edit', edit_event_applicant_path(@event_applicant) %> |
+<%= link_to 'Back', event_applicants_path %>

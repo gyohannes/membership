@@ -1,0 +1,2 @@
+module EventApplicantsHelper
+end

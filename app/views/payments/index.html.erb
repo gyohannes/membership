@@ -20,7 +20,7 @@
       <tr>
         <td><%= payment.person %></td>
         <td><%= payment.budget_year %></td>
-        <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) %></td>
+        <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
         <td><%= payment.created_at %></td>
         <td><%= link_to 'Download', payment.attachment.url %></td>
         <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>

@@ -24,6 +24,8 @@
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });
 
+        $('.wysihtml5').wysihtml5({'toolbar': {'blockquote': false, 'html': true}})
+
         $('#mainTable').editableTableWidget()
         $('.best_in_place').best_in_place();
 

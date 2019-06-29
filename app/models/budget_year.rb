@@ -11,8 +11,8 @@ class BudgetYear < ApplicationRecord
     status == true ? 'Active' : ''
   end
 
-  def payment_amount(member_type)
-    mp_amount_settings.where('membership_type_id = ?', member_type).first.try(:amount)
+  def expected_payment_amount
+    Person.all.collect{|x| x.payment_amount(self.id)}.sum || 0
   end
 
   def paid_members
@@ -24,7 +24,7 @@ class BudgetYear < ApplicationRecord
   end
 
   def total_paid_amount
-    budget_year_payments.joins(:budget_year=>:mp_amount_settings).sum(:amount)
+    budget_year_payments.joins(:budget_year=>:mp_amount_settings).uniq.collect{|x| x.payment_amount}.sum
   end
 
   def trainees_by_year(orga_unit, type)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190606141838) do
+ActiveRecord::Schema.define(version: 20190625134202) do
 
   create_table "budget_years", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -31,6 +31,33 @@ ActiveRecord::Schema.define(version: 20190606141838) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_educations_on_person_id"
+  end
+
+  create_table "event_applicants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "person_id"
+    t.bigint "event_id"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_applicants_on_event_id"
+    t.index ["person_id"], name: "index_event_applicants_on_person_id"
+  end
+
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "maximum_participants"
+    t.text "event_details"
+    t.string "location"
+    t.string "contact_person"
+    t.string "contact_phone"
+    t.string "contact_email"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "facilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -389,6 +416,9 @@ ActiveRecord::Schema.define(version: 20190606141838) do
   end
 
   add_foreign_key "educations", "people"
+  add_foreign_key "event_applicants", "events"
+  add_foreign_key "event_applicants", "people"
+  add_foreign_key "events", "users"
   add_foreign_key "facilities", "facility_types"
   add_foreign_key "facilities", "organization_units"
   add_foreign_key "institutions", "institution_types"

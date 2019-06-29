@@ -64,10 +64,10 @@
       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            Total Health Workers by <%= current_user.try(:parent_org_unit).try(:sub_unit_name).try(:to_sentence) %>
+            Total Members by <%= current_user.try(:parent_org_unit).try(:sub_unit_name).try(:to_sentence) %>
           </div>
           <div class="panel-body">
-            <%= line_chart org_unit_facilities_organization_units_path, curve: false, code: true %>
+            <%= pie_chart org_unit_facilities_organization_units_path, curve: false, code: true %>
           </div>
         </div>
       </div>

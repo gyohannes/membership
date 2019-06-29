@@ -13,6 +13,9 @@ class User < ApplicationRecord
     organization_unit == OrganizationUnit.top_organization_unit
   end
 
+  def has_role(role_name)
+    role.try(:name) == role_name
+  end
   def admin?
     !organization_unit.blank?
   end
@@ -23,9 +26,7 @@ class User < ApplicationRecord
 
   def self.load_users(user,type)
     users = []
-    if user.super_admin?
-      users = User.where('user_type = ?', type)
-    elsif user.institution
+    if user.institution
       users = User.where('institution_id = ?', user.institution_id)
     elsif user.facility
       users = User.where('facility_id = ?', user.facility_id)

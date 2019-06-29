@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  resources :event_applicants
+  resources :events
   resources :payments do
+    collection do
+      get 'member_fees'
+    end
     member do
       get 'confirm'
     end

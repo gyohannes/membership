@@ -1,8 +1,43 @@
-<% if !current_user.admin? and @institution.blank? %>
+<% if current_user.has_role('Member') %>
   <li>
     <%= link_to current_user.person do %>
         <i class="material-icons">person</i>
-        <span>My Profile</span>
+        <span class="nav-label">My Profile</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to member_fees_payments_path(type: 'All') do %>
+        <i class="material-icons">person</i>
+        <span class="nav-label">Membership Fees</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to current_user.person do %>
+        <i class="material-icons">person</i>
+        <span class="nav-label">Membership ID Card</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to current_user.person do %>
+        <i class="material-icons">person</i>
+        <span class="nav-label">My CPD</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to current_user.person do %>
+        <i class="material-icons">person</i>
+        <span class="nav-label">Events</span>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to current_user.person do %>
+        <i class="material-icons">person</i>
+        <span class="nav-label">Trainings</span>
     <% end %>
   </li>
 

@@ -56,7 +56,9 @@ class Training < ApplicationRecord
 
   def self.load_trainings(user,type=nil,from=nil,to=nil)
     trainings = []
-    if user.institution
+    if type = 'all_upcoming'
+      trainings = Training.upcoming_trainings
+    elsif user.institution
       if type == 'Pre-Service'
         trainings = Training.type_trainings('Pre-Service').all_institution_trainings(user.institution,from,to)
       elsif type == 'In-Service'
