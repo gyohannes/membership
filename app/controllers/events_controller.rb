@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply]
 
   # GET /events
   # GET /events.json
@@ -9,6 +9,13 @@ class EventsController < ApplicationController
     else
       @events = Event.all
     end
+  end
+
+  def apply
+    event_application = @event.event_applicants.build(person_id: params[:applicant])
+    event_application.save
+    flash[:notice] = 'You have successfully applied'
+    redirect_to @event
   end
 
   # GET /events/1

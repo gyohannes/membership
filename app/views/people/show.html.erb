@@ -5,6 +5,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs tab-nav-right" role="tablist">
     <li role="presentation" class="active"><a href="#personal_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Personal Details</a></li>
+    <li role="presentation"><a href="#id_card" data-toggle="tab"><i class="fa fa-book m-r-5"></i> ID Card</a></li>
     <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Education</a></li>
     <li role="presentation"><a href="#experience" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Work Experience</a></li>
     <li role="presentation"><a href="#trainer" data-toggle="tab"><i class="fa fa-address-card m-r-5"></i> Trainer Profile</a></li>
@@ -25,13 +26,8 @@
           </div>
 
           <div class='row'>
-            <div class='col-sm-3'><b>Job Title</b></div>
-            <div class='col-sm-6'><%= @person.job_title %></div>
-          </div>
-
-          <div class='row'>
-            <div class='col-sm-3'><b>Profession Category</b></div>
-            <div class='col-sm-6'><%= @person.profession_category %></div>
+            <div class='col-sm-3'><b>ID Number</b></div>
+            <div class='col-sm-6'><%= @person.id_number %></div>
           </div>
 
           <div class='row'>
@@ -84,6 +80,47 @@
           <% end %>
         </div>
       </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade in" id="id_card">
+      <div class="id_card" style="width: 450px; height: 250px; border: 1px solid gray; padding: 10px; border-radius: 6px">
+        <div class="id_card_header" style="border-bottom: 5px solid #2992a7; margin-bottom: 20px">
+          <%= image_tag 'logo.png', height: '80px' %>
+        </div>
+        <div class="body_and_footer">
+          <div class="id_card_body">
+            <table width="100%">
+              <tr>
+                <td>
+                  <table width="100%" cellpadding="5">
+                    <tr>
+                      <th colspan="2" style="border-bottom: 1px solid silver"><center><%= @person.id_number %></center></th>
+                    </tr>
+                    <tr>
+                      <td>Name</td> <th><%= @person.full_name %></th>
+                    </tr>
+                    <tr>
+                      <td>Membership Type</td> <th><%= @person.membership_type %></th>
+                    </tr>
+                    <tr>
+                      <td>Mobile Number</td> <th><%= @person.phone_number %></th>
+                    </tr>
+                    <tr>
+                      <td>Joined Year</td> <th><%= @person.created_at.year %></th>
+                    </tr>
+                  </table>
+                </td>
+                <th style="text-align: right">
+                  <%= image_tag @person.photo.url(:medium), height: '120px' %>
+                </th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <%= link_to membership_idcard_person_path(@person, format: :pdf) do %>
+          <button class="btn btn-primary"><i class="material-icons">file_download</i> Download ID Card</button>
+      <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="education">
       <table class="table table-responsive">

@@ -14,28 +14,28 @@
   </li>
 
   <li>
-    <%= link_to current_user.person do %>
+    <%= link_to membership_idcard_person_path(current_user.person) do %>
         <i class="material-icons">person</i>
         <span class="nav-label">Membership ID Card</span>
     <% end %>
   </li>
 
   <li>
-    <%= link_to current_user.person do %>
+    <a href="http://localhost/cpd">
         <i class="material-icons">person</i>
         <span class="nav-label">My CPD</span>
-    <% end %>
+    </a>
   </li>
 
   <li>
-    <%= link_to current_user.person do %>
+    <%= link_to events_path do %>
         <i class="material-icons">person</i>
         <span class="nav-label">Events</span>
     <% end %>
   </li>
 
   <li>
-    <%= link_to current_user.person do %>
+    <%= link_to trainings_path do %>
         <i class="material-icons">person</i>
         <span class="nav-label">Trainings</span>
     <% end %>

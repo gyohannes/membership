@@ -5,11 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-role = Role.create(name: 'Admin')
 
 top_org_type = OrganizationType.create(name: 'Top Org Type')
 
 top_org_unit = OrganizationUnit.create(name: 'Top Org Unit', short_name: 'TOU', organization_type_id: top_org_type.id)
 
-admin_user = User.create(role_id: role.id, organization_unit_id: top_org_unit.id,email: 'admin@openhtms.com', password: 'admin123')
+admin_user = User.create(role: User::ADMIN, organization_unit_id: top_org_unit.id,email: 'admin@openhtms.com', password: 'admin123')
+p = admin_user.build_person(organization_unit_id: top_org_unit.id)
+p.save(validate: false)
 admin_user.confirm

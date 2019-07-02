@@ -25,8 +25,17 @@ class Person < ApplicationRecord
 
   after_create :set_user
 
+  def self.set_id_number
+    association_code = AssociationDetail.first.try(:short_name) || ''
+    serial_no = Person.exists? ? (Person.last.id + 1).to_s : '1'
+    while serial_no.length < 7
+      serial_no = "0" << serial_no
+    end
+    return association_code << serial_no
+  end
+
   def set_user
-    u = User.create(email: email, password: '123456', password_confirmation: '123456', 
+    u = User.create(email: email, role: User::MEMBER, password: '123456', password_confirmation: '123456',
       organization_unit_id: organization_unit_id, facility_id: facility_id, institution_id: institution_id)
     self.update(user_id: u.id)
   end

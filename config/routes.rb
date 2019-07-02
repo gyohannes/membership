@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :association_details
   resources :event_applicants
-  resources :events
+  resources :events do
+    member do
+      get 'apply'
+    end
+  end
   resources :payments do
     collection do
       get 'member_fees'
@@ -50,6 +55,9 @@ Rails.application.routes.draw do
   end
   resources :trainers
   resources :people do
+    member do
+      get 'membership_idcard'
+    end
     collection do
       get 'load_people'
       get 'load_professions'
@@ -115,8 +123,9 @@ Rails.application.routes.draw do
     end
   end
   get 'home/index'
-  get 'home/payment_dashboard'
-  get 'home/training_dashboard'
+  get 'payment_dashboard', to: 'home#payment_dashboard'
+  get 'training_dashboard', to: 'home#training_dashboard'
+  get 'member_dashboard', to: 'home#member_dashboard'
   root to: "home#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
-  belongs_to :role, optional: true
   belongs_to :institution, optional: true
   belongs_to :facility, optional: true
   has_one :person
@@ -9,12 +8,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = [ADMIN='Admin', MEMBER='Member', INSTITUTION='Institution']
+
   def super_admin?
     organization_unit == OrganizationUnit.top_organization_unit
   end
 
   def has_role(role_name)
-    role.try(:name) == role_name
+    role == role_name
   end
   def admin?
     !organization_unit.blank?

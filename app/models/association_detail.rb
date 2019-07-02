@@ -1,0 +1,2 @@
+class AssociationDetail < ApplicationRecord
+end

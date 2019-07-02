@@ -1,10 +1,21 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :membership_idcard]
 
   # GET /people
   # GET /people.json
   def index
     @people = current_user.organization_unit.try(:sub_people) || []
+  end
+
+  def membership_idcard
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Membership ID Card",
+               disposition: 'attachment',
+               encoding: 'utf8'
+      end
+    end
   end
 
   def members_paid
@@ -130,6 +141,6 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(:profession_id, :gender, :date_of_birth, :photo, :user_id, :title, :membership_type_id, :job_title, :first_name, :middle_name, :last_name,
-                                     :email, :phone_number, :address, :country, :organization_unit_id, :institution_id, :facility_id)
+                                     :email, :phone_number, :address, :country, :organization_unit_id, :institution_id, :facility_id, :id_number)
     end
 end

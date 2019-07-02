@@ -1,7 +1,7 @@
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
-      t.integer :role_id
+      t.string :role
       t.string :user_name
       t.integer :organization_unit_id
       t.integer :facility_id

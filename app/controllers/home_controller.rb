@@ -29,6 +29,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def member_dashboard
+    @upcoming_events = Event.where('start_date > ?', Date.today)
+  end
+
   def payment_dashboard
     @people = current_user.organization_unit.try(:sub_people) || []
     @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))

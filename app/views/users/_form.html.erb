@@ -1,10 +1,11 @@
 <%= simple_form_for(@user) do |f| %>
     <%= f.error_notification %>
     <%= f.input :email %>
+    <%= f.association :organization_unit, prompt: true %>
     <%= f.association :institution, selected: @institution, prompt: true %>
     <%= f.input :password %>
     <%= f.input :password_confirmation, label: 'Confirm Password' %>
-    <%= f.association :role %>
+    <%= f.input :role, collection: User::ROLES %>
 
     <div class="form-actions">
       <%= f.button :submit, 'Submit', class: 'btn btn-outline btn-primary' %>

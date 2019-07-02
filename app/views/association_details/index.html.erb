@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Association Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Short name</th>
+      <th>Contact phone</th>
+      <th>Contact email</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @association_details.each do |association_detail| %>
+      <tr>
+        <td><%= association_detail.name %></td>
+        <td><%= association_detail.short_name %></td>
+        <td><%= association_detail.contact_phone %></td>
+        <td><%= association_detail.contact_email %></td>
+        <td><%= association_detail.address %></td>
+        <td><%= link_to 'Show', association_detail %></td>
+        <td><%= link_to 'Edit', edit_association_detail_path(association_detail) %></td>
+        <td><%= link_to 'Destroy', association_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Association Detail', new_association_detail_path %>
