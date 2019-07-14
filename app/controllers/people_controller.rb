@@ -85,8 +85,8 @@ class PeopleController < ApplicationController
   # GET /people/1/edit
   def edit
     @organization_unit = @person.organization_unit
-    profession_category = @person.profession.profession_category
-    @professions = profession_category.professions
+    profession_category = @person.profession.profession_category rescue nil
+    @professions = profession_category.professions rescue nil
   end
 
   # POST /people
@@ -109,8 +109,8 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
-    profession_category = @person.profession.profession_category
-    @professions = profession_category.professions
+    profession_category = @person.profession.profession_category rescue nil
+    @professions = profession_category.professions rescue nil
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }

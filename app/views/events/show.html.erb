@@ -1,12 +1,9 @@
 <div class="panel-body">
 <h1 class="bold">
-  <%= @event.title %>
+  <%= @event.title %>   <strong>Applicants:</strong>  <%= @event.event_applicants.count %> &nbsp; &nbsp; <%= link_to 'List Applicants', event_applicants_path(event: @event.id), class: 'btn btn-lg btn-primary' %>
+  
 </h1>
 <hr/>
-<p>
-  <%= raw @event.event_details %>
-</p>
-
 <p>
   <strong>Date:</strong>
   <%= @event.event_date %>
@@ -33,9 +30,10 @@
   </p>
 
   <p>
-    <strong>Applicants:</strong>
-    <%= @event.event_applicants.count %> <%= link_to 'List Applicants', event_applicants_path(event: @event.id), class: 'btn btn-lg btn-primary' %>
-  </p>
+  <%= raw @event.event_details %>
+</p>
+
+
   <hr/>
   <%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-lg btn-primary' %>
   <%= link_to 'Apply', apply_event_path(@event, applicant: current_user.person.try(:id)), class: 'btn btn-lg btn-primary' unless @event.applied(current_user.person.try(:id))%>

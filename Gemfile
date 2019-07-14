@@ -17,6 +17,8 @@ gem "highcharts-rails"
 gem 'best_in_place'
 gem 'jquery-rails'
 gem 'cancancan', '~> 2.0'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 gem 'bootstrap-wysihtml5-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
