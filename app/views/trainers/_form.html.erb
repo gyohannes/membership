@@ -4,6 +4,6 @@
   <%= f.association :person, label: 'Trainer Name', collection: @trainers.map{|x|[x.to_s, x.id]} %>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>
