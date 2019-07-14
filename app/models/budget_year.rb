@@ -11,7 +11,7 @@ class BudgetYear < ApplicationRecord
     status == true ? 'Active' : ''
   end
 def expected_payment_amount
-    Person.all.collect{|x| x.payment_amount(self.id)}.sum
+    Person.all.collect{|x| x.payment_amount(self.id) || 0}.sum
   end
 
   def payment_amount(member_type)

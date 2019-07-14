@@ -6,11 +6,11 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
 
-       if user.admin?
+       if user.has_role('Admin')
          can :manage, :all
        else
          can :read, :all
-         can :create, Payment
+         can [:create, :member_fees], Payment
        end
     #
     # The first argument to `can` is the action you are giving the user

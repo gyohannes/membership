@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <% if current_user.admin? %>
+    <% if current_user.has_role('Admin') %>
         <%= f.input :status, as: :hidden, input_html: {value: true} %>
     <% end %>
     <%= f.input :person_id, label: 'Member', collection: @people.map{|p| [p.to_s, p.try(:id)]} %>

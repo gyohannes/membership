@@ -35,7 +35,7 @@ class PaymentsController < ApplicationController
   def confirm
     @payment.update(status: true)
     flash[:notice] = 'Payment was successfully confirmed.'
-    redirect_to @payment.person
+    redirect_to action: 'index'
   end
 
   # GET /payments/1
