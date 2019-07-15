@@ -6,8 +6,17 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
 
-       if user.has_role('Admin')
+       if user.super_admin?
          can :manage, :all
+         cannot [:create, :edit], SupportRequest
+       elsif user.has_role('Admin')
+         can :manage, :all
+         cannot [:create, :edit], AssociationDetail
+         cannot :manage, BoardMembersTerm
+         cannot [:create, :edit], SupportRequest
+         cannot :manage, Event
+         can :read, Event
+         can :manage, Event, user_id: user.id
        else
          can :read, :all
          can [:create, :member_fees], Payment

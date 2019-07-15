@@ -7,7 +7,10 @@ class UsersController < ApplicationController
   def index
     @type = params[:type]
     @users = User.load_users(current_user, @type)
-    @institution_users = User.joins(:institutution)
+  end
+
+  def institution_users
+    @institution_users = current_user.institution ? current_user.institution.users : User.joins(:institution)
   end
 
   def confirm
@@ -41,7 +44,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @organization_units = current_user.parent_org_unit.try(:sub_units)
+    @organization_units = [current_user.organization_unit]
     @institutions = @institution ? [@institution] : Institution.all
   end
 

@@ -1,7 +1,19 @@
-    <div class="panel-heading">
-        Users
+   <div class="panel-heading">
+      Users
     </div>
 
     <div class="panel-body">
-      <%= render partial: 'users' %>
+      <div class="row">
+        <div class="col-sm-4">
+          <div id="user_tree"></div>
+        </div>
+
+        <div class="col-sm-8">
+          <div id="users">
+            <%= render partial: 'users' %>
+          </div>
+          </div>
+      </div>
     </div>
+
+

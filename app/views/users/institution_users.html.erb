@@ -1,0 +1,33 @@
+<div class="panel-body">
+<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Institution</th>
+    <th>Role</th>
+    <th>Confirmation</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @institution_users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.institution %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to 'Confirm', confirm_user_path(user), class: 'btn btn-primary' unless user.confirmed? %></td>
+        <td>
+          <%= link_to edit_user_path(user) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<hr/>
+    <%= link_to new_user_path(type: 'institution') do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Institution User</button>
+    <% end %>
+</div>

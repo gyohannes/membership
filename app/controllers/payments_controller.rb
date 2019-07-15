@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
     if params[:person]
       @people = [Person.find(params[:person])]
     else
-      @people = Person.all
+      @people = current_user.organization_unit.sub_people
     end
   end
   # GET /payments
@@ -26,7 +26,7 @@ class PaymentsController < ApplicationController
     @unpaid_fees = []
     @type = params[:type]
 
-    if @type == 'Unpaid'
+    if @type == 'Unpaid' || @type == 'All'
       @unpaid_fees = current_user.person.unpaid_fees
     end
     @payments = current_user.person.payments

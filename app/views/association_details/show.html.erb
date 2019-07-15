@@ -1,29 +1,106 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-heading">
+  Association Details
+</div>
+<div class="panel-body">
+  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+    <li role="presentation" class="active"><a href="#assocation_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-users m-r-5"></i> Association Details</a></li>
+    <li role="presentation"><a href="#board_members" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Board Members</a></li>
+    <li role="presentation"><a href="#president_history" data-toggle="tab"><i class="fa fa-history m-r-5"></i> Presidential History</a></li>
+  </ul>
 
-<p>
-  <strong>Name:</strong>
-  <%= @association_detail.name %>
-</p>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="assocation_details">
+      <div class="row">
+      <div class="col-sm-6">
+      <%= image_tag @association_detail.logo.url %><br/>
+        <%= raw @association_detail.about_association %>
+      </div>
 
-<p>
-  <strong>Short name:</strong>
-  <%= @association_detail.short_name %>
-</p>
+      <div class="col-sm-6">
+      <p>
+        <strong>Name:</strong>
+        <%= @association_detail.name %>
+      </p>
 
-<p>
-  <strong>Contact phone:</strong>
-  <%= @association_detail.contact_phone %>
-</p>
+      <p>
+        <strong>Short name:</strong>
+        <%= @association_detail.short_name %>
+      </p>
 
-<p>
-  <strong>Contact email:</strong>
-  <%= @association_detail.contact_email %>
-</p>
+      <p>
+        <strong>Contact phone:</strong>
+        <%= @association_detail.contact_phone %>
+      </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @association_detail.address %>
-</p>
+      <p>
+        <strong>Contact email:</strong>
+        <%= @association_detail.contact_email %>
+      </p>
 
-<%= link_to 'Edit', edit_association_detail_path(@association_detail) %> |
-<%= link_to 'Back', association_details_path %>
+      <p>
+        <strong>Address:</strong>
+        <%= @association_detail.address %>
+      </p>
+      </div>
+      </div>
+      <hr/>
+      <%= link_to 'Edit', edit_association_detail_path(@association_detail), class: 'btn btn-primary' if can? :edit, @association_detail %>
+    </div>
+  <div role="tabpanel" class="tab-pane fade in" id="board_members">
+    <div class="comment-box">
+      <ul>
+        <% @current_board_term.board_members.each do |bm| %>
+        <li>
+          <div class="media col-sm-offset-2">
+            <div class="media-right">
+              <%= link_to bm.person do %>
+                <%= image_tag bm.person.photo.url(:medium) %>
+              <% end %>
+            </div>
+            <div class="media-body">
+              <div class="username"><%= bm.role %></div>
+              <div class="comment"><%= bm.person %></div>
+            </div>
+          </div>
+        </li>
+            <hr/>
+        <% end %>
+      </ul>
+    </div>
+    <% if can? :manage, BoardMembersTerm %>
+    <%= link_to edit_board_members_term_path(@current_board_term) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit Current Board Members</button>
+    <% end %>
+    <%= link_to new_board_members_term_path do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Board Members</button>
+    <% end %>
+    <% end %>
+  </div>
+    <div role="tabpanel" class="tab-pane fade in" id="president_history">
+      <div class="comment-box">
+        <ul>
+          <% @presidents.each do |president| %>
+              <li>
+                <div class="media col-sm-offset-2">
+                  <div class="media-right">
+                    <%= link_to president.person do %>
+                        <%= image_tag president.person.photo.url(:medium) %>
+                    <% end %>
+                  </div>
+                  <div class="media-body">
+                    <div class="col-sm-2">
+                    <div class="username"><%= president.role %></div>
+                    <div class="comment"><%= president.person %></div>
+                    </div>
+                    <div class=" col-sm-2 time"><%= president.board_members_term.from.strftime("%B %Y") %> - <%= president.board_members_term.to > Date.today ? 'Present' : president.board_members_term.to.strftime("%B %Y") %> </div>
+                  </div>
+                </div>
+              </li>
+              <hr/>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+</div>
+</div>

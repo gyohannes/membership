@@ -6,6 +6,7 @@
   <ul class="nav nav-tabs tab-nav-right" role="tablist">
     <li role="presentation" class="active"><a href="#personal_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Personal Details</a></li>
     <li role="presentation"><a href="#id_card" data-toggle="tab"><i class="fa fa-book m-r-5"></i> ID Card</a></li>
+    <li role="presentation"><a href="#payments" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Payments</a></li>
     <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Education</a></li>
     <li role="presentation"><a href="#experience" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Work Experience</a></li>
     <li role="presentation"><a href="#trainer" data-toggle="tab"><i class="fa fa-address-card m-r-5"></i> Trainer Profile</a></li>
@@ -93,7 +94,7 @@
                 <td>
                   <table width="100%" cellpadding="5">
                     <tr>
-                      <th colspan="2" style="border-bottom: 1px solid silver"><center>ID No. <%= @person.id_number %></center></th>
+                      <th colspan="2" style="border-bottom: 1px solid silver"><center>ID Number: <%= @person.id_number %></center></th>
                     </tr>
                     <tr>
                       <td>Name</td> <th><%= @person.full_name %></th>
@@ -121,6 +122,39 @@
       <%= link_to membership_idcard_person_path(@person, format: :pdf) do %>
           <button class="btn btn-primary"><i class="material-icons">file_download</i> Download ID Card</button>
       <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane fade in" id="payments">
+      <table class="table table-responsive">
+        <thead>
+        <tr>
+          <th>Budget Year</th>
+          <th>Amount</th>
+          <th>Paid Date</th>
+          <th>Attachment</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @person.payments.each do |payment| %>
+            <tr>
+              <td><%= payment.budget_year %></td>
+              <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
+              <td><%= payment.created_at %></td>
+              <td><%= link_to 'Download', payment.attachment.url %></td>
+              <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+              <td>
+                <%= link_to edit_payment_path(payment) do %>
+                    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                <% end %>
+                <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                    <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="education">
       <table class="table table-responsive">

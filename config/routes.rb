@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :support_requests
+  resources :board_members_terms
   resources :association_details
   resources :event_applicants
   resources :events do

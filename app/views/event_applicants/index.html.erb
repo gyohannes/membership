@@ -5,9 +5,12 @@
   <table class="table table-bordered table-striped table-hover dataTable js-exportable">
   <thead>
     <tr>
-      <th>Person</th>
+      <th>Name</th>
+      <th>Organization Unit</th>
+      <th>Facility</th>
+      <th>Institution</th>
       <th>Applied Date</th>
-      <th></th>
+      <th>Status</th>
     </tr>
   </thead>
 
@@ -15,8 +18,11 @@
     <% @event_applicants.each do |event_applicant| %>
       <tr>
         <td><%= event_applicant.person %></td>
+        <td><%= event_applicant.person.organization_unit %></td>
+        <td><%= event_applicant.person.facility %></td>
+        <td><%= event_applicant.person.institution %></td>
         <td><%= event_applicant.created_at.strftime("%B %d, %Y") %></td>
-        <td><%= link_to 'Delete', event_applicant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><a><%= best_in_place event_applicant, :status, as: :checkbox, collection: {false: "Pending", true: "Accepted"} %></a></td>
       </tr>
     <% end %>
   </tbody>

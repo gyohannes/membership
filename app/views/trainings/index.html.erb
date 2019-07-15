@@ -48,8 +48,9 @@
       </tbody>
     </table>
     <hr/>
-
+     <% if can? :manage, Training %>
       <%= link_to new_training_path do %>
         <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Training</button>
+      <% end %>
       <% end %>
 </div>

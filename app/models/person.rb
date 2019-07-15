@@ -19,9 +19,9 @@ class Person < ApplicationRecord
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "missing/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
-  scope :list_by_org_unit, -> (org_unit) { org_unit.blank? ? [] : where('id in (?)', OrganizationUnit.find(org_unit).sub_people.pluck(:id)) }
-  scope :list_by_membership_type, -> (member_type) { where('membership_type_id = ?', member_type)}
-  scope :list_by_year, -> (year,status) { status == true ? joins(:payments).where('budget_year_id = ?', year) : joins(:payments).where.not('budget_year_id = ?', year) }
+  scope :list_by_org_unit, -> (org_unit) { org_unit.blank? ? [] : where('people.id in (?)', OrganizationUnit.find(org_unit).sub_people.pluck(:id)) }
+  scope :list_by_membership_type, -> (user,member_type) { user.organization_unit.sub_people.where('membership_type_id = ?', member_type)}
+  scope :list_by_year, -> (user,year,status) { status == true ? user.organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', year) : user.organization_unit.sub_people - joins(:payments).where('budget_year_id = ?', year) }
 
   after_create :set_user
 
@@ -59,10 +59,10 @@ class Person < ApplicationRecord
     by.mp_amount_settings.where('membership_type_id = ?', self.membership_type_id).first.try(:amount)
   end
 
-  def self.search(org_unit, membership_type, year, status=nil)
+  def self.search(user,org_unit, membership_type, year, status=nil)
     people = []
-    available_filters = {org_unit => list_by_org_unit(org_unit), membership_type => list_by_membership_type(membership_type),
-                         year => list_by_year(year,status)}.select{|k,v| !k.blank?}
+    available_filters = {org_unit => list_by_org_unit(org_unit), membership_type => list_by_membership_type(user,membership_type),
+                         year => list_by_year(user,year,status)}.select{|k,v| !k.blank?}
     counter = 0
     available_filters.each do |k,v|
       people = counter == 0 ? v : people.merge(v)

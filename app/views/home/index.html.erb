@@ -1,4 +1,4 @@
-<% if current_user.has_role('Admin') %>
+<% if current_user.has_role('Admin') || current_user.super_admin? %>
   <%= render 'dashboards/payment_dashboard' %>
 <% elsif @institution %>
     <%= render 'dashboards/institution' %>

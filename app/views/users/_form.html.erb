@@ -1,11 +1,15 @@
 <%= simple_form_for(@user) do |f| %>
     <%= f.error_notification %>
     <%= f.input :email %>
-    <%= f.association :organization_unit, prompt: true %>
-    <%= f.association :institution, selected: @institution, prompt: true %>
+    <%= f.association :organization_unit, collection: [f.object.organization_unit], prompt: false unless @user.user_type == 'institution' %>
+    <%= f.association :institution, selected: @institution, prompt: true if @user.user_type == 'institution' %>
     <%= f.input :password %>
     <%= f.input :password_confirmation, label: 'Confirm Password' %>
-    <%= f.input :role, collection: User::ROLES %>
+    <% if current_user.institution or @user.user_type == 'institution' %>
+        <%= f.input :role, as: :hidden, input_html: {value: User::INSTITUTION} %>
+    <% else %>
+        <%= f.input :role, collection: [User::ADMIN, User::MEMBER] %>
+    <% end %>
 
     <div class="form-actions">
       <%= f.button :submit, 'Submit', class: 'btn btn-outline btn-primary' %>

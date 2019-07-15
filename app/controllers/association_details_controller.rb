@@ -10,6 +10,8 @@ class AssociationDetailsController < ApplicationController
   # GET /association_details/1
   # GET /association_details/1.json
   def show
+    @current_board_term = BoardMembersTerm.active
+    @presidents = BoardMember.joins(:board_members_term).where('role = ?', Constants::PRESIDENT).order('board_members_terms.from DESC')
   end
 
   # GET /association_details/new
@@ -69,6 +71,6 @@ class AssociationDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def association_detail_params
-      params.require(:association_detail).permit(:name, :short_name, :contact_phone, :contact_email, :address)
+      params.require(:association_detail).permit(:name, :short_name, :contact_phone, :contact_email, :address, :logo, :about_association)
     end
 end

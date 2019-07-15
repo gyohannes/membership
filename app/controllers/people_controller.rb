@@ -29,24 +29,24 @@ class PeopleController < ApplicationController
   end
 
   def members_not_paid
-    @members_not_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = current_user.organization_unit.try(:sub_people) - current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
   end
 
   def load_members_not_paid
     @organization_unit  = OrganizationUnit.find(params[:node])
-    @members_not_paid = @organization_unit.sub_people.joins(:payments).where.not('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = @organization_unit.sub_people - @organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
     render partial: 'members_not_paid'
   end
 
   def members_by_type
-    members = Person.joins(:membership_type).group('membership_types.name').count
+    members = current_user.organization_unit.sub_people.joins(:membership_type).group('membership_types.name').count
     render json: members
   end
 
   def members_by_membership_type_and_payment_status
     members = []
     ['Paid', 'Not Paid'].each do |c|
-      members << {name: c, data: MembershipType.all.map{|mt| [mt.to_s, mt.members_by_status(c).count]} }
+      members << {name: c, data: MembershipType.all.map{|mt| [mt.to_s, mt.members_by_status(current_user,c).count]} }
     end
     render json: members
   end

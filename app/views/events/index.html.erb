@@ -23,14 +23,14 @@
         <td><%= event.end_date %></td>
         <td><%= event.maximum_participants %></td>
         <td>
-          <%= link_to 'Details', event %>
-          <%= link_to 'Edit', edit_event_path(event) %>
-          <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Details', event if can? :read, event %>
+          <%= link_to 'Edit', edit_event_path(event) if can? :edit, event %>
+          <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, event %>
         </td>
       </tr>
     <% end %>
 </table>
 <br>
 
-<%= link_to 'Create Event', new_event_path, class: 'btn btn-primary' %>
+<%= link_to 'Create Event', new_event_path, class: 'btn btn-primary' if can? :manage, Event %>
 </div>

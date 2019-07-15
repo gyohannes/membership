@@ -1,0 +1,14 @@
+<%= simple_form_for(@support_request) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.association :organization_unit, label: 'Request to' %>
+    <%= f.input :subject %>
+    <%= f.input :message,input_html: {class: 'wysihtml5'} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Send' %>
+  </div>
+<% end %>

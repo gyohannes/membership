@@ -1,13 +1,13 @@
 class MembershipType < ApplicationRecord
   has_many :people
 
-  def members_by_status(status, year=BudgetYear.active)
+  def members_by_status(user,status, year=BudgetYear.active)
     members = []
-    paid = people.joins(:payments).where('budget_year_id = ?', year.try(:id))
+    paid = user.organization_unit.sub_people.joins(:payments).where('budget_year_id = ? and membership_type_id = ?', year.try(:id),self.id)
     if status == 'Paid'
       members = paid
     else
-      members = people - paid
+      members = user.organization_unit.sub_people.where('membership_type_id = ?', self.id) - paid
     end
     return members
   end

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply]
 
   # GET /events
@@ -12,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def apply
-    event_application = @event.event_applicants.build(person_id: params[:applicant])
+    event_application = @event.event_applicants.build(person_id: params[:applicant], status: false)
     event_application.save
     flash[:notice] = 'You have successfully applied'
     redirect_to @event

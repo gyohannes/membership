@@ -8,10 +8,17 @@
 
   <li>
     <%= link_to member_fees_payments_path(type: 'All') do %>
-        <i class="material-icons">person</i>
+        <i class="material-icons">payment</i>
         <span class="nav-label">Membership Fees</span>
     <% end %>
   </li>
+
+    <li>
+      <%= link_to support_requests_path do %>
+          <i class="material-icons">help</i>
+          <span class="nav-label">Support</span>
+      <% end %>
+    </li>
 
   <li>
     <a href="http://localhost/cpd">
@@ -22,14 +29,14 @@
 
   <li>
     <%= link_to events_path do %>
-        <i class="material-icons">person</i>
+        <i class="material-icons">event</i>
         <span class="nav-label">Events</span>
     <% end %>
   </li>
 
   <li>
     <%= link_to trainings_path do %>
-        <i class="material-icons">person</i>
+        <i class="material-icons">library_books</i>
         <span class="nav-label">Trainings</span>
     <% end %>
   </li>

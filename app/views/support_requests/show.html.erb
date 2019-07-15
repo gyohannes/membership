@@ -1,0 +1,35 @@
+<div class="panel-heading">
+  Support Request Details
+</div>
+<div class="panel-body">
+<p>
+  <strong>Requested By:</strong>
+  <%= @support_request.user %>
+</p>
+
+<p>
+  <strong>Requested to:</strong>
+  <%= @support_request.organization_unit %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @support_request.subject %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= raw @support_request.message %>
+</p>
+  <% @support_request.comments.each do |reply| %>
+      <hr/>
+      <label class="col-sm-3"><%= reply.user %></label>
+      <p><%= raw reply.message %></p>
+      <% end %>
+  <hr/>
+  <% if can? :manage, Comment %>
+  <%= link_to new_comment_path(support: @support_request.id) do %>
+      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-reply"></i> Reply</button>
+  <% end %>
+  <% end %>
+</div>

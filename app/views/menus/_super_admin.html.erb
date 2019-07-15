@@ -1,84 +1,142 @@
 <% if current_user.super_admin? %>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">group</i>
-      <span class="nav-label">Users</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Org Unit Users', users_path(type: 'org unit') %></li>
-      <li><%= link_to 'Institution Users', users_path(type: 'institution') %></li>
-    </ul>
-  </li>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">build</i>
-      <span class="nav-label">Organization Structure</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Organization Types', organization_types_path %></li>
-      <li><%= link_to 'Organization Units', organization_units_path %></li>
-    </ul>
-  </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">dashboard</i>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Payment Dashboard', payment_dashboard_path %></li>
+        <li><%= link_to 'Training Dashboard', training_dashboard_path %></li>
+      </ul>
+    </li>
 
-  <li>
-  <a href="javascript:void(0);" class="menu-toggle">
-    <i class="material-icons">school</i>
-  <span class="nav-label">Institutions</span>
-  </a>
-  <ul>
-    <li><%= link_to 'Institution Types', institution_types_path %></li>
-    <li><%= link_to 'Institutions', institutions_path %></li>
-  </ul>
-  </li>
-  <li>
-  <a href="javascript:void(0);" class="menu-toggle">
-    <i class="material-icons">local_hospital</i>
-    <span class="nav-label">Facilities</span>
-  </a>
-  <ul>
-    <li><%= link_to 'Facility Types',facility_types_path %></li>
-    <li><%= link_to 'Facilities', facilities_path %></li>
-  </ul>
-  </li>
-  <li>
-  <a href="javascript:void(0);" class="menu-toggle">
-    <i class="material-icons">library_books</i>
-    <span class="nav-label">Trainings</span>
-  </a>
-  <ul>
-    <li><%= link_to 'Program Areas', program_areas_path %></li>
-    <li><%= link_to 'Training Methods', training_methods_path %></li>
-    <li><%= link_to 'Training Topics', training_titles_path %></li>
-    <li><%= link_to 'Trainings', trainings_path %></li>
-  </ul>
-  </li>
-  <li>
-    <%= link_to people_path do %>
-      <i class="material-icons">group</i>
-      <span class="nav-label">Health Workers</span>
-    <% end %>
-  </li>
+    <li>
+      <%= link_to AssociationDetail.first || new_association_detail_path do %>
+          <i class="material-icons">people</i>
+          <span class="nav-label">Association Details</span>
+      <% end %>
+    </li>
 
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">insert_chart</i>
-      <span class="nav-label">Reports</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Trainings', reports_trainings_path %></li>
-      <li><%= link_to 'Health Workers', reports_health_workers_path %></li>
-    </ul>
-  </li>
+    <li>
+      <%= link_to support_requests_path do %>
+          <i class="material-icons">help</i>
+          <span>Support
+              <span class="badge btn btn-primary"><%= current_user.new_support_requets.count %></span>
+            </span>
+      <% end %>
+    </li>
 
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">build</i>
-      <span class="nav-label">System Settings</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Profession Categories', profession_categories_path %></li>
-      <li><%= link_to 'Professions', professions_path %></li>
-      <li><%= link_to 'Languages', languages_path %></li>
-    </ul>
-  </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">build</i>
+        <span class="nav-label">System Settings</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Budget Years', budget_years_path %></li>
+        <li><%= link_to 'Languages', languages_path %></li>
+        <li><%= link_to 'Profession Categories', profession_categories_path %></li>
+        <li><%= link_to 'Professions', professions_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">category</i>
+        <span class="nav-label">Organization Structure</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Organization Types', organization_types_path %></li>
+        <li><%= link_to 'Organization Units', organization_units_path %></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">group</i>
+        <span class="nav-label">Users</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Member Users', users_path %></li>
+        <li><%= link_to 'Institution Users', institution_users_users_path %></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">person</i>
+        <span class="nav-label">My Membership</span>
+      </a>
+      <ul>
+        <li><%= link_to 'My Profile', current_user.person %></li>
+
+        <li><%= link_to 'Membership Fees', member_fees_payments_path(type: 'All') %></li>
+        <li><a href="http://localhost/cpd">My CPD</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">widgets</i>
+        <span class="nav-label">Membership</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Membership Types', membership_types_path %></li>
+        <li><%= link_to 'Members', people_path %></li>
+        <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
+        <li><%= link_to 'Member Payments', payments_path %></li>
+        <li><%= link_to 'Representative Election', payments_path %></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">account_balance</i>
+        <span class="nav-label">Institutions</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Institution Types', institution_types_path %></li>
+        <li><%= link_to 'Institutions', institutions_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">local_hospital</i>
+        <span class="nav-label">Facilities</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Facility Types',facility_types_path %></li>
+        <li><%= link_to 'Facilities', facilities_path %></li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">library_books</i>
+        <span class="nav-label">Trainings</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Trainings', trainings_path %></li>
+        <li><%= link_to 'Program Areas', program_areas_path %></li>
+        <li><%= link_to 'Training Methods', training_methods_path %></li>
+        <li><%= link_to 'Training Topics', training_titles_path %></li>
+        <li><a href="http://www.emwacpd.org/"> CPD Online Self Study</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <%= link_to events_path do %>
+          <i class="material-icons">event</i>
+          <span class="nav-label">Events</span>
+      <% end %>
+    </li>
+
+    <li>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">insert_chart</i>
+        <span class="nav-label">Reports</span>
+      </a>
+      <ul>
+        <li><%= link_to 'Members Report', reports_members_path %></li>
+        <li><%= link_to 'Trainees Report', reports_trainees_path %></li>
+      </ul>
+    </li>
+
 <% end %>

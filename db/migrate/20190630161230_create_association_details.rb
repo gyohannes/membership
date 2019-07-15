@@ -6,6 +6,7 @@ class CreateAssociationDetails < ActiveRecord::Migration[5.1]
       t.string :contact_phone
       t.string :contact_email
       t.text :address
+      t.text :about_association
 
       t.timestamps
     end

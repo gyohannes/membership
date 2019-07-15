@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @board_members_term.name %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @board_members_term.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @board_members_term.to %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @board_members_term.status %>
+</p>
+
+<%= link_to 'Edit', edit_board_members_term_path(@board_members_term) %> |
+<%= link_to 'Back', board_members_terms_path %>

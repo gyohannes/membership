@@ -1,40 +1,56 @@
+<div class="panel-heading">
+  <%= @event.title %>
+</div>
 <div class="panel-body">
-<h1 class="bold">
-  <%= @event.title %>   <strong>Applicants:</strong>  <%= @event.event_applicants.count %> &nbsp; &nbsp; <%= link_to 'List Applicants', event_applicants_path(event: @event.id), class: 'btn btn-lg btn-primary' %>
-  
-</h1>
-<hr/>
-<p>
+
+  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+    <li role="presentation" class="active"><a href="#event_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-calendar m-r-5"></i> Event Details</a></li>
+    <% if can? :manage, Event %>
+    <li role="presentation"><a href="#applicants" data-toggle="tab"><i class="fa fa-group m-r-5"></i>
+      <span>Applicants <span class="badge btn btn-primary"><%= @event.event_applicants.count %></span></span></a></li>
+    <% end %>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="event_details">
+      <p>
   <strong>Date:</strong>
   <%= @event.event_date %>
 </p>
 
-  <p>
+      <p>
     <strong>Place:</strong>
     <%= @event.location %>
   </p>
 
-  <p>
+      <p>
     <strong>Contact Person:</strong>
     <%= @event.contact_person %>
   </p>
 
-  <p>
+      <p>
     <strong>Phone:</strong>
     <%= @event.contact_phone %>
   </p>
 
-  <p>
+      <p>
     <strong>Email:</strong>
     <%= @event.contact_email %>
   </p>
 
-  <p>
-  <%= raw @event.event_details %>
-</p>
+      <%= raw @event.event_details %>
 
-
-  <hr/>
-  <%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-lg btn-primary' %>
-  <%= link_to 'Apply', apply_event_path(@event, applicant: current_user.person.try(:id)), class: 'btn btn-lg btn-primary' unless @event.applied(current_user.person.try(:id))%>
+      <hr/>
+      <%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-lg btn-primary' if can? :edit, @event %>
+      <% unless @event.applied(current_user.person.try(:id)) %>
+      <%= link_to 'Apply', apply_event_path(@event, applicant: current_user.person.try(:id)), class: 'btn btn-lg btn-primary' %>
+          <% else %>
+      <h2>Your Application is <%= @event.application_status(current_user.person.try(:id)) %></h2>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane fade in" id="applicants">
+      <%= render template: '/event_applicants/index', locals: {:@event_applicants=>@event.event_applicants} %>
+    </div>
+  </div>
 </div>

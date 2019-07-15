@@ -7,6 +7,7 @@ class OrganizationUnit < ApplicationRecord
   has_many :people
   has_many :trainings
   has_many :trainee_distributions
+  has_many :support_requests
 
   validates :name, :short_name, :organization_type_id, presence: true
   validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?
