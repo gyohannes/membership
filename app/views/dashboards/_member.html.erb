@@ -1,3 +1,4 @@
+<% if current_user and current_user.has_role('Member') and current_user.person.status==true %>
 <% content_for :header do %>
   <div class="block-header">
     <h2>Member Dashboard</h2>
@@ -48,3 +49,4 @@
 </div>
 <% end %>
 <%= render template: '/people/show', locals: {:@person => current_user.person}  %>
+<% end %>

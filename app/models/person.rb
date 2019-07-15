@@ -25,6 +25,10 @@ class Person < ApplicationRecord
 
   after_create :set_user
 
+  def membership_status
+    status.blank? ? 'Pending' :(status==true ? 'Confirmed' : 'Not Accepted')
+  end
+
   def self.set_id_number
     association_code = AssociationDetail.first.try(:short_name) || ''
     serial_no = Person.exists? ? (Person.last.id + 1).to_s : '1'

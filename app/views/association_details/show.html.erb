@@ -50,7 +50,8 @@
   <div role="tabpanel" class="tab-pane fade in" id="board_members">
     <div class="comment-box">
       <ul>
-        <% @current_board_term.board_members.each do |bm| %>
+        <% unless @current_board_term.blank? %>
+          <% @current_board_term.board_members.each do |bm| %>
         <li>
           <div class="media col-sm-offset-2">
             <div class="media-right">
@@ -66,12 +67,15 @@
         </li>
             <hr/>
         <% end %>
+        <% end %>
       </ul>
     </div>
     <% if can? :manage, BoardMembersTerm %>
-    <%= link_to edit_board_members_term_path(@current_board_term) do %>
-        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit Current Board Members</button>
-    <% end %>
+        <% unless @current_board_term.blank? %>
+          <%= link_to edit_board_members_term_path(@current_board_term) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit Current Board Members</button>
+          <% end %>
+        <% end %>
     <%= link_to new_board_members_term_path do %>
         <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Board Members</button>
     <% end %>

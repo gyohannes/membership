@@ -1,4 +1,4 @@
-<% if current_user.has_role('Member') %>
+<% if current_user and current_user.has_role('Member') %>
   <li>
     <%= link_to current_user.person do %>
         <i class="material-icons">person</i>

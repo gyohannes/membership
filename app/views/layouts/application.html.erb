@@ -65,7 +65,7 @@
                 <i class="material-icons">fullscreen</i>
               </a>
             </li>
-
+            <% if current_user %>
             <li class="dropdown user-menu">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="hidden-xs"><%= current_user.email %></span>
@@ -95,6 +95,7 @@
                 </li>
               </ul>
             </li>
+            <% end %>
           </ul>
         </div>
 

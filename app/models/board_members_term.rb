@@ -3,6 +3,8 @@ class BoardMembersTerm < ApplicationRecord
 
   accepts_nested_attributes_for :board_members, allow_destroy: true
 
-  scope :active, -> {BoardMembersTerm.where(status: true).first}
+  def self.active
+    BoardMembersTerm.all.order('board_members_terms.to DESC').first
+  end
 
 end

@@ -2,6 +2,8 @@
   <%= render 'dashboards/payment_dashboard' %>
 <% elsif @institution %>
     <%= render 'dashboards/institution' %>
-<% elsif current_user.has_role('Member') %>
+<% elsif current_user.has_role('Member') and current_user.person.status==true %>
     <%= render 'dashboards/member' %>
+<% elsif current_user.person.blank? %>
+    <%= render 'dashboards/guest' %>
 <% end %>

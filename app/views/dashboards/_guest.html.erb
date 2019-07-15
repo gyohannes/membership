@@ -1,0 +1,9 @@
+<% if current_user.person.blank? or current_user.person.try(:status).blank? %>
+    <% unless current_user.person.blank? %>
+    <h2>Your membership status is <%= current_user.person.membership_status%></h2>
+    <hr/>
+    <%= render template: '/people/show', locals: {:@person => current_user.person}  %>
+        <% else %>
+        <%= render partial: '/people/form', locals: {:@person => Person.new}  %>
+        <% end %>
+<% end %>
