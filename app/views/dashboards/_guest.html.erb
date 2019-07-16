@@ -4,6 +4,11 @@
     <hr/>
     <%= render template: '/people/show', locals: {:@person => current_user.person}  %>
         <% else %>
-        <%= render partial: '/people/form', locals: {:@person => Person.new}  %>
+        <div class="panel-heading">
+          Member Registration
+        </div>
+        <div class="panel-body">
+          <%= render partial: '/people/form', locals: {:@person => Person.new(user_id: current_user.id)} %>
+        </div>
         <% end %>
 <% end %>

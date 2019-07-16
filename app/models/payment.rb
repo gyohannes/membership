@@ -4,7 +4,7 @@ class Payment < ApplicationRecord
 
   has_attached_file :attachment
   validates_attachment_content_type :attachment, content_type: ['application/pdf',/\Aimage\/.*\z/]
-
+  validates :payment_method, presence: true
   validates :person_id, uniqueness: { scope: :budget_year_id, message: 'has already paid'}
 
   scope :list_by_org_unit, -> (org_unit) { org_unit.blank? ? [] : Person.where('people.id in (?)', OrganizationUnit.find(org_unit).sub_people.pluck(:id)) }

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :support_requests
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ROLES = [ADMIN='Admin', MEMBER='Member', INSTITUTION='Institution']

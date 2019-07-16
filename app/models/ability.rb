@@ -18,6 +18,7 @@ class Ability
          can :read, Event
          can :manage, Event, user_id: user.id
        else
+         can :create, SupportRequest
          can :read, :all
          can [:create, :member_fees], Payment
        end

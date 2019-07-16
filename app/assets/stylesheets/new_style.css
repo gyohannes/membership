@@ -1,10 +1,30 @@
 ul.wysihtml5-toolbar > li {
     margin: 0;
 }
+
+.wizard .content{
+    overflow: visible;
+}
+.wizard, .tabcontrol{
+    overflow: visible;
+}
+fieldset{
+    background: #ffffff;
+    overflow: visible;
+}
+label.error{
+    margin-left: 30px;
+}
+legend.empty{
+    margin-bottom: 0px;
+}
 fieldset.sub_form{
     padding: 5px 20px;
     border: 1px solid #d4d3f2;
     margin: 20px 5px;
+}
+.tab-pane {
+    background: #fff;
 }
 .sub_form legend{
     border: none;
@@ -33,8 +53,6 @@ form label{
 .js-exportable{
     background: #ffffff;
 }
-.tab-pane{
-}
 
 .icheckbox_square-blue, .iradio_square-blue {
     margin-right: 2px;
@@ -56,6 +74,7 @@ form label{
 .wizard .content{
     overflow: -moz-hidden-unscrollable;
     overflow: visible;
+    background: #ffffff;
 }
 fieldset{
 }
