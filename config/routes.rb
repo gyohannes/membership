@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :comments
   resources :support_requests
   resources :board_members_terms
   resources :association_details
@@ -60,6 +59,7 @@ Rails.application.routes.draw do
   resources :people do
     member do
       get 'membership_idcard'
+      get 'confirm'
     end
     collection do
       get 'load_people'

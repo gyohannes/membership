@@ -13,8 +13,7 @@ class Person < ApplicationRecord
   has_many :payments
   belongs_to :membership_type
 
-  validates :first_name, :middle_name, :last_name, :gender, :date_of_birth, :profession_id,
-            :email, :phone_number, :country, :address, presence: true
+  validates :first_name, :middle_name, :last_name, presence: true
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "missing/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/

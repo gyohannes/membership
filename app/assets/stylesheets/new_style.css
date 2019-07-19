@@ -1,3 +1,6 @@
+.menu li a .info {
+    width: 100%;
+}
 ul.wysihtml5-toolbar > li {
     margin: 0;
 }

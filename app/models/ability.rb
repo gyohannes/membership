@@ -8,15 +8,17 @@ class Ability
 
        if user.super_admin?
          can :manage, :all
-         cannot [:create, :edit], SupportRequest
+         cannot :confirm, Person
+         can :confirm, Person, status: nil
        elsif user.has_role('Admin')
          can :manage, :all
          cannot [:create, :edit], AssociationDetail
          cannot :manage, BoardMembersTerm
-         cannot [:create, :edit], SupportRequest
          cannot :manage, Event
          can :read, Event
          can :manage, Event, user_id: user.id
+         cannot :confirm, Person
+         can :confirm, Person, status: nil
        else
          can :create, SupportRequest
          can :read, :all

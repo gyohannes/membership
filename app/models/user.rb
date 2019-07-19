@@ -3,11 +3,13 @@ class User < ApplicationRecord
   belongs_to :institution, optional: true
   belongs_to :facility, optional: true
   has_one :person
-  has_many :support_requests
+  has_many :sent_requests, :class_name => 'SupportRequest', :foreign_key => "sender"
+  has_many :incoming_requests, :class_name => 'SupportRequest', :foreign_key => "receiver"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+  accepts_nested_attributes_for :person
 
   ROLES = [ADMIN='Admin', MEMBER='Member', INSTITUTION='Institution']
 
@@ -15,12 +17,12 @@ class User < ApplicationRecord
     organization_unit == OrganizationUnit.top_organization_unit
   end
 
-  def load_support_requests
-    self.has_role('Member') ? self.support_requests : self.organization_unit.support_requests
+  def new_members
+    organization_unit.sub_people.where(status: nil) rescue nil
   end
 
-  def new_support_requets
-    load_support_requests.where(status: nil)
+  def new_support_requests
+    incoming_requests.where(status: nil)
   end
 
   def has_role(role_name)

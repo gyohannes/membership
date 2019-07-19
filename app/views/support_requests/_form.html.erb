@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user, as: :hidden, input_html: {value: current_user.id} %>
-    <%= f.association :organization_unit, label: 'Request to' %>
+    <%= f.input :sender, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :receiver, collection: User.all %>
     <%= f.input :subject %>
     <%= f.input :message,input_html: {class: 'wysihtml5'} %>
   </div>

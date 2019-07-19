@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190630161230) do
+ActiveRecord::Schema.define(version: 20190715092611) do
 
   create_table "association_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -18,6 +18,31 @@ ActiveRecord::Schema.define(version: 20190630161230) do
     t.string "contact_phone"
     t.string "contact_email"
     t.text "address"
+    t.text "about_association"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.integer "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
+  create_table "board_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "board_members_term_id"
+    t.string "title"
+    t.bigint "person_id"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_members_term_id"], name: "index_board_members_on_board_members_term_id"
+    t.index ["person_id"], name: "index_board_members_on_person_id"
+  end
+
+  create_table "board_members_terms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.date "from"
+    t.date "to"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -192,11 +217,13 @@ ActiveRecord::Schema.define(version: 20190630161230) do
     t.string "attachment_content_type"
     t.integer "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.string "payment_method"
     t.index ["budget_year_id"], name: "index_payments_on_budget_year_id"
     t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
     t.string "title"
     t.string "first_name"
     t.string "middle_name"
@@ -206,24 +233,22 @@ ActiveRecord::Schema.define(version: 20190630161230) do
     t.string "gender"
     t.string "email"
     t.string "phone_number"
-    t.string "address"
-    t.string "country"
-    t.bigint "institution_id"
+    t.bigint "membership_type_id"
     t.bigint "organization_unit_id"
+    t.string "kebelle"
+    t.string "house_number"
     t.bigint "facility_id"
-    t.bigint "user_id"
     t.string "job_title"
     t.bigint "profession_category_id"
     t.bigint "profession_id"
-    t.bigint "membership_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean "status"
     t.index ["facility_id"], name: "index_people_on_facility_id"
-    t.index ["institution_id"], name: "index_people_on_institution_id"
     t.index ["membership_type_id"], name: "index_people_on_membership_type_id"
     t.index ["organization_unit_id"], name: "index_people_on_organization_unit_id"
     t.index ["profession_category_id"], name: "index_people_on_profession_category_id"
@@ -255,6 +280,17 @@ ActiveRecord::Schema.define(version: 20190630161230) do
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "support_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "sender"
+    t.integer "receiver"
+    t.integer "parent_request_id"
+    t.string "subject"
+    t.text "message"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -426,6 +462,8 @@ ActiveRecord::Schema.define(version: 20190630161230) do
     t.index ["person_id"], name: "index_work_experiences_on_person_id"
   end
 
+  add_foreign_key "board_members", "board_members_terms"
+  add_foreign_key "board_members", "people"
   add_foreign_key "educations", "people"
   add_foreign_key "event_applicants", "events"
   add_foreign_key "event_applicants", "people"
@@ -439,7 +477,6 @@ ActiveRecord::Schema.define(version: 20190630161230) do
   add_foreign_key "payments", "budget_years"
   add_foreign_key "payments", "people"
   add_foreign_key "people", "facilities"
-  add_foreign_key "people", "institutions"
   add_foreign_key "people", "membership_types"
   add_foreign_key "people", "organization_units"
   add_foreign_key "people", "profession_categories"

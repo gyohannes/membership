@@ -1,29 +1,19 @@
-<div class="panel-heading">
-  Support
-</div>
-<div class="panel-body">
-  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-  <thead>
-    <tr>
-      <th>Requested by</th>
-      <th>Request to</th>
-      <th>Subject</th>
+<div class="panel panel-default">
+  <div class="panel-heading">New Support Requests</div>
+  <div class="panel-body">
+    <table class="table table-hover dataTable js-exportable">
+      <thead>
       <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @support_requests.each do |support_request| %>
-      <tr>
-        <td><%= support_request.user %></td>
-        <td><%= support_request.organization_unit %></td>
-        <td><%= support_request.subject %></td>
-        <td><%= link_to 'Details', support_request %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-  <hr/>
-  <%= link_to 'Request a Support', new_support_request_path, class: 'btn btn-primary' if can? :create, SupportRequest %>
+      <th></th>
+      </thead>
+      <tbody>
+      <% @support_requests.each do |support_request| %>
+          <tr class="unread">
+            <td><%= link_to "#{support_request.sender_user}", support_request %></td>
+            <td><%= support_request.subject %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

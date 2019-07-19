@@ -1,35 +1,33 @@
-<div class="panel-heading">
-  Support Request Details
-</div>
-<div class="panel-body">
+<div class="panel panel-default">
+  <div class="panel-heading">Support Request Details</div>
+  <div class="panel-body">
 <p>
-  <strong>Requested By:</strong>
-  <%= @support_request.user %>
+  <strong>Sender:</strong>
+  <%= @support_request.sender_user %>
 </p>
 
 <p>
-  <strong>Requested to:</strong>
-  <%= @support_request.organization_unit %>
+  <strong>Receiver:</strong>
+  <%= @support_request.receiver_user %>
 </p>
 
 <p>
   <strong>Subject:</strong>
   <%= @support_request.subject %>
 </p>
-
 <p>
-  <strong>Message:</strong>
   <%= raw @support_request.message %>
 </p>
+    <fieldset class="sub_form">
+      <legend>Replies</legend>
   <% @support_request.comments.each do |reply| %>
-      <hr/>
-      <label class="col-sm-3"><%= reply.user %></label>
+      <label class="col-sm-3"><%= reply.sender_user %></label>
       <p><%= raw reply.message %></p>
+          <hr/>
       <% end %>
-  <hr/>
-  <% if can? :manage, Comment %>
-  <%= link_to new_comment_path(support: @support_request.id) do %>
+    </fieldset>
+  <%= link_to new_support_request_path(support: @support_request.id) do %>
       <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-reply"></i> Reply</button>
   <% end %>
-  <% end %>
+</div>
 </div>

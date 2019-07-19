@@ -1,20 +1,29 @@
 class SupportRequestsController < ApplicationController
+  layout 'messaging'
   before_action :set_support_request, only: [:show, :edit, :update, :destroy]
 
   # GET /support_requests
   # GET /support_requests.json
   def index
-    @support_requests = current_user.load_support_requests
+    if params[:type] == 'sent'
+    @support_requests = current_user.sent_requests
+    else
+      @support_requests = current_user.incoming_requests
+    end
   end
 
   # GET /support_requests/1
   # GET /support_requests/1.json
   def show
+    @support_request.update(status: true)
   end
 
   # GET /support_requests/new
   def new
+    parent_request = SupportRequest.find_by(id: params[:support] )
     @support_request = SupportRequest.new
+    @support_request.parent_request_id = parent_request.id unless parent_request.blank?
+    @support_request.receiver = parent_request.sender unless parent_request.blank?
   end
 
   # GET /support_requests/1/edit
@@ -69,6 +78,6 @@ class SupportRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def support_request_params
-      params.require(:support_request).permit(:user_id, :organization_unit_id, :subject, :message)
+      params.require(:support_request).permit(:sender, :receiver, :parent_request_id, :subject, :message)
     end
 end
