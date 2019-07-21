@@ -1,16 +1,16 @@
 <div class="panel panel-default">
-  <div class="panel-heading">New Support Requests</div>
+  <div class="panel-heading">Messages</div>
   <div class="panel-body">
     <table class="table table-hover dataTable js-exportable">
       <thead>
-      <th></th>
-      <th></th>
+      <th><%= @type == 'sent' ? 'To' : 'From'%></th>
+      <th>Subject</th>
       </thead>
       <tbody>
       <% @support_requests.each do |support_request| %>
           <tr class="unread">
-            <td><%= link_to "#{support_request.sender_user}", support_request %></td>
-            <td><%= support_request.subject %></td>
+            <td><%= @type == 'sent' ? support_request.receiver_user : support_request.sender_user %></td>
+            <td><%= link_to "#{support_request.subject}", support_request %></td>
           </tr>
       <% end %>
       </tbody>

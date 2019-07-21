@@ -29,6 +29,11 @@
         $('#mainTable').editableTableWidget()
         $('.best_in_place').best_in_place();
 
+        $( "select" ).select2({
+            theme: "bootstrap"
+        });
+
+
 
     });
 }(jQuery))

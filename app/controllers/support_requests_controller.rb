@@ -5,7 +5,8 @@ class SupportRequestsController < ApplicationController
   # GET /support_requests
   # GET /support_requests.json
   def index
-    if params[:type] == 'sent'
+    @type = params[:type]
+    if @type == 'sent'
     @support_requests = current_user.sent_requests
     else
       @support_requests = current_user.incoming_requests
@@ -15,7 +16,7 @@ class SupportRequestsController < ApplicationController
   # GET /support_requests/1
   # GET /support_requests/1.json
   def show
-    @support_request.update(status: true)
+    @support_request.update(status: true) unless @support_request.sender.to_i == current_user.id
   end
 
   # GET /support_requests/new

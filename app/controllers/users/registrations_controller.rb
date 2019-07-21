@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  layout 'users'
+  layout 'users', except: [:edit]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -9,13 +9,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
+  #z def create
   #   super
   # end
 
   # GET /resource/edit
   # def edit
-  #   super
+   #  super
   # end
 
   # PUT /resource
@@ -55,7 +55,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+   def after_inactive_sign_up_path_for(resource)
+     flash[:notice] = 'Thank you for applying, a confirmation email is sent to your email. Please confirm your email to continue. '
+     new_user_session_path
+   end
 end

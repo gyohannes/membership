@@ -2,8 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :parent_request_id, as: :hidden, input_html: {value: f.object.parent_request_id} %>
     <%= f.input :sender, as: :hidden, input_html: {value: current_user.id} %>
-    <%= f.input :receiver, collection: User.all %>
+    <%= f.input :receiver, collection: User.all, prompt: true %>
     <%= f.input :subject %>
     <%= f.input :message,input_html: {class: 'wysihtml5'} %>
   </div>

@@ -3,6 +3,8 @@
  *= require bootstrap-treeview
  *= require bootstrap-wysihtml5
  *= require fullcalendar
+ *= require select2
+ *= require select2-bootstrap
  *= require new_style
  */
 

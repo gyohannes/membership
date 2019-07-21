@@ -2,4 +2,6 @@
 
 <p>Welcome, you have just started membership application to the Ethiopia Midwives Association(EMwA). Please confirm your account email through the link below to continue:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p class="content-block" itemprop="handler" itemscope="itemscope" itemtype="http://schema.org/HttpActionHandler">
+  <%= link_to 'Confirm Email Address', confirmation_url(@resource, confirmation_token: @token), class: "btn-primary", itemprop: "url" %>
+</p>

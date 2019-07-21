@@ -8,6 +8,7 @@
 //= require jquery_nested_form
 //= require bootstrap-treeview
 //= require bootstrap-wysihtml5
+//= require select2
 //= require organization_units
 //= require facilities
 //= require users

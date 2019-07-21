@@ -1,31 +1,20 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Support Request Details</div>
+  <div class="panel-heading"><strong><%= @support_request.subject %></strong></div>
   <div class="panel-body">
-<p>
-  <strong>Sender:</strong>
-  <%= @support_request.sender_user %>
-</p>
-
-<p>
-  <strong>Receiver:</strong>
+    <div class="info">
+      <strong>From:</strong> <%= @support_request.sender_user %> | <span class="time italic"> <%= distance_of_time_in_words_to_now(@support_request.created_at) %></span>
+    </div>
+  <strong>To:</strong>
   <%= @support_request.receiver_user %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @support_request.subject %>
-</p>
 <p>
   <%= raw @support_request.message %>
 </p>
-    <fieldset class="sub_form">
-      <legend>Replies</legend>
+    <hr/>
   <% @support_request.comments.each do |reply| %>
-      <label class="col-sm-3"><%= reply.sender_user %></label>
+      <label><%= reply.sender_user %></label> | <span class="time italic"><%= distance_of_time_in_words_to_now(reply.created_at) %></span>
       <p><%= raw reply.message %></p>
           <hr/>
       <% end %>
-    </fieldset>
   <%= link_to new_support_request_path(support: @support_request.id) do %>
       <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-reply"></i> Reply</button>
   <% end %>
