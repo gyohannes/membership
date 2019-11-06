@@ -5,6 +5,7 @@ $(function () {
             $('#organization_unit_tree').treeview({
                 data: response,
                 levels: 2,
+                showCheckbox: true,
                 onNodeSelected: function (event, data) {
                     $.ajax({
                         url:'/organization_units/load_sub_units',
