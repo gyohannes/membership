@@ -5,13 +5,13 @@
         <span class="nav-label">Dashboard</span>
       </a>
       <ul>
-        <li><%= link_to 'Payment Dashboard', payment_dashboard_path %></li>
-        <li><%= link_to 'Training Dashboard', training_dashboard_path %></li>
+        <li><%= link_to 'Payment Dashboard', main_app.payment_dashboard_path %></li>
+        <li><%= link_to 'Training Dashboard', main_app.training_dashboard_path %></li>
       </ul>
     </li>
 
     <li>
-      <%= link_to AssociationDetail.first || new_association_detail_path do %>
+      <%= link_to AssociationDetail.first || main_app.new_association_detail_path do %>
           <i class="material-icons">people</i>
           <span class="nav-label">Association Details</span>
       <% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Thredded::Engine => '/forum'
   resources :support_requests
   resources :board_members_terms
   resources :association_details

@@ -1,11 +1,11 @@
 class CreateOrganizationUnits < ActiveRecord::Migration[5.1]
   def change
-    create_table :organization_units do |t|
+    create_table :organization_units,id: :uuid do |t|
       t.string :name
       t.string :short_name
       t.string :code
-      t.references :organization_type, foreign_key: true
-      t.integer :parent_organization_unit_id
+      t.references :organization_type, type: :uuid, foreign_key: true
+      t.string :parent_organization_unit_id, type: :uuid
       t.string :url
       t.string :contact_person
       t.string :contact_phone

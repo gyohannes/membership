@@ -1,6 +1,6 @@
 class CreateAssociationDetails < ActiveRecord::Migration[5.1]
   def change
-    create_table :association_details do |t|
+    create_table :association_details, id: :uuid do |t|
       t.string :name
       t.string :short_name
       t.string :contact_phone

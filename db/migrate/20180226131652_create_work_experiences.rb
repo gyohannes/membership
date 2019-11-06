@@ -1,7 +1,7 @@
 class CreateWorkExperiences < ActiveRecord::Migration[5.1]
   def change
-    create_table :work_experiences do |t|
-      t.references :person, foreign_key: true
+    create_table :work_experiences, id: :uuid do |t|
+      t.references :person, type: :uuid, foreign_key: true
       t.string :company
       t.string :job_title
       t.date :from

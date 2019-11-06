@@ -33,6 +33,10 @@ class User < ApplicationRecord
     !organization_unit.blank?
   end
 
+  def admin
+    !organization_unit.blank?
+  end
+
   def parent_org_unit
     !institution.blank? ? OrganizationUnit.top_organization_unit : organization_unit
   end

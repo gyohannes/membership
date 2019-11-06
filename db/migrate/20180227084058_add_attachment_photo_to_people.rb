@@ -1,6 +1,6 @@
 class AddAttachmentPhotoToPeople < ActiveRecord::Migration[5.1]
   def self.up
-    change_table :people do |t|
+    change_table :people, id: :uuid do |t|
       t.attachment :photo
     end
   end

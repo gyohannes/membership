@@ -1,6 +1,6 @@
 class AddAttachmentAttachmentToPayment < ActiveRecord::Migration[5.1]
   def self.up
-    change_table :payments do |t|
+    change_table :payments, id: :uuid do |t|
       t.attachment :attachment
     end
   end

@@ -45,7 +45,7 @@
                 <li>
                   <% current_user.new_members.each do |member| %>
                     <li>
-                      <%= link_to member do %>
+                      <%= link_to main_app.person_path(member) do %>
                           <div class="info">
                             <h4><%= member %></h4>
                             <span class="time"><i class="material-icons">access_time</i><%= distance_of_time_in_words_to_now(member.created_at) %></span>
@@ -57,7 +57,7 @@
               </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%; width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 202.57px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51) none repeat scroll 0% 0%; opacity: 0.2; z-index: 90; right: 1px;"></div></div>
             </li>
             <li class="footer">
-              <%= link_to "New Members", people_path(status: nil) %>
+              <%= link_to "New Members", main_app.people_path(status: nil) %>
             </li>
           </ul>
         </li>
@@ -79,19 +79,19 @@
         <li class="body">
           <ul>
             <li>
-              <%= link_to current_user.person || nil do %>
+              <%= link_to current_user.person do %>
                   <i class="material-icons">account_circle</i> Profile
               <% end %>
             </li>
             <li>
-              <%= link_to edit_user_registration_path do %>
+              <%= link_to main_app.edit_user_registration_path do %>
                   <i class="material-icons">lock_open</i> Change Password
               <% end %>
             </li>
           </ul>
         </li>
         <li class="footer">
-          <%= link_to 'Log Out', destroy_user_session_path,class: "btn btn-default btn-sm btn-block" %>
+          <%= link_to 'Log Out', main_app.destroy_user_session_path,class: "btn btn-default btn-sm btn-block" %>
         </li>
       </ul>
     </li>

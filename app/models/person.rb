@@ -11,7 +11,7 @@ class Person < ApplicationRecord
   has_many :trainees
   has_many :trainers
   has_many :payments
-  belongs_to :membership_type
+  belongs_to :membership_type, optional: true
 
   validates :first_name, :middle_name, :last_name, presence: true
 
