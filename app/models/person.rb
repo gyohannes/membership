@@ -40,7 +40,7 @@ class Person < ApplicationRecord
   def set_user
     if user.blank?
     u = User.create(email: email, role: User::MEMBER, password: '123456', password_confirmation: '123456',
-      organization_unit_id: organization_unit_id, facility_id: facility_id, institution_id: institution_id)
+      organization_unit_id: organization_unit_id)
     self.update(user_id: u.id)
     end
   end

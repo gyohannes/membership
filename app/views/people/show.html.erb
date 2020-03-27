@@ -158,7 +158,7 @@
               </tr>
               </thead>
               <tbody>
-              <% current_user.person.payments.each do |payment| %>
+              <% @person.payments.each do |payment| %>
                   <tr>
                     <td><%= payment.budget_year %></td>
                     <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
@@ -193,7 +193,7 @@
               </tr>
               </thead>
               <tbody>
-              <% current_user.person.unpaid_fees.each do |year| %>
+              <% @person.unpaid_fees.each do |year| %>
                   <tr>
                     <td><%= year %></td>
                     <td><%= current_user.person.payment_amount(year.id) rescue nil %></td>

@@ -6,6 +6,7 @@ class CreateOrganizationUnits < ActiveRecord::Migration[5.1]
       t.string :code
       t.references :organization_type, type: :uuid, foreign_key: true
       t.string :parent_organization_unit_id, type: :uuid
+      t.string :ownership
       t.string :url
       t.string :contact_person
       t.string :contact_phone

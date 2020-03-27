@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
   respond_to :html, :js, :json
-
-  before_action :set_institution
+  layout :set_layout
+  before_action :set_institution, :set_association
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -21,6 +21,18 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_layout
+    unless current_user
+      return 'landing_page'
+    else
+      return 'application'
+    end
+  end
+
+  def set_association
+    @association = AssociationDetail.first rescue nil
+    @current_board_term = BoardMembersTerm.active
+  end
   def set_institution
     @institution = current_user.institution rescue nil
   end

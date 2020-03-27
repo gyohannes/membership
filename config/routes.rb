@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pages
   mount Thredded::Engine => '/forum'
   resources :support_requests
   resources :board_members_terms
@@ -128,10 +129,16 @@ Rails.application.routes.draw do
     end
   end
   get 'home/index'
+  get 'home/landing_page'
   get 'payment_dashboard', to: 'home#payment_dashboard'
   get 'training_dashboard', to: 'home#training_dashboard'
   get 'member_dashboard', to: 'home#member_dashboard'
-  root to: "home#index"
+
+  authenticated :user do
+    root 'home#index', as: :authenticated_root
+  end
+
+  root to: "home#landing_page"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,179 @@
+<section class="site-blocks-cover overflow-hidden">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 align-self-center text-center text-md-left">
+        <div class="intro-text">
+          <h1>Register Here</h1>
+          <h2>Become a Member of The Ethiopian Midwives Association (EMWA)</h2>
+        </div>
+      </div>
+      <div class="col-lg-5 align-self-center card">
+        <%= simple_form_for(User.new, url: registration_path(User.new), wrapper: 'vertical_form', html: {class: 'p-5 contact-form'}) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-group has-feedback">
+              <%= f.input :email, class: "form-control" %>
+              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+              <%= f.input :password, autocomplete: "off", class: "form-control" %>
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+              <%= f.input :password_confirmation, label: 'Confirm Password', autocomplete: "off", class: "form-control" %>
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <%= f.input :role, as: :hidden, input_html: {value: User::MEMBER} %>
+            <%= f.submit "SIGN UP",class: "btn btn-success btn-block btn-flat"  %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="site-section" id="news-section">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-6 text-center heading-section mb-5">
+        <h2 class="text-black mb-2">News</h2>
+      </div>
+    </div>
+
+    <div class="row hover-1-wrap mb-5 mb-lg-0">
+      <div class="col-12">
+        <div class="row">
+          <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-right">
+            <a href="#" class="hover-1">
+              <%= image_tag 'undraw_news.svg', alt: "Image", class: "img-fluid" %>
+            </a>
+          </div>
+          <div class="col-lg-5 mr-auto text-lg-right align-self-center order-lg-1" data-aos="fade-left">
+            <h2 class="text-black">Latest News</h2>
+            <p class="mb-4">Far far away, behind the word mountains, Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p><a href="#" class="btn btn-primary">Read More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section bg-light" id="events-section">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-6 text-center heading-section mb-5">
+        <h2 class="text-black mb-2">Events</h2>
+      </div>
+    </div>
+
+    <div class="row hover-1-wrap mb-5 mb-lg-0">
+      <div class="col-12">
+        <div class="row">
+          <div class="mb-4 mb-lg-0 col-lg-6"  data-aos="fade-left">
+            <a href="#" class="hover-1">
+              <%= image_tag 'undraw_events.svg', alt: "Image", class: "img-fluid" %>
+            </a>
+          </div>
+          <div class="col-lg-5 ml-auto align-self-center"  data-aos="fade-right">
+            <h2 class="text-black">Upcoming Events</h2>
+            <p class="mb-4">Far far away, behind the word mountains, Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p><a href="#" class="btn btn-primary">Read More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="site-section" id="publications-section">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-6 text-center heading-section mb-5">
+        <h2 class="text-black mb-2">Publications</h2>
+      </div>
+    </div>
+
+    <div class="row hover-1-wrap">
+      <div class="col-12">
+        <div class="row">
+          <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-right">
+            <a href="#" class="hover-1">
+              <%= image_tag 'undraw_publications.svg', alt: "Image", class: "img-fluid" %>
+            </a>
+          </div>
+          <div class="col-lg-5 mr-auto text-lg-right align-self-center order-lg-1" data-aos="fade-left">
+            <h2 class="text-black">New Publications</h2>
+            <p class="mb-4">Far far away, behind the word mountains, Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p><a href="#" class="btn btn-primary">Read More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section bg-light" id="about-section">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-7 text-center heading-section mb-5">
+        <h2 class="mb-2 heading">About Us</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-4 text-left heading-section mb-5 align-self-center"  data-aos="fade-up" data-aos-delay="100">
+          <%= image_tag @association.logo.url, alt: 'Image', class: 'img-fluid' %>
+      </div>
+      <div class="col-lg-8 align-self-center mr-auto text-left heading-section mb-5">
+        <%= raw @association.about_association %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section bg-primary trainers" id="board-section">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-7 text-center heading-section mb-5">
+        <h2 class="mb-2 heading">Current EMWA Board</h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+
+      <% unless @current_board_term.blank? %>
+          <% @current_board_term.board_members.each do |bm| %>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 bg-primary p-3 p-md-5" data-aos="fade-up" data-aos-delay="">
+                <div class="trainer">
+                  <figure>
+                    <%= image_tag bm.person.photo.url, alt: 'Image', class: 'img-fluid' %>
+                  </figure>
+                  <div class="px-md-3">
+                    <h3><%= bm.person %></h3>
+                    <p><%= bm.role %></p>
+                    <p>Phone Number: <%= bm.person.phone_number %></p>
+                    <p>Email: <%= bm.person.email %></p>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<% Page.all.each do |p| %>
+
+<section class="site-section" id="<%= p.name.split.join << '-section' %>">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-7 text-center heading-section mb-5">
+        <h2 class="mb-2 heading"><%= p.name %></h2>
+      </div>
+    </div>
+    <div class="align-self-center mr-auto text-left heading-section mb-5">
+      <%= raw p.content %>
+    </div>
+  </div>
+</section>
+<% end %>
