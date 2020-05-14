@@ -138,10 +138,10 @@
     </div>
     <div class="row justify-content-center" data-aos="fade-up">
       <div class="col-lg-4 text-left heading-section mb-5 align-self-center"  data-aos="fade-up" data-aos-delay="100">
-          <%= image_tag @association.logo.url, alt: 'Image', class: 'img-fluid' %>
+          <%= image_tag @association.logo.url, alt: 'Image', class: 'img-fluid' rescue nil %>
       </div>
       <div class="col-lg-8 align-self-center mr-auto text-left heading-section mb-5">
-        <%= raw @association.about_association %>
+        <%= raw @association.about_association rescue nil %>
       </div>
     </div>
   </div>

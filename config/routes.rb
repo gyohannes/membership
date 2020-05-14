@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :pages
-  mount Thredded::Engine => '/forum'
   resources :support_requests
   resources :board_members_terms
   resources :association_details
@@ -80,7 +79,6 @@ Rails.application.routes.draw do
       get 'load_facilities'
     end
   end
-  resources :facility_types
   resources :trainings do
     collection do
       get 'load_distribution'

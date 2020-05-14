@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
   belongs_to :institution, optional: true
-  belongs_to :facility, optional: true
   has_one :person
   has_many :sent_requests, :class_name => 'SupportRequest', :foreign_key => "sender"
   has_many :incoming_requests, :class_name => 'SupportRequest', :foreign_key => "receiver"
@@ -47,8 +46,6 @@ class User < ApplicationRecord
       users = User.all
     elsif user.institution
       users = User.where('institution_id = ?', user.institution_id)
-    elsif user.facility
-      users = User.where('facility_id = ?', user.facility_id)
     elsif user.organization_unit
       users = user.organization_unit.sub_users
     end

@@ -2,7 +2,6 @@ class OrganizationUnit < ApplicationRecord
   belongs_to :organization_type
   belongs_to :parent_organization_unit, optional: true, :class_name => 'OrganizationUnit', :foreign_key => "parent_organization_unit_id"
   has_many :sub_organization_units, :class_name => 'OrganizationUnit', :foreign_key => "parent_organization_unit_id"
-  has_many :facilities
   has_many :users
   has_many :people
   has_many :trainings
@@ -37,12 +36,7 @@ class OrganizationUnit < ApplicationRecord
   end
 
   def sub_unit_name
-    unless sub_organization_units.blank?
-      sub_organization_units.joins(:organization_type).
-        pluck('organization_types.name').uniq
-    else
-      ['Facility']
-    end
+      sub_organization_units.joins(:organization_type).pluck('organization_types.name').uniq
   end
 
   def trainees
@@ -72,10 +66,6 @@ class OrganizationUnit < ApplicationRecord
 
   def sub_units
     sub_organization_units + sub_organization_units.collect{|x| x.sub_units}.flatten
-  end
-
-  def sub_facilities
-    facilities + sub_organization_units.collect{|x| x.sub_facilities}.flatten
   end
 
   def sub_users

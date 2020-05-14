@@ -15,7 +15,6 @@ class CreatePeople < ActiveRecord::Migration[5.1]
       t.references :organization_unit, type: :uuid, foreign_key: true
       t.string :kebelle
       t.string :house_number
-      t.references :facility, type: :uuid, foreign_key: true
       t.string :job_title
       t.references :profession_category, type: :uuid,  foreign_key: true
       t.references :profession, type: :uuid,  foreign_key: true

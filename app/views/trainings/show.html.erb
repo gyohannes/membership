@@ -160,7 +160,6 @@
         <tr>
           <th>Name</th>
           <th>Org Unit</th>
-          <th>Facility</th>
           <th>Pre Training Score</th>
           <th>Post Training Score</th>
           <th>Status</th>
@@ -174,7 +173,6 @@
             <tr>
               <td><%= trainee.person %></td>
               <td><%= trainee.person.organization_unit %></td>
-              <td><%= trainee.person.facility %></td>
               <td><a><%= best_in_place trainee, :pre_training_score, as: :input, place_holder: "Click here to add value" %></a></td>
               <td><a><%= best_in_place trainee, :post_training_score, :as => :input, place_holder: "Click here to add value" %></a></td>
               <td><a><%= best_in_place trainee, :status, :as => :input, as: :select, collection:

@@ -71,15 +71,9 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @professions = []
-    if params[:facility]
-      @facility = Facility.find(params[:facility])
-      @organization_unit = @facility.organization_unit
-    else
       @organization_unit = OrganizationUnit.find_by_id(params[:organization_unit])
-    end
     @person = Person.new
     @person.organization_unit = @organization_unit unless @organization_unit.blank?
-    @person.facility = @facility unless @facility.blank?
   end
 
   def load_professions
@@ -147,6 +141,6 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(:profession_id, :gender, :date_of_birth, :photo, :user_id, :title, :membership_type_id, :job_title, :first_name, :middle_name, :last_name,
-                                     :email, :phone_number, :kebelle, :house_number, :organization_unit_id, :facility_id, :id_number)
+                                     :email, :phone_number, :kebelle, :house_number, :organization_unit_id, :id_number)
     end
 end

@@ -1,7 +1,6 @@
 class Person < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :institution, optional: true
-  belongs_to :facility, optional: true
   belongs_to :organization_unit, optional: true
   belongs_to :profession, optional: true
   belongs_to :profession_category, optional: true
@@ -30,7 +29,7 @@ class Person < ApplicationRecord
 
   def self.set_id_number
     association_code = AssociationDetail.first.try(:short_name) || ''
-    serial_no = Person.exists? ? (Person.last.id + 1).to_s : '1'
+    serial_no = Person.exists? ? (Person.count + 1).to_s : '1'
     while serial_no.length < 7
       serial_no = "0" << serial_no
     end

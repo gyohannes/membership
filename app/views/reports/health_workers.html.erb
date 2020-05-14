@@ -6,13 +6,6 @@
   <%= form_tag reports_health_workers_path, :remote => true do %>
 
       <div class="row">
-        <div class="col-sm-4">Facility </div>
-        <div class="col-sm-8">
-          <%= select_tag "facility", options_from_collection_for_select(Facility.all, "id", "name"),{include_blank: true, class: 'form-control'} %>
-        </div>
-      </div><br/>
-
-      <div class="row">
         <div class="col-sm-4">Training Type</div>
         <div class="col-sm-8">
           <%= select(nil, "training_type", ["Pre-Service", "In-Service"].collect{|x| x},{include_blank: true}, class: 'form-control') %>

@@ -4,7 +4,7 @@
     <tr>
       <th>Name</th>
       <th>Membership Type</th>
-      <th>Org Unit / Facility</th>
+      <th>Org Unit</th>
       <th>Phone Number</th>
       <th>Email</th>
       <th></th>
@@ -16,7 +16,7 @@
         <tr>
           <td><%= person.full_name %></td>
           <td><%= person.membership_type %></td>
-          <td><%= person.organization_unit || person.facility %></td>
+          <td><%= person.organization_unit %></td>
           <td><%= person.phone_number %></td>
           <td><%= person.email %></td>
           <td>

@@ -19,12 +19,8 @@ class OrganizationUnitsController < ApplicationController
   end
 
   def org_unit_facilities
-    unless current_user.parent_org_unit.sub_organization_units.blank?
       health_workres = current_user.parent_org_unit.sub_organization_units.
           map{|x| [x.to_s => x.sub_people.count]}.flatten.inject({}){|hash, og| hash.merge!(og)}
-    else
-      health_workres = current_user.parent_org_unit.people.joins(:facility).group('facilities.name').count
-    end
     render json: health_workres
   end
 

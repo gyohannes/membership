@@ -7,7 +7,6 @@
     <tr>
       <th>Name</th>
       <th>Organization Unit</th>
-      <th>Facility</th>
       <th>Institution</th>
       <th>Applied Date</th>
       <th>Status</th>
@@ -19,7 +18,6 @@
       <tr>
         <td><%= event_applicant.person %></td>
         <td><%= event_applicant.person.organization_unit %></td>
-        <td><%= event_applicant.person.facility %></td>
         <td><%= event_applicant.person.institution %></td>
         <td><%= event_applicant.created_at.strftime("%B %d, %Y") %></td>
         <td><a><%= best_in_place event_applicant, :status, as: :checkbox, collection: {false: "Pending", true: "Accepted"} %></a></td>
