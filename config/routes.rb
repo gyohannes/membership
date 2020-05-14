@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       get 'org_unit_trainees_by_area'
       get 'org_unit_trainees_by_year'
       get 'org_unit_trainees_by_category'
+      get 'trainees_by_month'
     end
   end
   resources :trainers
@@ -105,6 +106,7 @@ Rails.application.routes.draw do
       get 'load_tree'
       get 'load_sub_units'
       get 'org_unit_facilities'
+      get 'members_by_region'
     end
   end
   resources :organization_types

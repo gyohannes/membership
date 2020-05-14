@@ -17,7 +17,6 @@
 //= require trainees
 //= require trainee_distributions
 //= require training_titles
-//= require chartkick
-//= require highcharts
+//= require charts
 //= require AdminBSBSenstive/index
 //= require global

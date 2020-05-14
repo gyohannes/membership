@@ -12,6 +12,12 @@ class OrganizationUnitsController < ApplicationController
     render json: OrganizationUnit.organization_tree(current_user)
   end
 
+  def members_by_region
+    org_unit = OrganizationUnit.top_organization_unit
+    members = org_unit.sub_organization_units.map{|x| [x.to_s => x.sub_people.count]}.flatten.inject({}){|hash, og| hash.merge!(og)}
+    render json: members
+  end
+
   def org_unit_facilities
     unless current_user.parent_org_unit.sub_organization_units.blank?
       health_workres = current_user.parent_org_unit.sub_organization_units.

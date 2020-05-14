@@ -23,6 +23,11 @@ class Trainee < ApplicationRecord
     return trainees.uniq
   end
 
+  def self.trainees_by_month_by_type(month, type)
+    joins(:training).where('trainings.end_time >= ? and trainings.end_time <= ? and trainings.training_type = ?',
+                           month.beginning_of_month,  month.end_of_month, type ).count
+  end
+
   def trainee_status
 
   end

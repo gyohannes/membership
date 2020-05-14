@@ -26,6 +26,15 @@ class TraineesController < ApplicationController
     render json: trainees
   end
 
+  def trainees_by_month
+    date_range = ((Date.today - 11.month)..Date.today).uniq{|d| [d.month, d.year]}.collect{|y| y}
+    trainees = []
+    ['Basic', 'Refreshment', 'TOT'].each do |t|
+      trainees << {name: t, data: date_range.map{|m| [m.strftime("%B"), Trainee.trainees_by_month_by_type(m, t)]} }
+    end
+    render json: trainees
+  end
+
   def org_unit_trainees_by_year
     trainees = []
     ['Basic', 'Refreshment', 'TOT'].each do |t|

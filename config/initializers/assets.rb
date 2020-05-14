@@ -11,4 +11,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css.scss, and all non-JS/CSS in the app/assets
 # folder are already added.
- Rails.application.config.assets.precompile += %w( dogger/index.css dogger/index.js global.js AdminBSBMaterialDesign/form_index.js AdminBSBMaterialDesign/jquery_table_index.js)
+ Rails.application.config.assets.precompile += %w( charts.js dogger/index.css dogger/index.js global.js AdminBSBMaterialDesign/form_index.js AdminBSBMaterialDesign/jquery_table_index.js)
