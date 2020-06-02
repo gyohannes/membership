@@ -27,3 +27,9 @@
   <% end %>
   </tbody>
 </table>
+
+<%  unless @organization_unit.blank? %>
+    <%= link_to new_user_path(organization_unit: @organization_unit.try(:id))  do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add User</button>
+    <% end %>
+<% end %>

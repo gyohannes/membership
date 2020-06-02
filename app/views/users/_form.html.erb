@@ -8,7 +8,7 @@
     <% if current_user.institution or @user.user_type == 'institution' %>
         <%= f.input :role, as: :hidden, input_html: {value: User::INSTITUTION} %>
     <% else %>
-        <%= f.input :role, collection: [User::ADMIN, User::MEMBER] %>
+        <%= f.input :role, collection: [User::ADMIN, User::MEMBER], prompt: true %>
     <% end %>
 
     <div class="form-actions">

@@ -41,14 +41,10 @@
     </li>
 
     <li>
-      <a href="javascript:void(0);" class="menu-toggle">
-        <i class="material-icons">group</i>
-        <span class="nav-label">Users</span>
-      </a>
-      <ul>
-        <li><%= link_to 'Member Users', users_path %></li>
-        <li><%= link_to 'Institution Users', institution_users_users_path %></li>
-      </ul>
+      <%= link_to users_path do %>
+          <i class="material-icons">group</i>
+          <span class="nav-label">Users</span>
+      <% end %>
     </li>
 
     <li>
