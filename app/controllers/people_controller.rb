@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
   end
 
   def id_cards
-    @members = Person.all
+    @members = []
     member_ids = params[:members].delete_if{|e| e=='0'} rescue nil
     @members = member_ids.blank? ? [] : Person.find(member_ids)
     @members.each do |member|
@@ -33,7 +33,9 @@ class PeopleController < ApplicationController
   end
 
   def load_paid_members
-    @members = Person.all #MpYear.active.blank? ? [] : MpYear.current.paid_members
+    budget_year = BudgetYear.active
+    organization_unit  = OrganizationUnit.find(params[:node])
+    @members = budget_year.blank? ? [] : organization_unit.sub_people.joins(:payments).where('budget_year_id = ? and payments.status = ?', budget_year.id, true)
     render partial: 'id_cards'
   end
 
