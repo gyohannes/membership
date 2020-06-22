@@ -23,11 +23,12 @@ gem 'wkhtmltopdf_binary', '~> 0.12.3.1'
 gem 'thredded', '~> 0.16.11'
 gem "select2-rails"
 gem 'pg'
+gem 'barby', '~> 0.6.2'
+gem 'chunky_png'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

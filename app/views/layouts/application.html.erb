@@ -20,16 +20,6 @@
   <header>
     <nav class="navbar navbar-default">
 
-      <div class="search-bar">
-        <div class="search-icon">
-          <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="Start typing...">
-        <div class="close-search js-close-search">
-          <i class="material-icons">close</i>
-        </div>
-      </div>
-
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -40,7 +30,7 @@
           </a>
 
           <%= link_to root_path, class: 'navbar-brand' do %>
-              <span class="logo-minimized">M</span>
+              <span class="logo-minimized">EMWA</span>
               <span class="logo">EMwA</span>
           <% end %>
         </div>
@@ -53,18 +43,6 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="javascript:void(0);" class="js-search" data-close="true">
-                <i class="material-icons">search</i>
-              </a>
-            </li>
-
-
-            <li>
-              <a href="javascript:void(0);" class="fullscreen js-fullscreen">
-                <i class="material-icons">fullscreen</i>
-              </a>
-            </li>
             <%= render partial: 'menus/top_menu' %>
           </ul>
         </div>

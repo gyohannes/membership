@@ -5,12 +5,11 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs tab-nav-right" role="tablist">
     <li role="presentation" class="active"><a href="#personal_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Personal Details</a></li>
-    <li role="presentation"><a href="#id_card" data-toggle="tab"><i class="fa fa-book m-r-5"></i> ID Card</a></li>
-    <li role="presentation"><a href="#payments" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Payments</a></li>
-    <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Education</a></li>
+    <li role="presentation"><a href="#payments" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Membership Payments</a></li>
+    <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i>Educational Background</a></li>
     <li role="presentation"><a href="#experience" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Work Experience</a></li>
     <li role="presentation"><a href="#trainer" data-toggle="tab"><i class="fa fa-address-card m-r-5"></i> Trainer Profile</a></li>
-    <li role="presentation"><a href="#training" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Trainings</a></li>
+    <li role="presentation"><a href="#training" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Training History</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -87,53 +86,15 @@
             <div class='col-sm-6'><%= @person.job_title %></div>
           </div>
           <hr/>
-          <%= link_to edit_person_path(@person) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% if can? :edit, @person %>
+            <%= link_to edit_person_path(@person) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane fade in" id="id_card">
-      <div class="id_card" style="width: 450px; height: 250px; border: 2px solid #ddd; padding: 10px; border-radius: 6px">
-        <div class="id_card_header" style="border-bottom: 5px solid #2992a7; margin-bottom: 20px">
-          <%= image_tag 'logo.png', height: '80px' %>
-        </div>
-        <div class="body_and_footer">
-          <div class="id_card_body">
-            <table width="100%">
-              <tr>
-                <td>
-                  <table width="100%" cellpadding="5">
-                    <tr>
-                      <th colspan="2" style="border-bottom: 1px solid silver"><center>ID Number: <%= @person.id_number %></center></th>
-                    </tr>
-                    <tr>
-                      <td>Name</td> <th><%= @person.full_name %></th>
-                    </tr>
-                    <tr>
-                      <td>Membership Type</td> <th><%= @person.membership_type %></th>
-                    </tr>
-                    <tr>
-                      <td>Mobile Number</td> <th><%= @person.phone_number %></th>
-                    </tr>
-                    <tr>
-                      <td>Joined Year</td> <th><%= @person.created_at.year %></th>
-                    </tr>
-                  </table>
-                </td>
-                <th style="text-align: right">
-                  <%= image_tag @person.photo.url(:medium), height: '120px' %>
-                </th>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <%= link_to membership_idcard_person_path(@person, format: :pdf) do %>
-          <button class="btn btn-primary"><i class="material-icons">file_download</i> Download ID Card</button>
-      <% end %>
-    </div>
+
     <div role="tabpanel" class="tab-pane fade in" id="payments">
       <div class="panel-body">
         <div class="panel panel-default">
@@ -194,7 +155,7 @@
                     <td><%= current_user.person.payment_amount(year.id) rescue nil %></td>
                     <td>
                       <%= link_to new_payment_path(person: current_user.person.try(:id), year: year.id) do %>
-                          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Pay Now </button>
+                          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Attach Receipt If Paid </button>
                       <% end %>
                     </td>
                   </tr>
@@ -238,7 +199,7 @@
         </tbody>
       </table>
       <%= link_to new_education_path(person: @person.id) do %>
-          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Education</button>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add </button>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="experience">
@@ -274,7 +235,7 @@
         </tbody>
       </table>
       <%= link_to new_work_experience_path(person: @person.id) do %>
-          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Work Experience</button>
+          <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add</button>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="trainer">
@@ -318,13 +279,16 @@
       <% end %>
       <% if @person.trainer_profile.blank? %>
           <%= link_to new_trainer_profile_path(person: @person.id) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i>Add Trainer Profile</button>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Trainer Profile</button>
           <% end %>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="training">
-      <legend>Trainings Taken</legend>
-      <% unless @person.trainees.blank? %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Trainings
+        </div>
+        <div class="panel-body">
           <table class="table table-responsive">
             <thead>
             <tr>
@@ -349,10 +313,14 @@
             <% end %>
             </tbody>
           </table>
-      <% end %>
-
-      <legend>Trainings Given</legend>
+        </div>
+      </div>
       <% unless @person.trainers.blank? %>
+      <div class="panel panel-default">
+      <div class="panel-heading">
+        As Trainer
+      </div>
+      <div class="panel-body">
           <table class="table table-responsive">
             <thead>
             <tr>
@@ -377,7 +345,9 @@
             <% end %>
             </tbody>
           </table>
-      <% end %>
     </div>
+      </div>
+      <% end %>
   </div>
+</div>
 </div>

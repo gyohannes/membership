@@ -72,6 +72,8 @@ Rails.application.routes.draw do
       get 'load_members_paid'
       get 'members_not_paid'
       get 'load_members_not_paid'
+      get 'id_cards'
+      get 'load_paid_members'
     end
   end
   resources :facilities do

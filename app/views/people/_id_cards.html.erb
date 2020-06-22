@@ -1,32 +1,41 @@
 <div class="body table-responsive">
+  <%= form_tag id_cards_people_path(format: :pdf), method: :get do %>
   <table class="table table-bordered table-striped table-hover dataTable js-exportable">
     <thead>
     <tr>
+      <th><%= check_box(nil, "check_all", {class: 'check_all'}) %>
+      <label for="check_all">All</label>
+    </th>
       <th>Name</th>
       <th>Membership Type</th>
       <th>Org Unit</th>
       <th>Phone Number</th>
       <th>Email</th>
-      <th></th>
     </tr>
     </thead>
 
     <tbody>
-    <% @people.each do |person| %>
+    <% @members.each do |person| %>
         <tr>
+          <td><%= check_box(nil, "members", {multiple: true,id: person.id}, person.id) %>
+            <label for="<%= person.id %>"></label>
+          </td>
           <td><%= person.full_name %></td>
           <td><%= person.membership_type %></td>
           <td><%= person.organization_unit %></td>
           <td><%= person.phone_number %></td>
           <td><%= person.email %></td>
-          <td>
-            <%= link_to person_path(person) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
-            <% end %>
-          </td>
         </tr>
     <% end %>
     </tbody>
   </table>
+  <br>
+
+      <center>
+        <%= submit_tag 'Generate ID Cards', data: { disable_with: false }, class: 'btn btn-primary' %>
+      </center>
+  <% end %>
 
 </div>
+
+<%= javascript_include_tag 'global' %>

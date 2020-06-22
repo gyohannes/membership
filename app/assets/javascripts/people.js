@@ -4,6 +4,34 @@ $(function () {
         $.ajax({
             url: '/organization_units/load_tree',
             success: function(response){
+                $('#id_cards_tree').treeview({
+                    data: response,
+                    levels: 0,
+                    onNodeSelected: function (event, data) {
+                        $.ajax({
+                            url:'/people/load_paid_members',
+                            data: { node: data.id},
+                            success: function (response) {
+                                $('#paid_members').html(response)
+                                $('.js-exportable').DataTable({
+                                    retrieve: true,
+                                    responsive: true,
+                                    dom: '<"html5buttons"B>lTfgtip',
+                                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                                });
+                            }
+                        })
+                    }
+                });
+            }
+        });
+
+    });
+
+    $(function () {
+        $.ajax({
+            url: '/organization_units/load_tree',
+            success: function(response){
                 $('#member_organization_tree').treeview({
                     data: response,
                     levels: 0,

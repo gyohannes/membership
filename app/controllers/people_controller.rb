@@ -1,3 +1,6 @@
+require 'barby'
+require 'barby/barcode/code_128'
+require 'barby/outputter/png_outputter'
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy, :membership_idcard, :confirm]
 
@@ -5,6 +8,33 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = current_user.organization_unit.try(:sub_people) || []
+  end
+
+  def id_cards
+    @members = Person.all
+    member_ids = params[:members].delete_if{|e| e=='0'} rescue nil
+    @members = member_ids.blank? ? [] : Person.find(member_ids)
+    @members.each do |member|
+      barcode = Barby::Code128.new(member.id_number)
+      File.open("#{Rails.root}/public/barcodes/#{member.id_number}.png", 'wb'){|f|
+        f.write barcode.to_png(:height => 20, :margin => 5)
+      }
+    end
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "id_cards",
+               disable_smart_shrinking: false,
+               text_size_shrink:  0.5,
+               disposition: 'attachment',
+               encoding: 'utf8'
+      end
+    end
+  end
+
+  def load_paid_members
+    @members = Person.all #MpYear.active.blank? ? [] : MpYear.current.paid_members
+    render partial: 'id_cards'
   end
 
   def confirm

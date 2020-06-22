@@ -1,7 +1,7 @@
 class Person < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :institution, optional: true
-  belongs_to :organization_unit, optional: true
+  belongs_to :organization_unit
   belongs_to :profession, optional: true
   belongs_to :profession_category, optional: true
   has_many :educations
@@ -55,7 +55,7 @@ class Person < ApplicationRecord
   end
 
   def paid(year)
-    !payments.where('budget_year_id = ?', year).blank?
+    !payments.where('budget_year_id = ? and status = ?', year, true).blank?
   end
 
   def payment_amount(budget_year)

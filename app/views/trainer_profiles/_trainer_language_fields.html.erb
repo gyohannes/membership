@@ -2,7 +2,7 @@
   <%= f.simple_fields_for :trainer_languages, :wrapper => false do |tf| %>
       <div class=" fields row">
         <div class='col-sm-10'>
-          <%= tf.input :language_id, collection: Language.all, class: "form-control show-tick" %>
+          <%= tf.input :language_id, collection: Language.all, prompt: true %>
         </div>
 
         <div class='col-sm-2'>
@@ -11,7 +11,7 @@
           <% end %>
         </div>
       </div>
-      <%= javascript_include_tag 'AdminBSBMaterialDesign/form_index' %>
+      <%= javascript_include_tag 'global' %>
   <% end %>
 <%= f.link_to_add :trainer_languages do %>
   <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Language</button>

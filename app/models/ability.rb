@@ -10,6 +10,8 @@ class Ability
          can :manage, :all
          cannot :confirm, Person
          can :confirm, Person, status: nil
+         cannot :edit, Person
+         can :edit, Person, user_id: user.id
        elsif user.has_role('Admin')
          can :manage, :all
          cannot [:create, :edit], AssociationDetail
@@ -19,7 +21,11 @@ class Ability
          can :manage, Event, user_id: user.id
          cannot :confirm, Person
          can :confirm, Person, status: nil
+         cannot :edit, Person
+         can :edit, Person, user_id: user.id
        else
+         can :create, Person
+         can :edit, Person, user_id: user.id
          can :create, SupportRequest
          can :read, :all
          can [:create, :member_fees], Payment

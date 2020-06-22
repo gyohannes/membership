@@ -30,7 +30,8 @@ class TraineesController < ApplicationController
     date_range = ((Date.today - 11.month)..Date.today).uniq{|d| [d.month, d.year]}.collect{|y| y}
     trainees = []
     ['Basic', 'Refreshment', 'TOT'].each do |t|
-      trainees << {name: t, data: date_range.map{|m| [m.strftime("%B"), Trainee.trainees_by_month_by_type(m, t)]} }
+      trainees << {name: t, data: date_range.map{|m| [m.strftime("%B"),
+                                                      Trainee.trainees_by_month_by_type(m, t, current_user.organization_unit)]} }
     end
     render json: trainees
   end
