@@ -22,7 +22,13 @@
         <td><%= payment.budget_year %></td>
         <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
         <td><%= payment.created_at %></td>
-        <td><%= link_to 'Download', payment.attachment.url %></td>
+        <td>
+          <% unless payment.attachment.blank? %>
+          <%= link_to payment.attachment.url do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-download"></i> Download</button>
+          <% end %>
+          <% end %>
+          </td>
         <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
         <td>
           <%= link_to edit_payment_path(payment) do %>

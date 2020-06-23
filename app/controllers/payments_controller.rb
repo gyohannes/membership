@@ -5,18 +5,18 @@ class PaymentsController < ApplicationController
   before_action :load, only: [:new, :create, :edit, :update]
 
   def load
-    if params[:person]
-      @people = [Person.find(params[:person])]
-    else
-      @people = current_user.organization_unit.sub_people
-    end
+      if params[:person]
+        @people = [Person.find(params[:person])]
+      else
+        @people = current_user.organization_unit.try(:sub_people)
+      end
   end
   # GET /payments
   # GET /payments.json
   def index
     if params['year']
       budget_year = BudgetYear.find(params['year'])
-      @payments = budget_year.budget_year_payments
+      @payments = budget_year.budget_year_payments(current_user)
     else
       @payments = Payment.all
     end

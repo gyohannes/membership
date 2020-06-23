@@ -11,17 +11,12 @@
     </li>
 
     <li>
-      <a href="javascript:void(0);" class="menu-toggle">
-        <i class="material-icons">person</i>
-        <span class="nav-label">My Membership</span>
-      </a>
-      <ul>
-        <li><%= link_to 'My Profile', current_user.person %></li>
-
-        <li><%= link_to 'Membership Fees', member_fees_payments_path(type: 'All') %></li>
-        <li><a href="http://localhost/cpd">My CPD</a></li>
-      </ul>
+      <%= link_to nil do %>
+          <i class="material-icons">school</i>
+          <span class="nav-label">My CPD</span>
+      <% end %>
     </li>
+
 
     <li>
       <a href="javascript:void(0);" class="menu-toggle">
@@ -34,17 +29,6 @@
         <li><%= link_to 'Payment Settings', mp_amount_settings_path %></li>
         <li><%= link_to 'Member Payments', payments_path %></li>
         <li><%= link_to 'ID Card Management', id_cards_people_path %></li>
-      </ul>
-    </li>
-
-    <li>
-      <a href="javascript:void(0);" class="menu-toggle">
-        <i class="material-icons">account_balance</i>
-        <span class="nav-label">Institutions</span>
-      </a>
-      <ul>
-        <li><%= link_to 'Institution Types', institution_types_path %></li>
-        <li><%= link_to 'Institutions', institutions_path %></li>
       </ul>
     </li>
 

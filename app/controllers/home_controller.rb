@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     @organization_unit = OrganizationUnit.all
     @upcoming_events = Event.where('start_date > ?', Date.today)
     @people = current_user.organization_unit.try(:sub_people) || []
-    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id)) rescue nil
+    @members_paid = current_user.organization_unit.paid_members rescue nil
     @members_not_paid = @people - @members_paid rescue nil
     #upcoming trainings
     type_upcoming = 'upcoming'
@@ -40,7 +40,7 @@ class HomeController < ApplicationController
 
   def payment_dashboard
     @people = current_user.organization_unit.try(:sub_people) || []
-    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_paid = current_user.organization_unit.paid_members
     @members_not_paid = current_user.organization_unit.try(:sub_people) - @members_paid
   end
 

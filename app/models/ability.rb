@@ -23,12 +23,13 @@ class Ability
          can :confirm, Person, status: nil
          cannot :edit, Person
          can :edit, Person, user_id: user.id
-       else
+       elsif user.has_role('Member')
          can :create, Person
          can :edit, Person, user_id: user.id
          can :create, SupportRequest
          can :read, :all
          can [:create, :member_fees], Payment
+         can [:destroy, :edit], Payment, person_id: user.person.id, status: nil
        end
     #
     # The first argument to `can` is the action you are giving the user

@@ -11,13 +11,13 @@
           <%=  f.input :organization_unit, as: :hidden, required: false %>
       </div>
       <div class="col-sm-4">
-        <%=  f.input :program_area, collection: ProgramArea.all, required: false %>
-        <%=  f.input :training_title, collection: TrainingTitle.all, required: false %>
-        <%=  f.input :category, collection: ['In-Service', 'Pre-Service'], required: false %>
+        <%=  f.input :program_area, collection: ProgramArea.all, required: false, prompt: true %>
+        <%=  f.input :training_title, collection: TrainingTitle.all, required: false, prompt: true %>
+        <%=  f.input :category, collection: ['In-Service', 'Pre-Service'], required: false, prompt: true %>
       </div>
       <div class="col-sm-4">
-        <%=  f.input :training_type, collection: ['Basic', 'Refreshment', 'TOT'], required: false %>
-        <%=  f.input :trainee_status, collection: Trainee::STATUSES, required: false %>
+        <%=  f.input :training_type, collection: ['Basic', 'Refreshment', 'TOT'], required: false, prompt: true %>
+        <%=  f.input :trainee_status, collection: Trainee::STATUSES, required: false, prompt: true %>
       </div>
       </div>
     </div>

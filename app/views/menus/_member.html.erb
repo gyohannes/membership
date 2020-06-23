@@ -1,5 +1,11 @@
 <% if current_user and current_user.has_role('Member') and current_user.person.try(:status)==true %>
-  <li>
+    <li>
+      <%= link_to root_path do %>
+          <i class="material-icons">dashboard</i>
+          <span class="nav-label">Dashboard</span>
+      <% end %>
+    </li>
+    <li>
     <%= link_to current_user.person do %>
         <i class="material-icons">person</i>
         <span class="nav-label">My Profile</span>

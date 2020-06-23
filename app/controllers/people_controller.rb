@@ -25,7 +25,6 @@ class PeopleController < ApplicationController
       format.pdf do
         render pdf: "id_cards",
                disable_smart_shrinking: false,
-               text_size_shrink:  0.5,
                disposition: 'attachment',
                encoding: 'utf8'
       end
@@ -35,7 +34,7 @@ class PeopleController < ApplicationController
   def load_paid_members
     budget_year = BudgetYear.active
     organization_unit  = OrganizationUnit.find(params[:node])
-    @members = budget_year.blank? ? [] : organization_unit.sub_people.joins(:payments).where('budget_year_id = ? and payments.status = ?', budget_year.id, true)
+    @members = budget_year.blank? ? [] : organization_unit.paid_members
     render partial: 'id_cards'
   end
 
@@ -57,27 +56,27 @@ class PeopleController < ApplicationController
   end
 
   def members_paid
-    @members_paid = current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_paid = current_user.organization_unit.paid_members
   end
 
   def load_members_paid
     @organization_unit  = OrganizationUnit.find(params[:node])
-    @members_paid = @organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_paid = @organization_unit.paid_members
     render partial: 'members_paid'
   end
 
   def members_not_paid
-    @members_not_paid = current_user.organization_unit.try(:sub_people) - current_user.organization_unit.try(:sub_people).joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = current_user.organization_unit.try(:sub_people) - current_user.organization_unit.paid_members
   end
 
   def load_members_not_paid
     @organization_unit  = OrganizationUnit.find(params[:node])
-    @members_not_paid = @organization_unit.sub_people - @organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', BudgetYear.active.try(:id))
+    @members_not_paid = @organization_unit.sub_people - @organization_unit.paid_members
     render partial: 'members_not_paid'
   end
 
   def members_by_type
-    members = current_user.organization_unit.sub_people.joins(:membership_type).group('membership_types.name').count
+    members = current_user.organization_unit.paid_members.count
     render json: members
   end
 

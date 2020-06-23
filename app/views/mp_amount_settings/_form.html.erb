@@ -3,8 +3,8 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.association :budget_year %>
-    <%= f.association :membership_type %>
+    <%= f.association :budget_year, prompt: true %>
+    <%= f.association :membership_type , prompt: true%>
     <%= f.input :amount %>
     <%= f.input :description %>
   </div>

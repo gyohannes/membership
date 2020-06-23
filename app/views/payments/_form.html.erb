@@ -5,8 +5,8 @@
     <% if current_user.has_role('Admin') %>
         <%= f.input :status, as: :hidden, input_html: {value: true} %>
     <% end %>
-    <%= f.input :person_id, label: 'Member', collection: @people.map{|p| [p.to_s, p.try(:id)]} %>
-    <%= f.association :budget_year %>
+    <%= f.input :person_id, label: 'Member', collection: @people.map{|p| [p.to_s, p.try(:id)]}, prompt: true %>
+    <%= f.association :budget_year, prompt: true %>
     <%= f.input :payment_method, collection: ['In Cash', 'Bank Deposit'], as: :radio_buttons %>
     <%= f.input :attachment, label: 'Attach Receipt', as: :file, class: "form-control show-tick" %>
     <%= f.input :remark %>

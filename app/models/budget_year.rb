@@ -19,11 +19,12 @@ def expected_payment_amount(user)
   end
 
   def paid_members
-    payments.joins(:person)
+    payments.joins(:person).where('payments.status = ?', true)
   end
 
   def budget_year_payments(user)
-    payments.joins(:budget_year).where('budget_years.id = ? and person_id in (?)', self.id, user.organization_unit.sub_people.pluck(:id))
+    payments.joins(:budget_year).where('budget_years.id = ? and person_id in (?) and payments.status = ?',
+                                       self.id, user.organization_unit.sub_people.pluck(:id), true)
   end
 
   def total_paid_amount(user)

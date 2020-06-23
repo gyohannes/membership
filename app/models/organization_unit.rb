@@ -76,6 +76,10 @@ class OrganizationUnit < ApplicationRecord
     Person.where(organization_unit_id: sub_units.pluck(:id) << self.id)
   end
 
+  def paid_members(budget_year = BudgetYear.active)
+    sub_people.joins(:payments).where('budget_year_id = ? and payments.status = ?', budget_year.try(:id), true)
+  end
+
   def to_s
     name
   end
