@@ -1,0 +1,185 @@
+<div class="panel-heading">
+  CPD Provider Details
+</div>
+<div class="panel-body">
+  <div class="alert alert-info">
+  <label class="col-sm-3">Application Status</label>
+    <span><%= @cpd_provider.app_status %></span>
+      <% if @cpd_provider.status.blank? %>
+          <%= link_to 'Accept', accept_or_reject_cpd_provider_path(@cpd_provider, status: Constants::ACCEPTED), class: 'btn btn-primary' %>
+          <%= link_to 'Reject', accept_or_reject_cpd_provider_path(@cpd_provider, status: Constants::REJECTED), class: 'btn btn-danger' %>
+      <% end %>
+  </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table">
+            <tr>
+              <th>Organization category</th>
+              <td><%= @cpd_provider.organization_category %></td>
+            </tr>
+            <tr>
+              <th>Name of organization</th>
+              <td><%= @cpd_provider.name_of_organization %></td>
+            </tr>
+            <tr>
+              <th>Availability of office</th>
+              <td><%= bool_to_str @cpd_provider.availability_of_office %></td>
+            </tr>
+            <tr>
+              <th>Does the office have telephone, fax, and e-mail address designated for provision of CPD?</th>
+              <td><%= @cpd_provider.telephone_fax_email.to_sentence %></td>
+            </tr>
+            <tr>
+              <th>Do you have designated training hall?</th>
+              <td><%= @cpd_provider.training_hall %></td>
+            </tr>
+            <tr>
+              <th>Do you have syndicate room?</th>
+              <td><%= @cpd_provider.syndicate_room %></td>
+            </tr>
+            <tr>
+              <th>Computer (Laptop/Desktop), printer, LCD and photo copy machine</th>
+              <td><%= @cpd_provider.computer_printer_lcd_photo_copy.to_sentence %></td>
+            </tr>
+            <tr>
+              <th>Availability of shelf for keeping records</th>
+              <td><%= @cpd_provider.availability_of_shelf %></td>
+            </tr>
+            <tr>
+              <th>Availability of an electronic database</th>
+              <td><%= bool_to_str @cpd_provider.availability_of_electronic_database %></td>
+            </tr>
+            <tr>
+              <th>Is there toilet service nearby the training hall?</th>
+              <td><%= bool_to_str @cpd_provider.toilet_service %></td>
+            </tr>
+            <tr>
+              <th>Running water available?</th>
+              <td><%= @cpd_provider.running_water_available %></td>
+            </tr>
+            <tr>
+              <th>Is there room/place for coffee break?</th>
+              <td><%= @cpd_provider.place_for_coffee_break %></td>
+            </tr>
+            <tr>
+              <th>Website Availability</th>
+              <td><%= bool_to_str @cpd_provider.website_availability %></td>
+            </tr>
+            <tr>
+              <th>Is there functional internet connection in the office?</th>
+              <td><%= bool_to_str @cpd_provider.internet_connection %></td>
+            </tr>
+            <tr>
+              <th>Will you be posting list of accredited activities on the website?</th>
+              <td><%= bool_to_str @cpd_provider.accredited_activities_on_website %></td>
+            </tr>
+            <tr>
+              <th>If so, how frequently will this be updated?</th>
+              <td><%= @cpd_provider.how_frequently_updated %></td>
+            </tr>
+            <tr>
+              <th>Do you have administration assistant/secretary?</th>
+              <td><%= bool_to_str @cpd_provider.administration_assistant %></td>
+            </tr>
+          </table>
+          <fieldset class="sub_form">
+            <legend>CPD Director</legend>
+            <table class="table">
+              <tr>
+                <th>Do you have designated CPD director or coordinator?</th>
+                <td><%= bool_to_str @cpd_provider.designated_cpd_director %></td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td><%= @cpd_provider.cpd_director_name %></td>
+              </tr>
+              <tr>
+                <th>Telephone Number</th>
+                <td><%= @cpd_provider.cpd_director_telephone_number %></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td><%= @cpd_provider.cpd_director_email %></td>
+              </tr>
+            </table>
+          </fieldset>
+        </div>
+        <div class="col-sm-6">
+          <table class="table">
+            <tr>
+              <th>Have you assigned a training officer?</th>
+              <td><%= bool_to_str @cpd_provider.training_officer %></td>
+            </tr>
+            <tr>
+              <th>Have you assigned an IT officer</th>
+              <td><%= bool_to_str @cpd_provider.it_officer %></td>
+            </tr>
+          </table>
+          <fieldset class="sub_form">
+            <legend>Address of the organization</legend>
+            <table class="table">
+            <tr>
+              <th>Region</th>
+              <td><%= @cpd_provider.organization_unit %></td>
+            </tr>
+            <tr>
+              <th>City</th>
+              <td><%= @cpd_provider.city %></td>
+            </tr>
+            <tr>
+              <th>Sub city/Zone</th>
+              <td><%= @cpd_provider.sub_city_or_zone %></td>
+            </tr>
+            <tr>
+              <th>Woreda</th>
+              <td><%= @cpd_provider.woreda %></td>
+            </tr>
+            <tr>
+              <th>Kebele</th>
+              <td><%= @cpd_provider.kebele %></td>
+            </tr>
+            <tr>
+              <th>House Number</th>
+              <td><%= @cpd_provider.house_number %></td>
+            </tr>
+            <tr>
+              <th>Telephone Number</th>
+              <td><%= @cpd_provider.telephone_number %></td>
+            </tr>
+            <tr>
+              <th>Street</th>
+              <td><%= @cpd_provider.street %></td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td><%= @cpd_provider.email %></td>
+            </tr>
+            <tr>
+              <th>P.O.Box</th>
+              <td><%= @cpd_provider.pobox %></td>
+            </tr>
+            </table>
+          </fieldset>
+            <fieldset class="sub_form">
+              <legend>Application to another accreditor</legend>
+              <table class="table">
+            <tr>
+              <th>Have you applied to another accreditor to have this activity approved? if yes what was the outcome? Reason if the application was not approved</th>
+              <td><%= bool_to_str @cpd_provider.applied_to_another_accreditor %></td>
+            </tr>
+            <tr>
+              <th>Name of accreditor</th>
+              <td><%= @cpd_provider.name_of_accreditor %></td>
+            </tr>
+            <tr>
+              <th>Outcome and reason</th>
+              <td><%= @cpd_provider.outcome_and_reason %></td>
+            </tr>
+          </table>
+            </fieldset>
+        </div>
+      </div>
+  <div class="form-actions">
+    <%= link_to 'Edit', edit_cpd_provider_path(@cpd_provider), class: 'btn btn-primary' %>
+  </div>
+</div>

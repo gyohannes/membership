@@ -1,0 +1,39 @@
+<div class="panel-heading">
+  Upcoming Retirements
+</div>
+
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Membership Type</th>
+      <th>Organization Unit/Facility</th>
+      <th>Mobile Phone</th>
+      <th>Email</th>
+      <th>Date of Birth</th>
+      <th>Age</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @people.each do |person| %>
+        <tr>
+          <td><%= person.full_name %></td>
+          <td><%= person.membership_type %></td>
+          <td><%= person.organization_unit %></td>
+          <td><%= person.mobile_phone %></td>
+          <td><%= person.email %></td>
+          <td><%= person.date_of_birth.strftime("%B %d, %Y") %></td>
+          <td><%= person.age %></td>
+          <td>
+            <%= link_to person.member do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

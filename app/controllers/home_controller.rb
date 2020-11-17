@@ -6,11 +6,12 @@ class HomeController < ApplicationController
   end
 
   def index
+    @regions = OrganizationUnit.regions
     @organization_unit = OrganizationUnit.all
     @upcoming_events = Event.where('start_date > ?', Date.today)
-    @people = current_user.organization_unit.try(:sub_people) || []
+    @members = current_user.organization_unit.try(:sub_members) || []
     @members_paid = current_user.organization_unit.paid_members rescue nil
-    @members_not_paid = @people - @members_paid rescue nil
+    @members_not_paid = @members - @members_paid rescue nil
     #upcoming trainings
     type_upcoming = 'upcoming'
     @upcoming_trainings = Training.load_trainings(current_user,type_upcoming)
@@ -39,9 +40,9 @@ class HomeController < ApplicationController
   end
 
   def payment_dashboard
-    @people = current_user.organization_unit.try(:sub_people) || []
-    @members_paid = current_user.organization_unit.paid_members
-    @members_not_paid = current_user.organization_unit.try(:sub_people) - @members_paid
+    @members = current_user.organization_unit.try(:sub_members) || []
+    @members_paid = current_user.organization_unit.paid_members rescue nil
+    @members_not_paid = @members - @members_paid rescue nil
   end
 
   def training_dashboard

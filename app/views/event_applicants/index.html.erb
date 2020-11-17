@@ -6,8 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Organization Unit</th>
-      <th>Institution</th>
+      <th>Membership Type</th>
       <th>Applied Date</th>
       <th>Status</th>
     </tr>
@@ -16,9 +15,8 @@
   <tbody>
     <% @event_applicants.each do |event_applicant| %>
       <tr>
-        <td><%= event_applicant.person %></td>
-        <td><%= event_applicant.person.organization_unit %></td>
-        <td><%= event_applicant.person.institution %></td>
+        <td><%= event_applicant %></td>
+        <td><%= event_applicant.membership_type %></td>
         <td><%= event_applicant.created_at.strftime("%B %d, %Y") %></td>
         <td><a><%= best_in_place event_applicant, :status, as: :checkbox, collection: {false: "Pending", true: "Accepted"} %></a></td>
       </tr>

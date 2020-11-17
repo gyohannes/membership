@@ -19,7 +19,7 @@
         //Advanced form with validation
         var form = $('#wizard_with_validation').show();
         form.steps({
-            headerTag: 'h4',
+            headerTag: 'h3',
             bodyTag: 'fieldset',
             transitionEffect: 'fade',
             onInit: function (event, currentIndex) {
@@ -45,7 +45,6 @@
             },
             onFinished: function (event, currentIndex) {
                 $(this).closest('form').submit()
-                alert('Form Submitted Successfully!');
             }
         });
 

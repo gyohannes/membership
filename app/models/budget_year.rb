@@ -11,7 +11,7 @@ class BudgetYear < ApplicationRecord
     status == true ? 'Active' : ''
   end
 def expected_payment_amount(user)
-    user.organization_unit.sub_people.collect{|x| x.payment_amount(self.id) || 0}.sum
+    user.organization_unit.sub_members.collect{|x| x.payment_amount(self.id) || 0}.sum
   end
 
   def payment_amount(member_type)
@@ -23,12 +23,12 @@ def expected_payment_amount(user)
   end
 
   def budget_year_payments(user)
-    payments.joins(:budget_year).where('budget_years.id = ? and person_id in (?) and payments.status = ?',
-                                       self.id, user.organization_unit.sub_people.pluck(:id), true)
+    payments.joins(:budget_year).where('budget_years.id = ? and member_id in (?) and payments.status = ?',
+                                       self.id, user.organization_unit.sub_members.pluck(:id), true)
   end
 
   def total_paid_amount(user)
-    budget_year_payments(user).joins(:budget_year=>:mp_amount_settings).uniq.collect{|x| x.payment_amount}.sum
+    budget_year_payments(user).pluck(:amount).sum
   end
 
   def trainees_by_year(orga_unit, type)

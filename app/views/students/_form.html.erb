@@ -1,0 +1,37 @@
+<%= simple_nested_form_for(@student) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.association :member, as: :hidden %>
+      <%= f.association :person, as: :hidden unless @student.person.blank? %>
+      <%= f.simple_fields_for :person do |pf| %>
+          <div class="row">
+            <div class="col-sm-4">
+              <legend>Select Your Organization Unit/Facility</legend>
+              <br/>
+              <div id="member_organization_tree"></div>
+              <%= pf.input :organization_unit_id, as: :hidden %>
+            </div>
+            <div class="col-sm-8">
+              <%= pf.input :first_name %>
+              <%= pf.input :father_name %>
+              <%= pf.input :grand_father_name %>
+              <%= pf.input :sex, as: :radio_buttons, wrapper: :horizontal_collection, item_wrapper_tag: 'span', collection: ['Male', 'Female'] %>
+              <%= pf.input :date_of_birth, as: :string %>
+              <%= pf.input :mobile_phone %>
+              <%= pf.input :email if f.object.member.user_id.blank? %>
+              <%= pf.input :nationality, as: :country, priority: ['Ethiopia'], prompt: true %>
+              <%= pf.input :country, priority: ['Ethiopia'], prompt: true %>
+              <%= pf.input :pobox %>
+              <%= pf.input :photo, as: :file %>
+              <%= f.input :student_id_card, label: 'Attach Student ID', as: :file %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+    </div>
+<% end %>
+

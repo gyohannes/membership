@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <% current_user.person.payments.each do |payment| %>
+            <% current_user.member.payments.each do |payment| %>
                 <tr>
                   <td><%= payment.budget_year %></td>
                   <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
@@ -52,12 +52,12 @@
         </tr>
         </thead>
         <tbody>
-        <% current_user.person.unpaid_fees.each do |year| %>
+        <% current_user.member.unpaid_fees.each do |year| %>
           <tr>
             <td><%= year %></td>
             <td><%= current_user.person.payment_amount(year.id) rescue nil %></td>
             <td>
-              <%= link_to new_payment_path(person: current_user.person.try(:id), year: year.id) do %>
+              <%= link_to new_payment_path(member: current_user.member.try(:id), year: year.id) do %>
                   <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Pay Now </button>
               <% end %>
             </td>

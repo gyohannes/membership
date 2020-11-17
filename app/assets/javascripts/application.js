@@ -1,6 +1,7 @@
 //= require AdminBSBSenstive/plugins/jquery/dist/jquery.min
 //= require AdminBSBSenstive/plugins/jquery-ui/jquery-ui
 //= require jquery_ujs
+//= require calendar/index
 //= require AdminBSBSenstive/plugins/editable-table/mindmup-editabletable
 //= require best_in_place
 //= require best_in_place.jquery-ui
@@ -13,6 +14,9 @@
 //= require facilities
 //= require users
 //= require people
+//= require members
+//= require payments
+//= require institutions
 //= require reports
 //= require trainees
 //= require trainee_distributions

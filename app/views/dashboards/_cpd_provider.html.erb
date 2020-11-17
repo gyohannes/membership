@@ -1,0 +1,12 @@
+<% if current_user.has_role(User::CPDPROVIDER) and current_user.cpd_provider.blank? or current_user.cpd_provider.try(:status) != Constants::ACCEPTED %>
+    <% unless current_user.cpd_provider.blank? %>
+        <%= render template: '/cpd_providers/show', locals: {:@cpd_provider => current_user.cpd_provider}  %>
+    <% else %>
+        <div class="panel-heading">
+          Application for Accreditation of CPD Providers
+        </div>
+        <div class="panel-body">
+          <%= render partial: '/cpd_providers/form', locals: {:@cpd_provider => CpdProvider.new(user_id: current_user.id)} %>
+        </div>
+    <% end %>
+<% end %>

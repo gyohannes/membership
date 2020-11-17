@@ -6,8 +6,8 @@
     <legend>Event Details </legend>
     <%= f.association :user, as: :hidden, input_html: {value: current_user.id} %>
     <%= f.input :title %>
-    <%= f.input :start_date, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-    <%= f.input :end_date, as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :start_date, as: :string,  input_html: {class: "date_picker"} %>
+    <%= f.input :end_date, as: :string,  input_html: {class: "date_picker"} %>
     <%= f.input :maximum_participants %>
     <%= f.input :event_details, label: false, placeholder: 'Event detail', wrapper: 'vertical_form', input_html: {class: 'wysihtml5'} %>
   </fieldset>

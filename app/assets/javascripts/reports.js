@@ -17,7 +17,7 @@ $(function () {
         success: function(response){
             $('#report_members_organization_unit_tree').treeview({
                 data: response,
-                levels: 0,
+                levels: 2,
                 onNodeSelected: function (event, data) {
                     $('#search_organization_unit').val(data.id)
                 }

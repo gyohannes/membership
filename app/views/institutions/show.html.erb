@@ -1,54 +1,100 @@
-<div class="panel-heading">
-    Institution Details
-</div>
-<div class='panel-body'>
-  <div class='row'>
-    <div class="col-sm-4">
-      <%= image_tag @institution.logo.url(:medium), height: '200' %>
-      <h5><%= @institution.description %></h5>
-    </div>
-    <div class='col-sm-8' style='border-left: 1px solid silver;'>
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Name</div>
-        <div class='col-sm-6'><%= @institution.name %></div>
-      </div>
+<div class='row'>
+  <div class='col-sm-4'>
+    <%= image_tag @institution.logo rescue nil %>
+  </div>
+  <div class='col-sm-8'>
+    <table class="table table-condensed">
+      <tr>
+        <th>Confirmation Status</th>
+        <td><span class='<%= @member.status.blank? ? "btn btn-danger" : 'btn btn-primary' %>'><%= @member.membership_status %></span>
+          <%= link_to 'Confirm Member', confirm_member_path(@member), class: 'btn btn-primary' if can? :confirm, @member %>
+        </td>
+      </tr>
+      <tr>
+        <th>Membership type</th>
+        <td><%= @member.membership_type %>
+        </td>
+      </tr>
+      <tr>
+        <th>Name of organization:</th>
+        <td><%= @institution.name_of_organization %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Type</div>
-        <div class='col-sm-6'><%= @institution.institution_type %></div>
-      </div>
+      <tr>
+        <th>Establishment year:</th>
+        <td><%= @institution.establishment_year %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Address</div>
-        <div class='col-sm-6'><%= @institution.address %></div>
-      </div>
+      <tr>
+        <th>Organization unit:</th>
+        <td><%= @institution.organization_unit %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>URL</div>
-        <div class='col-sm-6'><%= @institution.url %></div>
-      </div>
+      <tr>
+        <th>Kebele:</th>
+        <td><%= @institution.kebele %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Contact Person</div>
-        <div class='col-sm-6'><%= @institution.contact_person %></div>
-      </div>
+      <tr>
+        <th>City:</th>
+        <td><%= @institution.city %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Contact Email</div>
-        <div class='col-sm-6'><%= @institution.email %></div>
-      </div>
+      <tr>
+        <th>Telephone number:</th>
+        <td><%= @institution.telephone_number %></td>
+      </tr>
 
-      <div class='row'>
-        <div class='col-sm-6 details-label'>Contact Phone</div>
-        <div class='col-sm-6'><%= @institution.phone %></div>
-      </div>
+      <tr>
+        <th>Email:</th>
+        <td><%= @institution.email %></td>
+      </tr>
 
-    </div>
+      <tr>
+        <th>Website:</th>
+        <td><%= @institution.website %></td>
+      </tr>
 
-</div>
-  <hr/>
-<%= link_to edit_institution_path(@institution) do %>
-    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+      <tr>
+        <th>Pobox:</th>
+      <td><%= @institution.pobox %></td>
+      </tr>
+
+      <tr>
+        <th>Fax:</th>
+        <td><%= @institution.fax %></td>
+      </tr>
+
+      <tr>
+        <th>Contact name:</th>
+        <td><%= @institution.contact_name %></td>
+      </tr>
+
+      <tr>
+        <th>Contact title:</th>
+        <td><%= @institution.contact_title %></td>
+      </tr>
+
+      <tr>
+        <th>Contact telephone number:</th>
+        <td><%= @institution.contact_telephone_number %></td>
+      </tr>
+
+      <tr>
+        <th>Type of organization:</th>
+        <td><%= @institution.type_of_organization %></td>
+      </tr>
+
+      <tr>
+        <th>Major objectives:</th>
+        <td><%= @institution.major_objectives %></td>
+      </tr>
+    </table>
+    <hr/>
+    <% if can? :edit, @institution %>
+        <%= link_to edit_institution_path(@member) do %>
+            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+        <% end %>
     <% end %>
-
+  </div>
 </div>

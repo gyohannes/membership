@@ -1,0 +1,16 @@
+<%= simple_form_for(@member) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <br/>
+    <%= f.input :id_number, label: 'Membership ID', readonly: !current_user.has_role('Admin'), input_html: {value: f.object.id_number || Member.set_id_number} %>
+    <br/>
+    <%= f.association :user, as: :hidden %>
+    <%= f.input :category, label: 'Membership Category', as: :radio_buttons,
+                collection: Constants::MEMBERSHIP_CATEGORIES, prompt: true, wrapper_html:{class: "vertical_list"} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Continue', class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<% unless @zones.blank? %>
+<div class="row form-group">
+  <label class="col-sm-3 col-form-label">Zone</label>
+  <div class="col-sm-9"><%= select nil, :zone, @zones.map{|x| [x.name, x.id]}, {selected: @institution.try(:zone), prompt: true},
+                                   {id: 'institution_zone', class: 'form-control'} %>
+  </div>
+</div>
+<% end %>
+<%= javascript_include_tag 'institutions', 'global' %>

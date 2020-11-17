@@ -1,5 +1,4 @@
 class Person < ApplicationRecord
-  belongs_to :user, optional: true
   belongs_to :institution, optional: true
   belongs_to :organization_unit
   belongs_to :profession, optional: true
@@ -9,23 +8,18 @@ class Person < ApplicationRecord
   has_one :trainer_profile
   has_many :trainees
   has_many :trainers
-  has_many :payments
-  belongs_to :membership_type, optional: true
+  has_one :individual
+  has_one :student
 
-  validates :first_name, :middle_name, :last_name, presence: true
+  validates :first_name, :father_name, :grand_father_name, :date_of_birth, :sex, presence: true
+  scope :upcoming_birthdays, -> {where('EXTRACT(DAY from date_of_birth) >= ? and EXTRACT(MONTH from date_of_birth) = ? or EXTRACT(MONTH from date_of_birth) = ?',
+                                       Date.today.day, Date.today.month, (Date.today + 1.month).month )
+                                     .order('EXTRACT(MONTH from date_of_birth), EXTRACT(DAY from date_of_birth)')}
+  scope :upcoming_retirements, -> {where('age >= ?', 59.6)}
 
-  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "missing/:style/missing.png"
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
+  has_one_attached :photo
 
-  scope :list_by_org_unit, -> (org_unit) { org_unit.blank? ? [] : where('people.id in (?)', OrganizationUnit.find(org_unit).sub_people.pluck(:id)) }
-  scope :list_by_membership_type, -> (user,member_type) { user.organization_unit.sub_people.where('membership_type_id = ?', member_type)}
-  scope :list_by_year, -> (user,year,status) { status == true ? user.organization_unit.sub_people.joins(:payments).where('budget_year_id = ?', year) : user.organization_unit.sub_people - joins(:payments).where('budget_year_id = ?', year) }
-
-  after_create :set_user
-
-  def membership_status
-    status.blank? ? 'Pending' :(status==true ? 'Confirmed' : 'Not Accepted')
-  end
+  after_find :set_age
 
   def self.set_id_number
     association_code = AssociationDetail.first.try(:short_name) || ''
@@ -63,25 +57,34 @@ class Person < ApplicationRecord
     by.mp_amount_settings.where('membership_type_id = ?', self.membership_type_id).first.try(:amount)
   end
 
-  def self.search(user,org_unit, membership_type, year, status=nil)
-    people = []
-    available_filters = {org_unit => list_by_org_unit(org_unit), membership_type => list_by_membership_type(user,membership_type),
-                         year => list_by_year(user,year,status)}.select{|k,v| !k.blank?}
-    counter = 0
-    available_filters.each do |k,v|
-      people = counter == 0 ? v : people.merge(v)
-      counter += 1
-    end
-    return people.uniq
-  end
-
   def trained(training)
     !trainees.joins(:training).where('training_title_id = ? and trainings.category = ? and trainees.status in (?) ',
                                      training.training_title_id, training.category, [Trainee::COMPLETED, Trainee::PENDING]).blank?
   end
 
   def full_name
-    [first_name, middle_name, last_name].join(' ')
+    [first_name, father_name, grand_father_name].join(' ')
+  end
+
+  def set_age
+    self[:age] = ((Date.today - date_of_birth).to_f/365).round(1)
+  end
+
+  def total_experience
+    total = work_experiences.map{|x| x.total_days}.sum
+    years = total/365
+    total = total%365
+    months = total/30
+    days = total%30
+    return "#{years} Years, #{months} Months and #{days} days"
+  end
+
+  def member
+    !individual.blank? ? individual.member : student.member
+  end
+
+  def membership_type
+    !individual.blank? ? individual.member.membership_type : student.member.membership_type rescue nil
   end
 
   def to_s

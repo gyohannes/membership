@@ -20,7 +20,6 @@ gem 'cancancan', '~> 2.0'
 gem 'bootstrap-wysihtml5-rails'
 gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf_binary', '~> 0.12.3.1'
-gem 'thredded', '~> 0.16.11'
 gem "select2-rails"
 gem 'pg'
 gem 'barby', '~> 0.6.2'

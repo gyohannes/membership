@@ -11,6 +11,18 @@ class OrganizationUnit < ApplicationRecord
   validates :name, :short_name, :organization_type_id, presence: true
   validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?
 
+  def self.regions
+    joins(:organization_type).where(organization_types: {name: 'Region'})
+  end
+
+  def self.zones
+    joins(:organization_type).where(organization_types: {name: 'Zone'})
+  end
+
+  def self.woredas
+    joins(:organization_type).where(organization_types: {name: 'Woreda'})
+  end
+
   def trainee_distribution(training)
     trainee_distributions.where('training_id = ?', training).first
   end
@@ -72,12 +84,28 @@ class OrganizationUnit < ApplicationRecord
     users + sub_organization_units.collect{|x| x.sub_users}.flatten
   end
 
-  def sub_people
-    Person.where(organization_unit_id: sub_units.pluck(:id) << self.id)
+  def sub_individuals
+    Member.joins(:individual=>:person).where('people.organization_unit_id in (?)', sub_units.pluck(:id) << self.id).pluck('members.id')
+  end
+
+  def sub_students
+    Member.joins(:student=>:person).where('people.organization_unit_id in (?)', sub_units.pluck(:id) << self.id).pluck('members.id')
+  end
+
+  def sub_institution_members
+    Member.joins(:institution).where('institutions.organization_unit_id in (?)', sub_units.pluck(:id) << self.id).pluck('members.id')
+  end
+
+  def sub_members
+    Member.where(id: sub_individuals + sub_students + sub_institution_members)
   end
 
   def paid_members(budget_year = BudgetYear.active)
-    sub_people.joins(:payments).where('budget_year_id = ? and payments.status = ?', budget_year.try(:id), true)
+    Member.where(id: sub_individuals + sub_students).joins(:payments).where('budget_year_id = ? and payments.status = ?', budget_year.try(:id), true)
+  end
+
+  def sub_payments(budget_year = BudgetYear.active)
+    Payment.where('budget_year_id = ? and member_id in (?)', budget_year.try(:id), sub_members.pluck(:id))
   end
 
   def to_s

@@ -43,10 +43,10 @@
 
       <hr/>
       <%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-lg btn-primary' if can? :edit, @event %>
-      <% unless @event.applied(current_user.person.try(:id)) %>
-      <%= link_to 'Apply', apply_event_path(@event, applicant: current_user.person.try(:id)), class: 'btn btn-lg btn-primary' %>
+      <% unless @event.applied(current_user.member.try(:id)) %>
+      <%= link_to 'Apply', apply_events_path(event: @event.id, member: current_user.member.try(:id)), class: 'btn btn-lg btn-primary' %>
           <% else %>
-      <h2>Your Application is <%= @event.application_status(current_user.person.try(:id)) %></h2>
+      <h2>Your Application is <%= @event.application_status(current_user.member.try(:id)) %></h2>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade in" id="applicants">

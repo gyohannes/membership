@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cpd course:</strong>
+  <%= @cpd_course_enrollment.cpd_course %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @cpd_course_enrollment.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @cpd_course_enrollment.to %>
+</p>
+
+<%= link_to 'Edit', edit_cpd_course_enrollment_path(@cpd_course_enrollment) %> |
+<%= link_to 'Back', cpd_course_enrollments_path %>

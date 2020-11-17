@@ -1,50 +1,15 @@
 <div class="panel-heading">
-    Membership Payments
+  Membership Payments
 </div>
+
 <div class="panel-body">
-  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-  <thead>
-    <tr>
-      <th>Member</th>
-      <th>Budget Year</th>
-      <th>Amount</th>
-      <th>Paid Date</th>
-      <th>Attachment</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
+  <div class="col-sm-4">
+    <div id="payments_tree"></div>
+  </div>
 
-  <tbody>
-    <% @payments.each do |payment| %>
-      <tr>
-        <td><%= payment.person %></td>
-        <td><%= payment.budget_year %></td>
-        <td><%= payment.budget_year.payment_amount(payment.person.membership_type_id) rescue nil %></td>
-        <td><%= payment.created_at %></td>
-        <td>
-          <% unless payment.attachment.blank? %>
-          <%= link_to payment.attachment.url do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-download"></i> Download</button>
-          <% end %>
-          <% end %>
-          </td>
-        <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
-        <td>
-          <%= link_to edit_payment_path(payment) do %>
-              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
-          <% end %>
-          <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-      <%= link_to new_payment_path do %>
-        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> New Payment</button>
-      <% end %>
+  <div class="col-sm-8">
+    <div id="payments">
+      <%= render partial: 'payments/payments' %>
+    </div>
+  </div>
 </div>

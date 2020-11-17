@@ -1,0 +1,12 @@
+<div class="panel-heading">
+  Member Details
+</div>
+<div class="panel-body">
+  <% if @member.category == Constants::INDIVIDUAL %>
+    <%= render partial: 'members/individual_member' %>
+  <% elsif @member.category == Constants::STUDENT %>
+      <%= render partial: 'members/student_member' %>
+  <% elsif @member.category == Constants::INSTITUTION %>
+      <%= render partial: 'members/institution_member', locals: {:@institution => @member.institution } %>
+  <% end %>
+</div>

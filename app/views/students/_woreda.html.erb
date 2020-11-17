@@ -1,0 +1,9 @@
+<% unless @woredas.blank? %>
+    <%= simple_fields_for :student, @student do |f|  %>
+        <%= f.simple_fields_for @student.blank? ? :person_attributes : :person, @student.try(:person) do |pf|  %>
+            <%= pf.input :organization_unit_id, label: 'Woreda', collection: @woredas, prompt: true %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= javascript_include_tag 'global' %>

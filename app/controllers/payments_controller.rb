@@ -5,10 +5,10 @@ class PaymentsController < ApplicationController
   before_action :load, only: [:new, :create, :edit, :update]
 
   def load
-      if params[:person]
-        @people = [Person.find(params[:person])]
+      if params[:member]
+        @members = [Member.find(params[:member])]
       else
-        @people = current_user.organization_unit.try(:sub_people)
+        @members = current_user.organization_unit.try(:sub_members)
       end
   end
   # GET /payments
@@ -16,20 +16,27 @@ class PaymentsController < ApplicationController
   def index
     if params['year']
       budget_year = BudgetYear.find(params['year'])
-      @payments = budget_year.budget_year_payments(current_user)
+      @payments = current_user.organization_unit.sub_payments
     else
       @payments = Payment.all
     end
   end
+
+  def load_payments
+    @organization_unit  = OrganizationUnit.find(params[:node])
+    @payments = @organization_unit.sub_payments
+    render partial: 'payments'
+  end
+
 
   def member_fees
     @unpaid_fees = []
     @type = params[:type]
 
     if @type == 'Unpaid' || @type == 'All'
-      @unpaid_fees = current_user.person.unpaid_fees
+      @unpaid_fees = current_user.member.unpaid_fees
     end
-    @payments = current_user.person.payments
+    @payments = current_user.member.payments
   end
 
   def confirm
@@ -46,9 +53,16 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
-    @payment.person_id = params[:person]
+    @payment.member_id = params[:member]
     @payment.budget_year_id = params[:year]
     session[:return_to] = request.referer
+  end
+
+  def load_amount
+    member = Member.find_by(id: params[:member])
+    budget_year = BudgetYear.find_by(id: params[:budget_year])
+    @amount = budget_year.payment_amount(member.membership_type_id)
+    render partial: 'amount'
   end
 
   # GET /payments/1/edit
@@ -104,6 +118,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:person_id, :attachment, :payment_method, :budget_year_id, :remark, :status)
+      params.require(:payment).permit(:member_id, :attachment, :payment_method, :amount, :budget_year_id, :remark, :status)
     end
 end

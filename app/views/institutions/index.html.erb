@@ -1,47 +1,57 @@
-    <div class="panel-heading">
-            Institutions
-    </div>
-    <div class="panel-body">
-    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+<p id="notice"><%= notice %></p>
+
+<h1>Institutions</h1>
+
+<table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Institution type</th>
-      <th>Address</th>
-      <th>Url</th>
-      <th>Contact person</th>
+      <th>Member</th>
+      <th>Name of organization</th>
+      <th>Establishment year</th>
+      <th>Organization unit</th>
+      <th>Kebele</th>
+      <th>City</th>
+      <th>Telephone number</th>
       <th>Email</th>
-      <th>Phone</th>
-      <th></th>
+      <th>Website</th>
+      <th>Pobox</th>
+      <th>Fax</th>
+      <th>Contact name</th>
+      <th>Contact title</th>
+      <th>Contact telephone number</th>
+      <th>Type of organization</th>
+      <th>Major objectives</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @institutions.each do |institution| %>
       <tr>
-        <td><%= institution.name %></td>
-        <td><%= institution.institution_type %></td>
-        <td><%= institution.address %></td>
-        <td><%= institution.url %></td>
-        <td><%= institution.contact_person %></td>
+        <td><%= institution.member %></td>
+        <td><%= institution.name_of_organization %></td>
+        <td><%= institution.establishment_year %></td>
+        <td><%= institution.organization_unit %></td>
+        <td><%= institution.kebele %></td>
+        <td><%= institution.city %></td>
+        <td><%= institution.telephone_number %></td>
         <td><%= institution.email %></td>
-        <td><%= institution.phone %></td>
-        <td>
-          <%= link_to edit_institution_path(institution) do %>
-            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
-          <% end %>
-
-          <%= link_to institution do %>
-            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
-          <% end %>
-        </td>
+        <td><%= institution.website %></td>
+        <td><%= institution.pobox %></td>
+        <td><%= institution.fax %></td>
+        <td><%= institution.contact_name %></td>
+        <td><%= institution.contact_title %></td>
+        <td><%= institution.contact_telephone_number %></td>
+        <td><%= institution.type_of_organization %></td>
+        <td><%= institution.major_objectives %></td>
+        <td><%= link_to 'Show', institution %></td>
+        <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
+        <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
 <br>
 
-      <%= link_to new_institution_path do %>
-        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Institution</button>
-      <% end %>
-</div>
+<%= link_to 'New Institution', new_institution_path %>

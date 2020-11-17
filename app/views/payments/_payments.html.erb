@@ -1,0 +1,44 @@
+<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+  <tr>
+    <th>Member</th>
+    <th>Budget Year</th>
+    <th>Amount</th>
+    <th>Paid Date</th>
+    <th>Attachment</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.member %></td>
+        <td><%= payment.budget_year %></td>
+        <td><%= payment.amount %></td>
+        <td><%= payment.created_at %></td>
+        <td>
+          <% if payment.attachment.attached? %>
+              <%= link_to payment.attachment do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-download"></i> Download</button>
+              <% end %>
+          <% end %>
+        </td>
+        <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+        <td>
+          <%= link_to edit_payment_path(payment) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+          <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to new_payment_path do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Payment</button>
+<% end %>

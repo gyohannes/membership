@@ -8,7 +8,6 @@ class CreateTrainings < ActiveRecord::Migration[5.1]
       t.string :category
       t.date :start_time
       t.date :end_time
-      t.references :institution, type: :uuid, foreign_key: true
       t.string :location
       t.text :description
       t.string :status

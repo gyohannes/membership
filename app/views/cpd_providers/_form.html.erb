@@ -1,0 +1,56 @@
+<%= simple_form_for(@cpd_provider, html: {id: "wizard_with_validation", class: 'fields_with_dashed_line'}) do |f| %>
+    <%= f.error_notification %>
+    <h3>Basic Details</h3>
+    <fieldset>
+      <%= f.association :user, as: :hidden %>
+      <%= f.input :organization_category, collection: Constants::ORGANIZATION_CATEGORIES, prompt: true %>
+      <%= f.input :type_of_organization, collection: Constants::ORGANIZATION_TYPES, prompt: true %>
+      <%= f.input :name_of_organization %>
+      <%= f.input :availability_of_office, as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :telephone_fax_email, as: :check_boxes, collection: ['Telephone', 'Fax', 'E-mail'],
+                  wrapper_html: {class: 'single_columned_list'}, label: 'Does the office have telephone, fax, and e-mail address designated for provision of CPD?' %>
+      <%= f.input :training_hall, label: 'Do you have designated training hall?', as: :radio_buttons, collection: ['Available', 'Not Available'] %>
+      <%= f.input :syndicate_room, label: 'Do you have syndicate room?', as: :radio_buttons, collection: ['Available', 'Not Available'] %>
+      <%= f.input :computer_printer_lcd_photo_copy, label: 'Computer (Laptop/Desktop), printer, LCD and photo copy machine',
+                  as: :check_boxes, collection: ['Computer', 'Printer', 'LCD', 'Photocopy Machine'], wrapper_html: {class: 'single_columned_list'} %>
+      <%= f.input :availability_of_shelf, label: 'Availability of shelf for keeping records', as: :radio_buttons, collection: ['Available', 'Not Available'] %>
+      <%= f.input :availability_of_electronic_database, label: 'Availability of an electronic database', as: :radio_buttons, collection: [['Yes', true], ['No', false]]  %>
+      <%= f.input :toilet_service, label: 'Is there toilet service nearby the training hall?', as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :running_water_available, label: 'Running water available?', as: :radio_buttons, collection: ['Available', 'Not Available'] %>
+      <%= f.input :place_for_coffee_break, label: 'Is there room/place for coffee break', as: :radio_buttons, collection: ['Available', 'Not Available'] %>
+      <%= f.input :website_availability,as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :internet_connection, label: 'Is there functional internet connection in the office?',as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :accredited_activities_on_website, label: 'Will you be posting list of accredited activities on the website?', as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :how_frequently_updated, label: 'If so, how frequently will this be updated?' %>
+      <%= f.input :administration_assistant, label: 'Do you have administration assistant/secretary?', as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+    </fieldset>
+    <h3>CPD Director Details</h3>
+    <fieldset>
+      <%= f.input :designated_cpd_director, label: 'Do you have designated CPD director or coordinator?',  as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :cpd_director_name, label: 'Name' %>
+      <%= f.input :cpd_director_telephone_number, label: 'Telephone Number' %>
+      <%= f.input :cpd_director_email, label: 'Email' %>
+      <%= f.input :training_officer, label: 'Have you assigned a training officer?',  as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :it_officer, label: 'Have you assigned an IT officer', as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+    </fieldset>
+    <h3>Address of The Organization</h3>
+    <fieldset>
+      <%= f.association :organization_unit, label: 'Region', collection: OrganizationUnit.regions, prompt: true %>
+      <%= f.input :city %>
+      <%= f.input :sub_city_or_zone %>
+      <%= f.input :woreda %>
+      <%= f.input :kebele %>
+      <%= f.input :house_number %>
+      <%= f.input :telephone_number %>
+      <%= f.input :street %>
+      <%= f.input :email %>
+      <%= f.input :pobox %>
+    </fieldset>
+    <h3>Application to Another Accreditor</h3>
+    <fieldset>
+      <%= f.input :applied_to_another_accreditor, label: 'Have you applied to another accreditor to have this activity approved? if yes what was the outcome? provide a reason if the application was not approved',
+                  wrapper: 'vertical_collection', as: :radio_buttons, collection: [['Yes', true], ['No', false]] %>
+      <%= f.input :name_of_accreditor %>
+      <%= f.input :outcome_and_reason %>
+    </fieldset>
+<% end %>

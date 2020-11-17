@@ -1,0 +1,7 @@
+<% unless @woredas.blank? %>
+    <%= simple_fields_for :institution, @institution do |pf|  %>
+        <%= pf.input :organization_unit_id, label: 'Woreda', collection: @woredas, prompt: true %>
+    <% end %>
+<% end %>
+
+<%= javascript_include_tag 'global' %>

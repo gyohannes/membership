@@ -414,16 +414,6 @@ SimpleForm.setup do |config|
 
   # Custom wrappers for input types. This should be a hash containing an input
   # type as key and the wrapper that will be used for all inputs with specified type.
-  config.wrapper_mappings = {
-      boolean:       :horizontal_boolean,
-      check_boxes:   :horizontal_collection,
-      date:          :vertical_multi_select,
-      datetime:      :vertical_multi_select,
-      file:          :horizontal_file,
-      radio_buttons: :horizontal_collection,
-      range:         :vertical_range,
-      time:          :vertical_multi_select
-  }
 
   # enable custom form wrappers
   # config.wrapper_mappings = {

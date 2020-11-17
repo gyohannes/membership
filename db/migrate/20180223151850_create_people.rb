@@ -1,23 +1,18 @@
 class CreatePeople < ActiveRecord::Migration[5.1]
   def change
     create_table :people,id: :uuid do |t|
-      t.references :user, type: :uuid, foreign_key: true
-      t.string :title
       t.string :first_name
-      t.string :middle_name
-      t.string :last_name
-      t.string :id_number
+      t.string :father_name
+      t.string :grand_father_name
+      t.string :sex
+      t.string :mobile_phone
       t.date :date_of_birth
-      t.string :gender
+      t.float :age
       t.string :email
-      t.string :phone_number
-      t.references :membership_type, type: :uuid, foreign_key: true
+      t.string :nationality
+      t.string :country
       t.references :organization_unit, type: :uuid, foreign_key: true
-      t.string :kebelle
-      t.string :house_number
-      t.string :job_title
-      t.references :profession_category, type: :uuid,  foreign_key: true
-      t.references :profession, type: :uuid,  foreign_key: true
+      t.string :pobox
 
       t.timestamps
     end

@@ -3,11 +3,36 @@ require 'barby/barcode/code_128'
 require 'barby/outputter/png_outputter'
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy, :membership_idcard, :confirm]
+  before_action :load, only: [:new, :create, :edit, :update]
+
+  def load
+    @regions = OrganizationUnit.regions
+    @zones = OrganizationUnit.zones
+    @woredas = OrganizationUnit.woredas
+  end
+
+  def load_zones
+    @zones = OrganizationUnit.zones.where(parent_organization_unit_id: params[:region])
+    render partial: 'zone'
+  end
+
+  def load_woredas
+    @woredas = OrganizationUnit.woredas.where(parent_organization_unit_id: params[:zone])
+    render partial: 'woreda'
+  end
 
   # GET /people
   # GET /people.json
   def index
     @people = current_user.organization_unit.try(:sub_people) || []
+  end
+
+  def upcoming_birthdays
+    @people = Person.upcoming_birthdays
+  end
+
+  def upcoming_retirements
+    @people = Person.upcoming_retirements
   end
 
   def id_cards
@@ -36,12 +61,6 @@ class PeopleController < ApplicationController
     organization_unit  = OrganizationUnit.find(params[:node])
     @members = budget_year.blank? ? [] : organization_unit.paid_members
     render partial: 'id_cards'
-  end
-
-  def confirm
-    @person.update(status: true)
-    flash[:notice] = 'Member Successfully Confirmed'
-    render action: 'show'
   end
 
   def membership_idcard
@@ -77,14 +96,6 @@ class PeopleController < ApplicationController
 
   def members_by_type
     members = current_user.organization_unit.paid_members.count
-    render json: members
-  end
-
-  def members_by_membership_type_and_payment_status
-    members = []
-    ['Paid', 'Not Paid'].each do |c|
-      members << {name: c, data: MembershipType.all.map{|mt| [mt.to_s, mt.members_by_status(current_user,c).count]} }
-    end
     render json: members
   end
 
@@ -171,7 +182,7 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:profession_id, :gender, :date_of_birth, :photo, :user_id, :title, :membership_type_id, :job_title, :first_name, :middle_name, :last_name,
-                                     :email, :phone_number, :kebelle, :house_number, :organization_unit_id, :id_number)
+      params.require(:person).permit(:first_name, :father_name, :grand_father_name, :sex, :date_of_birth, :photo,
+                                     :nationality, :country, :membership_type_id, :email, :mobile_phone, :organization_unit_id, :pobox)
     end
 end

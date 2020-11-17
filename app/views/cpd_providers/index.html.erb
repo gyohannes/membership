@@ -1,0 +1,27 @@
+<div class="panel-heading">
+  CPD Providers
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name of organization</th>
+      <th>Organization category</th>
+      <th>Type of organization</th>
+      <th>Application Status</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @cpd_providers.each do |cpd_provider| %>
+        <tr>
+          <td><%= cpd_provider.name_of_organization %></td>
+          <td><%= cpd_provider.organization_category %></td>
+          <td><%= cpd_provider.type_of_organization %></td>
+          <td><%= cpd_provider.app_status %></td>
+          <td><%= link_to 'Details', cpd_provider, class: 'btn btn-primary' if can? :read, cpd_provider %></td>
+        </tr>
+    <% end %>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+<%= simple_form_for(@cpd_course, wrapper: 'vertical_form', html: {class: 'vertical_form_fields'}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-sm-6 left_form">
+      <%= f.association :cpd_provider, as: :hidden %>
+      <%= f.input :activity_title %>
+      <%= f.input :method_of_delivery %>
+      <%= f.input :date_of_activity, label: 'Date(s) of Activity/Program' %>
+      <%= f.input :target_audience, label: 'Target Audience/Profession' %>
+      <%= f.input :venue_of_activity, label: 'Venue (Full Address) of Activity (If Applicable)' %>
+      <%= f.input :registration_fee_involved_for_participants %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :duration_of_the_learning_activity, label: 'Duration of the learning activity (hours)' %>
+    <%= f.input :suggested_ceu, label: "Suggested CEU's (General)" %>
+    <%= f.input :ethics %>
+    <%= f.input :mechanism_for_monitoring, label: 'Specify intended method of evaluation(e.g Questionnaire)' %>
+    <%= f.input :mechanism_for_monitoring_attendance, label: 'Specify intended mechanism of monitoring attendance(per hour or session) for the duration of the activity' %>
+    <%= f.input :attendance_certificate, as: :file, label: 'Attach a copy of certificate that will be provided on completion of the activity' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

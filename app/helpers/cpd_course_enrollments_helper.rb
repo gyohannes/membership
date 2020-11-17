@@ -1,0 +1,2 @@
+module CpdCourseEnrollmentsHelper
+end

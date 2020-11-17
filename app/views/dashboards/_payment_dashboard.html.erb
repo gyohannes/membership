@@ -4,7 +4,7 @@
   </div>
 
   <div class="row clearfix">
-    <%= link_to people_path do %>
+    <%= link_to members_path do %>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box infobox-type-5 hover-zoom-effect">
           <div class="icon">
@@ -12,13 +12,13 @@
           </div>
           <div class="content" style="min-height: 1486px;">
             <div class="text">Total Members</div>
-            <div class="number"><%= @tm = @people.count %></div>
+            <div class="number"><%= @tm = @members.count %></div>
           </div>
         </div>
       </div>
     <% end %>
 
-      <%= link_to members_paid_people_path do %>
+      <%= link_to members_paid_members_path do %>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box infobox-type-5 hover-zoom-effect">
         <div class="icon">
@@ -26,12 +26,12 @@
         </div>
         <div class="content" style="min-height: 1486px;">
           <div class="text">Members Paid</div>
-          <div class="number"><%= @members_paid.count %></div>
+          <div class="number"><%= @members_paid.count rescue nil %></div>
         </div>
       </div>
         </div>
       <% end %>
-      <%= link_to members_not_paid_people_path do %>
+      <%= link_to members_not_paid_members_path do %>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="icon">
@@ -39,7 +39,7 @@
               </div>
               <div class="content" style="min-height: 1486px;">
                 <div class="text">Members Not Paid</div>
-                <div class="number"><%= @members_not_paid.count %></div>
+                <div class="number"><%= @members_not_paid.count rescue nil %></div>
               </div>
             </div>
           </div>
@@ -57,6 +57,35 @@
             </div>
           </div>
       <% end %>
+
+    <%= link_to upcoming_birthdays_people_path do %>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="info-box infobox-type-5 hover-zoom-effect">
+            <div class="icon">
+              <i class="material-icons col-success">people</i>
+            </div>
+            <div class="content" style="min-height: 1486px;">
+              <div class="text">Upcoming Birthdays</div>
+              <div class="number"><%= Person.upcoming_birthdays.count %></div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+    <%= link_to upcoming_retirements_people_path do %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box infobox-type-5 hover-zoom-effect">
+            <div class="icon">
+              <i class="material-icons col-success">people</i>
+            </div>
+            <div class="content" style="min-height: 1486px;">
+              <div class="text">Upcoming Retirements</div>
+              <div class="number"><%= Person.upcoming_retirements.count %></div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
     </div>
 
 
@@ -67,7 +96,7 @@
           Total Members by Membership Type
         </div>
         <div class="panel-body">
-          <%= column_chart members_by_type_people_path, curve: false, code: true %>
+          <%= column_chart members_by_type_members_path, curve: false, code: true %>
         </div>
       </div>
     </div>
@@ -78,7 +107,7 @@
           Members by Membership Type and Payment Status
         </div>
         <div class="panel-body">
-          <%= column_chart members_by_membership_type_and_payment_status_people_path rescue nil %>
+          <%= column_chart members_by_membership_type_and_payment_status_members_path rescue nil %>
         </div>
       </div>
     </div>

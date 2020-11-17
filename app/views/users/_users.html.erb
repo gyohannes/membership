@@ -2,8 +2,7 @@
   <thead>
   <tr>
     <th>Email</th>
-    <th>Org Unit</th>
-    <th>Institution</th>
+    <th>Organization Unit/Facility</th>
     <th>Role</th>
     <th>Confirmation</th>
     <th></th>
@@ -15,7 +14,6 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.organization_unit %></td>
-        <td><%= user.institution %></td>
         <td><%= user.role %></td>
         <td><%= link_to 'Confirm', confirm_user_path(user), class: 'btn btn-primary' unless user.confirmed? %></td>
         <td>

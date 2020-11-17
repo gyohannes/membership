@@ -10,13 +10,13 @@ class Event < ApplicationRecord
     end
   end
 
-  def applied(person)
-    return !event_applicants.where('person_id = ?', person).blank?
+  def applied(member)
+    return !event_applicants.where('member_id = ?', member).blank?
   end
 
-  def application_status(person)
-    if applied(person)
-      event_applicants.where('person_id = ?', person).first.status==true ? 'Accepted' : 'Pending'
+  def application_status(member)
+    if applied(member)
+      event_applicants.where('person_id = ?', member).first.status==true ? 'Accepted' : 'Pending'
     end
   end
 end

@@ -1,4 +1,4 @@
-<% if current_user and current_user.has_role('Member') and current_user.person.try(:status)==true %>
+<% if current_user and current_user.has_role('Member') and current_user.member.try(:status)==true %>
     <li>
       <%= link_to root_path do %>
           <i class="material-icons">dashboard</i>
@@ -6,7 +6,7 @@
       <% end %>
     </li>
     <li>
-    <%= link_to current_user.person do %>
+    <%= link_to current_user.member || new_member_path do %>
         <i class="material-icons">person</i>
         <span class="nav-label">My Profile</span>
     <% end %>

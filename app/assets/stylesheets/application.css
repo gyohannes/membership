@@ -2,6 +2,8 @@
  *= require AdminBSBSenstive/index
  *= require bootstrap-treeview
  *= require bootstrap-wysihtml5
+ *= require calendar/jquery.calendars.picker
+ *= require calendar/redmond.calendars.picker
  *= require fullcalendar
  *= require select2
  *= require select2-bootstrap

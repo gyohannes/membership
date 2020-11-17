@@ -1,4 +1,5 @@
 $(function () {
+
     $.ajax({
         url: '/organization_units/load_tree',
         success: function(response){

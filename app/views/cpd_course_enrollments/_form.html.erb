@@ -1,0 +1,29 @@
+<%= simple_nested_form_for(@cpd_course_enrollment) do |f| %>
+  <%= f.error_notification %>
+
+    <%= f.association :cpd_course, label: 'CPD Course', prompt: true %>
+    <%= f.input :from, label: 'Course Start Date', as: :string, input_html: {class: 'date_picker'} %>
+    <%= f.input :to, label: 'Course End Date', as: :string, input_html: {class: 'date_picker'} %>
+    <fieldset class="sub_form">
+      <legend>Member CEU (Credits)</legend>
+      <div class="row">
+        <strong class="col-sm-5">Member</strong>
+        <strong class="col-sm-5">CEU (Credits)</strong>
+        <div class="col-sm-2"></div>
+      </div>
+    <%= f.simple_fields_for :enrollment_credits do |ef| %>
+      <div class="row fields">
+        <div class="col-sm-5"><%= ef.association :person, prompt: true, label: false %></div>
+        <div class="col-sm-5"><%= ef.input :ceu, label: false %></div>
+        <div class="col-sm-2"><%= ef.link_to_remove "Remove", class: 'btn btn-danger' %></div>
+      </div>
+          <%= javascript_include_tag 'global' %>
+    <% end %>
+      <br/>
+    <%= f.link_to_add 'Add Credits', :enrollment_credits, class: 'btn btn-primary' %>
+    </fieldset>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

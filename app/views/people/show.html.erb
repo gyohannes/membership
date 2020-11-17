@@ -20,71 +20,84 @@
           <%= image_tag @person.photo.url(:medium) %>
         </div>
         <div class='col-sm-8'>
-          <div class='row'>
-            <div class='col-sm-3'><b>Membership Status</b></div>
-            <div class='col-sm-3 <%= @person.status.blank? ? "alert-danger" : 'alert-success' %>'><%= @person.membership_status %>
-              <%= link_to 'Confirm Member', confirm_person_path(@person), class: 'btn btn-primary' if can? :confirm, @person %></div>
-          </div>
-          <hr/>
-          <div class='row'>
-            <div class='col-sm-3'><b>Name</b></div>
-            <div class='col-sm-6'><%= @person.full_name %></div>
-          </div>
+          <table class="table table-condensed">
+            <tr>
+              <th>Membership Status</th>
+              <td><span class='<%= @person.status.blank? ? "btn btn-danger" : 'btn btn-primary' %>'><%= @person.membership_status %></span>
+                <%= link_to 'Confirm Member', confirm_person_path(@person), class: 'btn btn-primary' if can? :confirm, @person %>
+              </td>
+            </tr>
+            <tr>
+              <th>Membership Type</th>
+              <td><%= @person.membership_type %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>ID Number</b></div>
-            <div class='col-sm-6'><%= @person.id_number %></div>
-          </div>
+            <tr>
+              <th>Name</th>
+              <td><%= @person.full_name %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Profession</b></div>
-            <div class='col-sm-6'><%= @person.profession %></div>
-          </div>
+            <tr>
+              <th>ID Number</th>
+              <td><%= @person.id_number %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Gender</b></div>
-            <div class='col-sm-6'><%= @person.gender %></div>
-          </div>
+            <tr>
+              <th>Sex</th>
+              <td><%= @person.sex %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>DOB</b></div>
-            <div class='col-sm-6'><%= @person.date_of_birth %></div>
-          </div>
+            <tr>
+              <th>Date of Birth</th>
+              <td><%= @person.date_of_birth %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Email</b></div>
-            <div class='col-sm-6'><%= @person.email %></div>
-          </div>
+            <tr>
+              <th>Age</th>
+              <td><%= @person.age %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Phone Number</b></div>
-            <div class='col-sm-6'><%= @person.phone_number %></div>
-          </div>
+            <tr>
+              <th>Email</th>
+              <td><%= @person.email %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Region/Zone/Woreda</b></div>
-            <div class='col-sm-6'><%= @person.organization_unit %></div>
-          </div>
+            <tr>
+              <th>Mobile Phone</th>
+              <td><%= @person.mobile_phone %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Kebelle</b></div>
-            <div class='col-sm-6'><%= @person.kebelle %></div>
-          </div>
+            <tr>
+              <th>Nationality</th>
+              <td><%= @person.nationality %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>House Number</b></div>
-            <div class='col-sm-6'><%= @person.house_number %></div>
-          </div>
+            <tr>
+              <th>Country</th>
+              <td><%= @person.country %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Profession</b></div>
-            <div class='col-sm-6'><%= @person.profession %></div>
-          </div>
+            <tr>
+              <th>Region</th>
+              <td><%= @person.region %></td>
+            </tr>
 
-          <div class='row'>
-            <div class='col-sm-3'><b>Job Title</b></div>
-            <div class='col-sm-6'><%= @person.job_title %></div>
-          </div>
+            <tr>
+              <th>Zone/Sub City</th>
+              <td><%= @person.zone %></td>
+            </tr>
+
+            <tr>
+              <th>Woreda</th>
+              <td><%= @person.organization_unit %></td>
+            </tr>
+
+            <tr>
+              <th>P.O.Box</th>
+              <td><%= @person.pobox %></td>
+            </tr>
+          </table>
+
           <hr/>
           <% if can? :edit, @person %>
             <%= link_to edit_person_path(@person) do %>
@@ -205,6 +218,7 @@
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="experience">
+
       <table class="table table-responsive">
         <thead>
         <tr>
@@ -225,7 +239,7 @@
               <td><%= experience.to %></td>
               <td><%= experience.description %></td>
               <td>
-                <%= link_to experience do %>
+                <%= link_to edit_work_experience_path(experience) do %>
                     <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
                 <% end %>
                 <%= link_to experience, method: :delete, data: { confirm: 'Are you sure?' } do %>
@@ -235,6 +249,10 @@
             </tr>
         <% end %>
         </tbody>
+        <tfoot style="background: lightgrey">
+        <th colspan="2">Total Experience</th>
+        <th colspan="2"><%= @person.total_experience %></th>
+        </tfoot>
       </table>
       <%= link_to new_work_experience_path(person: @person.id) do %>
           <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add</button>

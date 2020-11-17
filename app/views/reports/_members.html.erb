@@ -2,28 +2,22 @@
   <table class="table table-bordered table-striped table-hover dataTable js-exportable">
     <thead>
     <tr>
-      <th>Name</th>
+      <th>Member</th>
       <th>Membership Type</th>
-      <th>Org Unit</th>
-      <th>Phone Number</th>
-      <th>Email</th>
       <th></th>
     </tr>
     </thead>
 
     <tbody>
-    <% @members.each do |person| %>
+    <% @members.each do |member| %>
         <tr>
-          <td><%= person.full_name %></td>
-          <td><%= person.membership_type %></td>
-          <td><%= person.organization_unit %></td>
-          <td><%= person.phone_number %></td>
-          <td><%= person.email %></td>
+          <td><%= member %></td>
+          <td><%= member.membership_type %></td>
           <td>
-            <%= link_to person_path(person) do %>
+            <%= link_to member_path(member) do %>
                 <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
             <% end %>
-            <%= link_to edit_person_path(person) do %>
+            <%= link_to edit_member_path(member) do %>
                 <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
             <% end %>
           </td>

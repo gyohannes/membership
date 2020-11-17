@@ -1,6 +1,37 @@
-#user_email, #user_password{
+.sign-in-page{
+    background: white;
+}
+.vertical_list .form-control{
+    margin-bottom: 70px;
+}
+.form-check{
+    padding-left: inherit;
+    margin-right: 10px;
+    float: left;
+    font-weight: bold;
+}
+
+.form-check label{
+    margin-left: 5px;
+}
+
+.form-check{
+    margin-right: 10px;
+}
+.single_columned_list .form-check {
+    float: left;
     width: 100%;
 }
+
+.fields_with_dashed_line .form-group.radio_buttons, .form-group.check_boxes{
+    padding: 10px;
+    border: 1px dashed silver;
+}
+
+.vertical_form_fields .form-control{
+    margin-bottom: 25px;
+}
+
 .menu li a .info {
     width: 100%;
 }
@@ -26,7 +57,7 @@ legend.empty{
 }
 fieldset.sub_form{
     padding: 5px 20px;
-    border: 1px solid #d4d3f2;
+    border: 1px solid rgba(226, 223, 226, 0.4);
     margin: 20px 5px;
 }
 .tab-pane {
@@ -74,8 +105,8 @@ form label{
 .form-group .form-control{
     width: inherit;
 }
-#new_user .form-control{
-    width: -moz-available;
+.has-feedback .form-control{
+    width: 100%;
 }
 .wizard .content{
     overflow: -moz-hidden-unscrollable;

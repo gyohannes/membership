@@ -1,0 +1,33 @@
+<div class="body table-responsive">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Membership Type</th>
+      <th>Organization Unit/Facility</th>
+      <th>Member ID</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @members_not_paid.each do |member| %>
+        <tr>
+          <td><%= member %></td>
+          <td><%= member.membership_type %></td>
+          <td><%= member.org_unit %></td>
+          <td><%= member.id_number %></td>
+          <td>
+            <%= link_to member_path(member) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+            <% end %>
+            <%= link_to edit_member_path(member) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>

@@ -1,9 +1,11 @@
-<% if current_user.has_role('Admin') || current_user.super_admin? %>
+<% if current_user.has_role('Admin') %>
   <%= render 'dashboards/payment_dashboard' %>
 <% elsif @institution %>
     <%= render 'dashboards/institution' %>
-<% elsif current_user.has_role('Member') and current_user.person.try(:status)==true %>
+<% elsif current_user.has_role('Member') and current_user.member.try(:status)==true %>
     <%= render 'dashboards/member' %>
-<% elsif current_user.person.blank? or current_user.person.try(:status).blank? %>
+<% elsif current_user.has_role('Member') and (current_user.member.blank? or current_user.member.try(:status).blank?)   %>
     <%= render 'dashboards/guest' %>
+<% elsif current_user.has_role(User::CPDPROVIDER) %>
+    <%= render 'dashboards/cpd_provider' %>
 <% end %>

@@ -1,0 +1,77 @@
+<div class="panel-heading">
+  CPD Course Details
+</div>
+<div class="panel-body">
+  <div class="alert alert-info">
+    <label class="col-sm-3">Application Status</label>
+    <span><%= @cpd_course.app_status %></span>
+    <% if @cpd_course.status.blank? %>
+        <%= link_to 'Accept', accept_or_reject_cpd_course_path(@cpd_course, status: Constants::ACCEPTED), class: 'btn btn-primary' %>
+        <%= link_to 'Reject', accept_or_reject_cpd_course_path(@cpd_course, status: Constants::REJECTED), class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+<table class="table">
+<tr>
+  <th>Cpd provider:</th>
+  <td><%= @cpd_course.cpd_provider %></td>
+</tr>
+
+<tr>
+  <th>Activity title:</th>
+  <td><%= @cpd_course.activity_title %></td>
+</tr>
+
+<tr>
+  <th>Method of delivery:</th>
+  <td><%= @cpd_course.method_of_delivery %></td>
+</tr>
+
+<tr>
+  <th>Date of activity:</th>
+  <td><%= @cpd_course.date_of_activity %></td>
+</tr>
+
+<tr>
+  <th>Target audience:</th>
+  <td><%= @cpd_course.target_audience %></td>
+</tr>
+
+<tr>
+  <th>Venue of activity:</th>
+  <td><%= @cpd_course.venue_of_activity %></td>
+</tr>
+
+<tr>
+  <th>Registration fee involved for participants:</th>
+  <td><%= @cpd_course.registration_fee_involved_for_participants %></td>
+</tr>
+
+<tr>
+  <th>Duration of the learning activity:</th>
+  <td><%= @cpd_course.duration_of_the_learning_activity %></td>
+</tr>
+
+<tr>
+  <th>Suggested ceu:</th>
+  <td><%= @cpd_course.suggested_ceu %></td>
+</tr>
+
+<tr>
+  <th>Ethics:</th>
+  <td><%= @cpd_course.ethics %></td>
+</tr>
+
+<tr>
+  <th>Mechanism for monitoring:</th>
+  <td><%= @cpd_course.mechanism_for_monitoring %></td>
+</tr>
+
+<tr>
+  <th>Mechanism for monitoring attendance:</th>
+  <td><%= @cpd_course.mechanism_for_monitoring_attendance %></td>
+</tr>
+</table>
+<div class="form-actions">
+<%= link_to 'Edit', edit_cpd_course_path(@cpd_course), class: 'btn btn-primary' %>
+</div>
+</div>

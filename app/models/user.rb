@@ -1,23 +1,23 @@
 class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
   belongs_to :institution, optional: true
-  has_one :person
+  has_one :member
+  has_one :cpd_provider
   has_many :sent_requests, :class_name => 'SupportRequest', :foreign_key => "sender"
   has_many :incoming_requests, :class_name => 'SupportRequest', :foreign_key => "receiver"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-  accepts_nested_attributes_for :person
 
-  ROLES = [ADMIN='Admin', MEMBER='Member', INSTITUTION='Institution']
+  ROLES = [ADMIN='Admin', MEMBER='Member', INSTITUTION='Institution', STUDENT='Student', CPDPROVIDER='CPD Provider']
 
   def super_admin?
     organization_unit == OrganizationUnit.top_organization_unit
   end
 
   def new_members
-    organization_unit.sub_people.where(status: nil) rescue nil
+    organization_unit.sub_members.where(status: nil)
   end
 
   def new_support_requests
@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def has_role(role_name)
-    role == role_name and !super_admin?
+    role == role_name
   end
 
   def admin?
@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    person
+    email
   end
 
 end

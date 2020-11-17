@@ -21,8 +21,8 @@ class Training < ApplicationRecord
   scope :all_institution_trainings, -> (ins,from=nil,to=nil){ ins.trainings.where('start_time >= ? and start_time <= ?',from || true, to || Date::Infinity) +
       Training.joins(:training_funds).where('start_time >= ? and start_time <= ? and training_funds.institution_id = ?',from || true, to || Date::Infinity,ins.id) }
 
-  scope :all_org_trainings, -> (org,from=nil,to=nil) { (Training.where('start_time >= ? and start_time <= ? and organization_unit_id in (?)', from || true, to || Date::Infinity, org.sub_units.pluck(:id) << org.id) +
-      Training.joins(:trainee_distributions).where('start_time >= ? and start_time <= ? and trainee_distributions.organization_unit_id in (?)', from || true, to || Date::Infinity, org.sub_units.pluck(:id) << org.id)).uniq}
+  scope :all_org_trainings, -> (org,from=nil,to=nil) { (Training.where('start_time >= ? and start_time <= ? and organization_unit_id in (?)', from, to, org.sub_units.pluck(:id) << org.id) +
+      Training.joins(:trainee_distributions).where('start_time >= ? and start_time <= ? and trainee_distributions.organization_unit_id in (?)', from, to, org.sub_units.pluck(:id) << org.id)).uniq}
 
   def training_status
     if status.blank?
@@ -56,7 +56,7 @@ class Training < ApplicationRecord
 
   def self.load_trainings(user,type=nil,from=nil,to=nil)
     trainings = []
-    if type = 'all_upcoming'
+    if type == 'all_upcoming'
       trainings = Training.upcoming_trainings
     elsif user.institution
       if type == 'Pre-Service'

@@ -1,11 +1,11 @@
 class Payment < ApplicationRecord
-  belongs_to :person
+  belongs_to :member
   belongs_to :budget_year
 
-  has_attached_file :attachment
-  validates_attachment_content_type :attachment, content_type: ['application/pdf',/\Aimage\/.*\z/]
+  has_one_attached :attachment
+
   validates :payment_method, presence: true
-  validates :person_id, uniqueness: { scope: :budget_year_id, message: 'has already paid'}
+  validates :member_id, uniqueness: { scope: :budget_year_id, message: 'has already paid'}
 
   scope :list_by_org_unit, -> (org_unit) { org_unit.blank? ? [] : Person.where('people.id in (?)', OrganizationUnit.find(org_unit).sub_people.pluck(:id)) }
   scope :list_by_membership_type, -> (type) { joins(:person).where('membership_type_id = ?', type)}

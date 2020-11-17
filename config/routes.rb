@@ -1,17 +1,57 @@
 Rails.application.routes.draw do
+  resources :cpd_course_enrollments
+  resources :cpd_courses do
+    member do
+      get 'accept_or_reject'
+    end
+  end
+  resources :cpd_providers do
+    member do
+      get 'accept_or_reject'
+    end
+  end
+  resources :institutions do
+    collection do
+      get 'load_zones'
+      get 'load_woredas'
+    end
+  end
+  resources :students
+  resources :individuals
+  resources :members do
+    collection do
+      get 'load_members'
+      get 'members_paid'
+      get 'load_members_paid'
+      get 'members_not_paid'
+      get 'load_members_not_paid'
+      get 'load_paid_members'
+      get 'members_by_type'
+      get 'members_by_membership_type_and_payment_status'
+      get 'id_cards'
+      get 'load_paid_members'
+    end
+    member do
+      get 'confirm'
+      get 'membership_idcard'
+    end
+
+  end
   resources :pages
   resources :support_requests
   resources :board_members_terms
   resources :association_details
   resources :event_applicants
   resources :events do
-    member do
+    collection do
       get 'apply'
     end
   end
   resources :payments do
     collection do
       get 'member_fees'
+      get 'load_amount'
+      get 'load_payments'
     end
     member do
       get 'confirm'
@@ -64,6 +104,8 @@ Rails.application.routes.draw do
       get 'confirm'
     end
     collection do
+      get 'upcoming_birthdays'
+      get 'upcoming_retirements'
       get 'load_people'
       get 'load_professions'
       get 'members_by_type'
@@ -99,7 +141,6 @@ Rails.application.routes.draw do
   end
 
   resources :program_areas
-  resources :institutions
   resources :institution_types
   resources :organization_units do
     collection do
@@ -137,7 +178,7 @@ Rails.application.routes.draw do
   get 'member_dashboard', to: 'home#member_dashboard'
 
   authenticated :user do
-    root 'home#index', as: :authenticated_root
+    root 'home#index'#, as: :authenticated_root
   end
 
   root to: "home#landing_page"

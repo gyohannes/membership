@@ -1,0 +1,240 @@
+<ul class="nav nav-tabs tab-nav-right" role="tablist">
+  <li role="presentation" class="active"><a href="#personal_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Personal Details</a></li>
+  <li role="presentation"><a href="#payments" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Membership Payments</a></li>
+  <li role="presentation"><a href="#education" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i>Educational Background</a></li>
+  <li role="presentation"><a href="#experience" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> Work Experience</a></li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="personal_details">
+    <div class='row'>
+      <div class='col-sm-4'>
+        <%= image_tag @member.student.person.photo, width: '80%' rescue nil %>
+        <hr/>
+        <%= image_tag @member.student.student_id_card, width: '80%' rescue nil %>
+      </div>
+      <div class='col-sm-8'>
+        <table class="table table-condensed">
+          <tr>
+            <th>Confirmation Status</th>
+            <td><span class='<%= @member.status.blank? ? "btn btn-danger" : 'btn btn-primary' %>'><%= @member.membership_status %></span>
+              <%= link_to 'Confirm Member', confirm_member_path(@member), class: 'btn btn-primary' if can? :confirm, @member %>
+            </td>
+          </tr>
+          <tr>
+            <th>Membership Type</th>
+            <td><%= @member.membership_type %>
+            </td>
+          </tr>
+          <% @person = @member.student.person %>
+          <tr>
+            <th>Name</th>
+            <td><%= @person.full_name %></td>
+          </tr>
+
+          <tr>
+            <th>Sex</th>
+            <td><%= @person.sex %></td>
+          </tr>
+
+          <tr>
+            <th>Date of Birth</th>
+            <td><%= @person.date_of_birth %></td>
+          </tr>
+
+          <tr>
+            <th>Age</th>
+            <td><%= @person.age %></td>
+          </tr>
+
+          <tr>
+            <th>Email</th>
+            <td><%= @person.email %></td>
+          </tr>
+
+          <tr>
+            <th>Mobile Phone</th>
+            <td><%= @person.mobile_phone %></td>
+          </tr>
+
+          <tr>
+            <th>Nationality</th>
+            <td><%= @person.nationality %></td>
+          </tr>
+
+          <tr>
+            <th>Country</th>
+            <td><%= @person.country %></td>
+          </tr>
+
+          <tr>
+            <th>Organization Unit/Facility</th>
+            <td><%= @person.organization_unit %></td>
+          </tr>
+
+          <tr>
+            <th>P.O.Box</th>
+            <td><%= @person.pobox %></td>
+          </tr>
+        </table>
+
+        <hr/>
+        <% if can? :edit, @member %>
+            <%= link_to edit_member_path(@member) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="payments">
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Paid Membership Fees
+        </div>
+        <div class="panel-body">
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Budget Year</th>
+              <th>Amount</th>
+              <th>Paid Date</th>
+              <th>Attachment</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @member.payments.each do |payment| %>
+                <tr>
+                  <td><%= payment.budget_year %></td>
+                  <td><%= payment.budget_year.payment_amount(@member.membership_type_id) rescue nil %></td>
+                  <td><%= payment.created_at %></td>
+                  <td><%= link_to 'Download', payment.attachment.url %></td>
+                  <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+                  <td>
+                    <% if can? :edit, payment %>
+                        <%= link_to edit_payment_path(payment) do %>
+                            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                        <% end %>
+                        <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                            <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+                        <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Unpaid Membership Fees
+        </div>
+        <div class="panel-body">
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Budget Year</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @member.unpaid_fees.each do |year| %>
+                <tr>
+                  <td><%= year %></td>
+                  <td><%= @member.payment_amount(year.id) rescue nil %></td>
+                  <td>
+                    <%= link_to new_payment_path(member: @member.try(:id), year: year.id) do %>
+                        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Attach Receipt If Paid </button>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="education">
+    <table class="table table-responsive">
+      <thead>
+      <tr>
+        <th>Study Field</th>
+        <th>Institution</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Qualification</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @member.student.person.educations.each do |ed| %>
+          <tr>
+            <td><%= ed.study_field %></td>
+            <td><%= ed.institution_name %></td>
+            <td><%= ed.from %></td>
+            <td><%= ed.to %></td>
+            <td><%= ed.qualification %></td>
+            <td>
+              <%= link_to edit_education_path(ed) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i>Edit</button>
+              <% end %>
+              <%= link_to ed, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-plus"></i> Delete </button>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= link_to new_education_path(person: @member.student.person_id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add </button>
+    <% end %>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="experience">
+
+    <table class="table table-responsive">
+      <thead>
+      <tr>
+        <th>Company</th>
+        <th>Job Title</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @member.student.person.work_experiences.each do |experience| %>
+          <tr>
+            <td><%= experience.company %></td>
+            <td><%= experience.job_title %></td>
+            <td><%= experience.from %></td>
+            <td><%= experience.to %></td>
+            <td><%= experience.description %></td>
+            <td>
+              <%= link_to edit_work_experience_path(experience) do %>
+                  <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+              <% end %>
+              <%= link_to experience, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+      <tfoot style="background: lightgrey">
+      <th colspan="2">Total Experience</th>
+      <th colspan="2"><%= @person.total_experience %></th>
+      </tfoot>
+    </table>
+    <%= link_to new_work_experience_path(person: @member.student.person_id) do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add</button>
+    <% end %>
+  </div>
+</div>

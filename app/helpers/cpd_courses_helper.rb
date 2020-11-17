@@ -1,0 +1,2 @@
+module CpdCoursesHelper
+end

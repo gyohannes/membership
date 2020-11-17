@@ -1,0 +1,21 @@
+<% if current_user and current_user.has_role(User::CPDPROVIDER) and current_user.cpd_provider.try(:status)==Constants::ACCEPTED %>
+    <li>
+      <%= link_to current_user.cpd_provider do %>
+          <i class="material-icons">dashboard</i>
+          <span class="nav-label">Profile</span>
+      <% end %>
+    </li>
+    <li>
+    <%= link_to cpd_courses_path do %>
+        <i class="material-icons">school</i>
+        <span class="nav-label">CPD Courses</span>
+    <% end %>
+  </li>
+    <li>
+      <%= link_to cpd_course_enrollments_path do %>
+          <i class="material-icons">school</i>
+          <span class="nav-label">Course Enrollments</span>
+      <% end %>
+    </li>
+
+<% end %>

@@ -17,7 +17,6 @@
 //= require AdminBSBSenstive/plugins/jquery-validation/dist/jquery.validate
 //= require AdminBSBSenstive/plugins/jquery-steps/build/jquery.steps
 //= require AdminBSBSenstive/plugins/moment/moment
-//= require AdminBSBSenstive/plugins/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker
 //= require AdminBSBSenstive/plugins/editable-table/mindmup-editabletable
 //= require AdminBSBSenstive/admin
 //= require AdminBSBSenstive/pages/examples/signin

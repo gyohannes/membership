@@ -1,0 +1,32 @@
+<div class="panel-heading">
+  CPD Course Enrollments
+</div>
+<div class="panel-body">
+  <table class="table js-exportable">
+  <thead>
+    <tr>
+      <th>CPD course</th>
+      <th>Course Start Date</th>
+      <th>Course End Date</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cpd_course_enrollments.each do |cpd_course_enrollment| %>
+      <tr>
+        <td><%= cpd_course_enrollment.cpd_course %></td>
+        <td><%= cpd_course_enrollment.from %></td>
+        <td><%= cpd_course_enrollment.to %></td>
+        <td>
+          <%= link_to 'Details', cpd_course_enrollment, class: 'btn btn-primary' %>
+          <%= link_to 'Edit', edit_cpd_course_enrollment_path(cpd_course_enrollment), class: 'btn btn-primary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <div class="form-actions">
+    <%= link_to 'Add CPD Course Enrollment', new_cpd_course_enrollment_path, class: 'btn btn-primary' %>
+  </div>
+</div>

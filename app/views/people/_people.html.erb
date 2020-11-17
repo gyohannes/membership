@@ -4,9 +4,10 @@
     <tr>
       <th>Name</th>
       <th>Membership Type</th>
-      <th>Org Unit</th>
-      <th>Phone Number</th>
+      <th>Organization Unit/Facility</th>
+      <th>Mobile Phone</th>
       <th>Email</th>
+      <th>Status</th>
       <th></th>
     </tr>
     </thead>
@@ -17,8 +18,9 @@
           <td><%= person.full_name %></td>
           <td><%= person.membership_type %></td>
           <td><%= person.organization_unit %></td>
-          <td><%= person.phone_number %></td>
+          <td><%= person.mobile_phone %></td>
           <td><%= person.email %></td>
+          <td><%= person.membership_status %></td>
           <td>
             <%= link_to person_path(person) do %>
               <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>

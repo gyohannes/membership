@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+MembershipType.create([{name: 'Student', static: true}, {name: 'Institution', static: true}])
 
 top_org_type = OrganizationType.create(name: 'Country')
 

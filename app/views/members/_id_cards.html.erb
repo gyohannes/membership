@@ -1,0 +1,37 @@
+<div class="body table-responsive">
+  <%= form_tag id_cards_members_path(format: :pdf), method: :get do %>
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+    <tr>
+      <th><%= check_box(nil, "check_all", {class: 'check_all'}) %>
+      <label for="check_all">All</label>
+    </th>
+      <th>Member</th>
+      <th>Member ID</th>
+      <th>Membership Type</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @members.each do |member| %>
+        <tr>
+          <td><%= check_box(nil, "members", {multiple: true,id: member.id}, member.id) %>
+            <label for="<%= member.id %>"></label>
+          </td>
+          <td><%= member %></td>
+          <td><%= member.id_number %></td>
+          <td><%= member.membership_type %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br>
+
+      <center>
+        <%= submit_tag 'Generate ID Cards', data: { disable_with: false }, class: 'btn btn-primary' %>
+      </center>
+  <% end %>
+
+</div>
+
+<%= javascript_include_tag 'global' %>

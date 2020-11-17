@@ -1,0 +1,39 @@
+<div class="panel-heading">
+  CPD Courses
+</div>
+<div class="panel-body">
+  <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>Cpd provider</th>
+      <th>Activity title</th>
+      <th>Method of delivery</th>
+      <th>Registration fee involved for participants</th>
+      <th>Duration of the learning activity</th>
+      <th>Suggested ceu</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cpd_courses.each do |cpd_course| %>
+      <tr>
+        <td><%= cpd_course.cpd_provider %></td>
+        <td><%= cpd_course.activity_title %></td>
+        <td><%= cpd_course.method_of_delivery %></td>
+        <td><%= cpd_course.registration_fee_involved_for_participants %></td>
+        <td><%= cpd_course.duration_of_the_learning_activity %></td>
+        <td><%= cpd_course.suggested_ceu %></td>
+        <td><%= cpd_course.status %></td>
+        <td><%= link_to 'Details', cpd_course %> |
+          <%= link_to 'Edit', edit_cpd_course_path(cpd_course) %> |
+          <%= link_to 'Delete', cpd_course, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <hr/>
+<%= link_to 'New Application for CPD Course', new_cpd_course_path, class: 'btn btn-primary' %>
+</div>

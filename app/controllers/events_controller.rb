@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -14,9 +14,13 @@ class EventsController < ApplicationController
   end
 
   def apply
-    event_application = @event.event_applicants.build(person_id: params[:applicant], status: false)
-    event_application.save
-    flash[:notice] = 'You have successfully applied'
+    @event = Event.find(params[:event])
+    event_application = @event.event_applicants.build(member_id: params[:member], status: false)
+    if event_application.save
+      flash[:notice] = 'You have successfully applied'
+    else
+      flash[:alert] = 'Sorry, your application is not completed'
+      end
     redirect_to @event
   end
 

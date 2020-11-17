@@ -1,14 +1,18 @@
-<% if current_user.person.blank? or current_user.person.try(:status).blank? %>
-    <% unless current_user.person.blank? %>
-    <h2>Your membership status is <%= current_user.person.membership_status %></h2>
-    <hr/>
-    <%= render template: '/people/show', locals: {:@person => current_user.person}  %>
+<% if current_user.member.blank? or current_user.member.try(:status).blank? or current_user.member.try(:status)==false %>
+    <% unless current_user.member.blank? %>
+        <% if (current_user.member.category == Constants::INDIVIDUAL and !current_user.member.individual.blank?) or
+            (current_user.member.category == Constants::STUDENT and !current_user.member.student.blank?) or
+            (current_user.member.category == Constants::INSTITUTION and !current_user.member.institution.blank?) %>
+                <%= render template: '/members/show', locals: {:@member => current_user.member}  %>
         <% else %>
+            <%= render partial: '/members/form', locals: {:@member => current_user.member} %>
+        <% end %>
+    <% else %>
         <div class="panel-heading">
           Member Registration
         </div>
         <div class="panel-body">
-          <%= render partial: '/people/form', locals: {:@person => Person.new(user_id: current_user.id)} %>
+          <%= render partial: '/members/form', locals: {:@member => Member.new(user_id: current_user.id)} %>
         </div>
-        <% end %>
+    <% end %>
 <% end %>

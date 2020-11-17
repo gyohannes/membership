@@ -6,8 +6,8 @@
     <%= f.input :institution_name, class: "form-control show-tick" %>
     <%= f.input :study_field, class: "form-control show-tick" %>
     <%= f.input :qualification, class: "form-control show-tick" %>
-    <%= f.input :from, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
-    <%= f.input :to, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :from, as: :string, input_html: {class: 'date_picker'} %>
+    <%= f.input :to, as: :string, input_html: {class: 'date_picker'} %>
   </div>
 
   <div class="form-actions">

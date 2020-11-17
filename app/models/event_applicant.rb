@@ -1,5 +1,5 @@
 class EventApplicant < ApplicationRecord
-  belongs_to :person
+  belongs_to :member
   belongs_to :event
 
   def applicant_status

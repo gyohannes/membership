@@ -1,0 +1,7 @@
+<% if !@amount.blank? or !@payment.blank? %>
+    <%= simple_fields_for :payment, @payment do |pf|  %>
+        <%= pf.input :amount, readonly: true, input_html: {value: @amount} %>
+    <% end %>
+<% end %>
+
+<%= javascript_include_tag 'global' %>

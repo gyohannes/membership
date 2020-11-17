@@ -1,0 +1,195 @@
+<ul class="nav nav-tabs tab-nav-right" role="tablist">
+  <li role="presentation" class="active"><a href="#institution_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Institution Details</a></li>
+  <li role="presentation"><a href="#payments" data-toggle="tab"><i class="fa fa-book m-r-5"></i> Membership Payments</a></li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="institution_details">
+    <% @institution = @member.institution %>
+    <div class='row'>
+      <div class='col-sm-4'>
+        <%= image_tag @institution.logo, width: '80%' rescue nil %>
+        <hr/>
+        <%= image_tag @institution.certificate, width: '80%' rescue nil %>
+      </div>
+      <div class='col-sm-8'>
+        <table class="table table-condensed">
+          <tr>
+            <th>Confirmation Status</th>
+            <td><span class='<%= @member.status.blank? ? "btn btn-danger" : 'btn btn-primary' %>'><%= @member.membership_status %></span>
+              <%= link_to 'Confirm Member', confirm_member_path(@member), class: 'btn btn-primary' if can? :confirm, @member %>
+            </td>
+          </tr>
+          <tr>
+            <th>Membership type</th>
+            <td><%= @member.membership_type %>
+            </td>
+          </tr>
+          <tr>
+            <th>Name of organization:</th>
+            <td><%= @institution.name_of_organization %></td>
+          </tr>
+
+          <tr>
+            <th>Establishment year:</th>
+            <td><%= @institution.establishment_year.strftime("%Y") rescue nil %></td>
+          </tr>
+
+          <tr>
+            <th>Region</th>
+            <td><%= @institution.region %></td>
+          </tr>
+
+          <tr>
+            <th>Zone</th>
+            <td><%= @institution.zone %></td>
+          </tr>
+
+          <tr>
+            <th>Woreda</th>
+            <td><%= @institution.organization_unit %></td>
+          </tr>
+
+          <tr>
+            <th>Kebele:</th>
+            <td><%= @institution.kebele %></td>
+          </tr>
+
+          <tr>
+            <th>City:</th>
+            <td><%= @institution.city %></td>
+          </tr>
+
+          <tr>
+            <th>Telephone number:</th>
+            <td><%= @institution.telephone_number %></td>
+          </tr>
+
+          <tr>
+            <th>Email:</th>
+            <td><%= @institution.email %></td>
+          </tr>
+
+          <tr>
+            <th>Website:</th>
+            <td><%= @institution.website %></td>
+          </tr>
+
+          <tr>
+            <th>Pobox:</th>
+            <td><%= @institution.pobox %></td>
+          </tr>
+
+          <tr>
+            <th>Fax:</th>
+            <td><%= @institution.fax %></td>
+          </tr>
+
+          <tr>
+            <th>Contact name:</th>
+            <td><%= @institution.contact_name %></td>
+          </tr>
+
+          <tr>
+            <th>Contact title:</th>
+            <td><%= @institution.contact_title %></td>
+          </tr>
+
+          <tr>
+            <th>Contact telephone number:</th>
+            <td><%= @institution.contact_telephone_number %></td>
+          </tr>
+
+          <tr>
+            <th>Type of organization:</th>
+            <td><%= @institution.type_of_organization %></td>
+          </tr>
+
+          <tr>
+            <th>Major objectives:</th>
+            <td><%= @institution.major_objectives %></td>
+          </tr>
+        </table>
+        <hr/>
+        <% if can? :edit, @institution %>
+            <%= link_to edit_institution_path(@institution) do %>
+                <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="payments">
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Paid Membership Fees
+        </div>
+        <div class="panel-body">
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Budget Year</th>
+              <th>Amount</th>
+              <th>Paid Date</th>
+              <th>Attachment</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @member.payments.each do |payment| %>
+                <tr>
+                  <td><%= payment.budget_year %></td>
+                  <td><%= payment.budget_year.payment_amount(@member.membership_type_id) rescue nil %></td>
+                  <td><%= payment.created_at %></td>
+                  <td><%= link_to 'Download', payment.attachment.url %></td>
+                  <td><%= payment.payment_status %>  <%= link_to 'Confirm Payment', confirm_payment_path(payment), class: 'btn btn-primary' if payment.status.blank? and can? :confirm, Payment %></td>
+                  <td>
+                    <% if can? :edit, payment %>
+                        <%= link_to edit_payment_path(payment) do %>
+                            <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+                        <% end %>
+                        <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                            <button type="button" class="btn btn-outline btn-danger"><i class="fa fa-remove"></i> Delete</button>
+                        <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Unpaid Membership Fees
+        </div>
+        <div class="panel-body">
+          <table class="table table-responsive">
+            <thead>
+            <tr>
+              <th>Budget Year</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @member.unpaid_fees.each do |year| %>
+                <tr>
+                  <td><%= year %></td>
+                  <td><%= @member.payment_amount(year.id) rescue nil %></td>
+                  <td>
+                    <%= link_to new_payment_path(member: @member.try(:id), year: year.id) do %>
+                        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Attach Receipt If Paid </button>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
