@@ -108,6 +108,16 @@ class OrganizationUnit < ApplicationRecord
     Payment.where('budget_year_id = ? and member_id in (?)', budget_year.try(:id), sub_members.pluck(:id))
   end
 
+  def members_by_status(status, year=BudgetYear.active)
+    paid = sub_members.joins(:payments).where('budget_year_id = ?', year.try(:id))
+    if status == 'Paid'
+      members = paid
+    else
+      members = sub_members - paid
+    end
+    return members
+  end
+
   def to_s
     name
   end

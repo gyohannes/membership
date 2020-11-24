@@ -15,7 +15,7 @@
           <fieldset class="sub_form">
             <legend>Payment Status</legend>
           <%=  f.input :budget_year, collection: BudgetYear.all, required: false, prompt: true %>
-          <%=  f.input :payment_status, collection: [['Paid', true], ['Not Paid', false]], required: false, prompt: true %>
+          <%=  f.input :payment_status, collection: [['Paid', "paid"], ['Not Paid', false]], required: false, prompt: true %>
           </fieldset>
         </div>
       </div>

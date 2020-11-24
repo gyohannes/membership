@@ -31,12 +31,11 @@ class ReportsController < ApplicationController
     def members
       @members = []
       if request.post?
-        status = params[:search][:payment_status] == 'true' ? true : false
+        status = params[:search][:payment_status] == 'paid' ? true : false
         @members = Member.search(current_user,params[:search][:organization_unit], params[:search][:membership_type],
                                  params[:search][:budget_year],status)
         respond_to do |format|
           format.js
-          format.html
         end
       end
   end

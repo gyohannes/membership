@@ -52,6 +52,16 @@ class MembersController < ApplicationController
     render json: members
   end
 
+
+  def members_by_org_unit_and_payment_status
+    og = current_user.organization_unit
+    members = []
+    ['Paid', 'Not Paid'].each do |c|
+      members << {name: c, data: og.sub_organization_units.map{|ou| [ou.to_s, ou.members_by_status(c).count]} }
+    end
+    render json: members
+  end
+
   def id_cards
     @members = []
     member_ids = params[:members].delete_if{|e| e=='0'} rescue nil

@@ -113,4 +113,39 @@
     </div>
 
 </div>
+
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Members by Org Unit and Payment Status
+        </div>
+        <div class="panel-body">
+          <%= column_chart members_by_org_unit_and_payment_status_members_path rescue nil %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Members by Org Unit and Payment Status
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tr>
+              <th>Org Unit</th>
+              <th>Paid</th>
+              <th>Not Paid</th>
+            </tr>
+            <% current_user.organization_unit.sub_organization_units.each do |og| %>
+            <tr>
+              <td><%= og %></td>
+              <td><%= og.members_by_status('Paid').count %></td>
+              <td><%= og.members_by_status("Not Paid").count %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
 <% end  %>
